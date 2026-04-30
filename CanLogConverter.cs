@@ -10,13 +10,13 @@ namespace PcapReplayer
     // ── Options ──────────────────────────────────────────────────────────────
 
     /// <summary>
-    /// All inputs required to convert a PCAN-View .trc file into a
+    /// All inputs required to convert a .trc or .log file into a
     /// USR-CANET200-compatible .pcap file.
     /// </summary>
-    public record TrcConversionOptions
+    public record ConversionOptions
     {
-        /// <summary>Full path to the .trc file to read.</summary>
-        public string TrcFile { get; init; } = string.Empty;
+        /// <summary>Full path to the .trc or .log file to read.</summary>
+        public string InputFile { get; init; } = string.Empty;
 
         /// <summary>Full path of the .pcap file to create.</summary>
         public string OutputPcap { get; init; } = string.Empty;
@@ -54,10 +54,10 @@ namespace PcapReplayer
     // ── Result ────────────────────────────────────────────────────────────────
 
     /// <summary>
-    /// Summary returned by <see cref="TrcConverter.Convert"/> after a
+    /// Summary returned by <see cref="CanLogConverter.Convert"/> after a
     /// successful conversion.
     /// </summary>
-    public record TrcConversionResult
+    public record ConversionResult
     {
         public int    FramesParsed   { get; init; }
         public int    PacketsWritten { get; init; }
@@ -69,16 +69,15 @@ namespace PcapReplayer
 
     // ── Internal CAN frame type ───────────────────────────────────────────────
 
-    public record TrcCanFrame(double TimeMs, uint ID29, bool IsExtended, int DLC, byte[] Data);
+    public record CanFrame(double AbsoluteTimeSec, uint ID29, bool IsExtended, int DLC, byte[] Data);
 
     // ── Converter ─────────────────────────────────────────────────────────────
 
     /// <summary>
-    /// Converts a PCAN-View .trc file into a USR-CANET200-compatible .pcap
-    /// that can be replayed by the PcapReplayer Replay tab.
+    /// Converts a PCAN-View .trc file or Linux candump .log file into a 
+    /// USR-CANET200-compatible .pcap that can be replayed by the PcapReplayer Replay tab.
     ///
-    /// This is a pure, static, UI-free engine — a port of the
-    /// TrcToUsrPcap CLI tool (iot_edge_udpcangateway/Tools/TrcToUsrPcap).
+    /// This is a pure, static, UI-free engine.
     ///
     /// Wire format preserved exactly:
     ///   • PCAP global header: magic 0xA1B2C3D4, link-type 1 (Ethernet)
@@ -91,105 +90,57 @@ namespace PcapReplayer
     ///   Bytes 1-4: CAN ID big-endian (29-bit, upper 3 bits zero)
     ///   Bytes 5-12: Data (always 8 bytes, zero-padded)
     /// </summary>
-    public static class TrcConverter
+    public static class CanLogConverter
     {
         // Fixed UDP source port (arbitrary, matches CLI tool)
         private const int SrcPort = 50000;
 
         // Regex matching PCAN-View 1.1 data lines:
         // "     1)        23.6  Rx     18F140CA  8  01 1E 00 28 00 00 00 00"
-        private static readonly Regex LinePattern =
+        private static readonly Regex TrcLinePattern =
             new(@"^\s*\d+\)\s+([\d.]+)\s+Rx\s+([0-9A-Fa-f]+)\s+(\d+)\s+(.+)$",
                 RegexOptions.Compiled);
 
-        private static readonly Regex StartTimePattern =
+        private static readonly Regex TrcStartTimePattern =
             new(@"\$STARTTIME=([\d.]+)", RegexOptions.Compiled);
 
+        // Regex matching Linux candump .log lines:
+        // "(1758823751.288213) can0 1CFE8801#FF7EFF7DFF7DFF7D R"
+        private static readonly Regex CandumpPattern =
+            new(@"^\(([\d.]+)\)\s+\S+\s+([0-9A-Fa-f]+)#([0-9A-Fa-f]*).*$", RegexOptions.Compiled);
+
         /// <summary>
-        /// Performs the TRC → PCAP conversion synchronously.
+        /// Performs the conversion synchronously based on file extension.
         /// </summary>
-        /// <param name="opts">Conversion parameters.</param>
-        /// <param name="progress">
-        /// Optional progress sink — receives human-readable status lines
-        /// (suitable for direct display in a log control).
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// Thrown when required option fields are null/empty.
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown when the .trc file yields zero parseable CAN frames.
-        /// </exception>
-        public static TrcConversionResult Convert(
-            TrcConversionOptions opts,
-            IProgress<string>?   progress = null)
+        /// <exception cref="ArgumentException">Thrown when required option fields are null/empty.</exception>
+        /// <exception cref="InvalidOperationException">Thrown when the file yields zero parseable CAN frames.</exception>
+        public static ConversionResult Convert(
+            ConversionOptions opts,
+            IProgress<string>? progress = null)
         {
             // ── Validate ──────────────────────────────────────────────────────
-            if (string.IsNullOrWhiteSpace(opts.TrcFile))
-                throw new ArgumentException("TrcFile must not be null or empty.", nameof(opts));
+            if (string.IsNullOrWhiteSpace(opts.InputFile))
+                throw new ArgumentException("InputFile must not be null or empty.", nameof(opts));
             if (string.IsNullOrWhiteSpace(opts.OutputPcap))
                 throw new ArgumentException("OutputPcap must not be null or empty.", nameof(opts));
 
-            // ── Parse .trc ────────────────────────────────────────────────────
-            Report(progress, $"📂 Parsing {Path.GetFileName(opts.TrcFile)} ...");
+            Report(progress, $"📂 Parsing {Path.GetFileName(opts.InputFile)} ...");
 
-            string trcContent = File.ReadAllText(opts.TrcFile);
+            bool isTrc = opts.InputFile.EndsWith(".trc", StringComparison.OrdinalIgnoreCase);
 
-            // Extract base time from $STARTTIME (OLE Automation Date)
-            DateTime baseTime  = DateTime.UtcNow;
-            var      stMatch   = StartTimePattern.Match(trcContent);
-            if (stMatch.Success &&
-                double.TryParse(stMatch.Groups[1].Value,
-                    NumberStyles.Float, CultureInfo.InvariantCulture, out double oleDate))
-            {
-                baseTime = DateTime.FromOADate(oleDate);
-            }
+            var frames = new List<CanFrame>();
+            var warnings = new List<string>();
+            DateTime baseTime = DateTime.UtcNow;
 
-            var epoch           = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            double baseEpochSec = (baseTime.ToUniversalTime() - epoch).TotalSeconds;
-
-            var     frames   = new List<TrcCanFrame>();
-            var     warnings = new List<string>();
-            int     lineNum  = 0;
-
-            foreach (string line in File.ReadLines(opts.TrcFile))
-            {
-                lineNum++;
-                var m = LinePattern.Match(line);
-                if (!m.Success) continue;
-
-                if (!double.TryParse(m.Groups[1].Value,
-                        NumberStyles.Float, CultureInfo.InvariantCulture, out double timeMs))
-                {
-                    warnings.Add($"Line {lineNum}: could not parse timestamp \"{m.Groups[1].Value}\"");
-                    continue;
-                }
-
-                if (!uint.TryParse(m.Groups[2].Value, NumberStyles.HexNumber,
-                        CultureInfo.InvariantCulture, out uint id))
-                {
-                    warnings.Add($"Line {lineNum}: could not parse CAN ID \"{m.Groups[2].Value}\"");
-                    continue;
-                }
-
-                if (!int.TryParse(m.Groups[3].Value, out int dlc) || dlc < 0 || dlc > 8)
-                {
-                    warnings.Add($"Line {lineNum}: invalid DLC \"{m.Groups[3].Value}\"");
-                    continue;
-                }
-
-                bool   isExtended = id > 0x7FF;
-                uint   id29       = id & 0x1FFFFFFF;
-                byte[] data       = ParseDataBytes(m.Groups[4].Value.Trim(), dlc);
-
-                frames.Add(new TrcCanFrame(timeMs, id29, isExtended, dlc, data));
-            }
+            if (isTrc)
+                ParseTrcFile(opts.InputFile, frames, warnings, out baseTime);
+            else
+                ParseCandumpFile(opts.InputFile, frames, warnings, out baseTime);
 
             Report(progress, $"✅ Parsed {frames.Count} CAN frames  ({warnings.Count} skipped lines)");
 
             if (frames.Count == 0)
-                throw new InvalidOperationException(
-                    "No valid CAN frames found in the .trc file. " +
-                    "Ensure the file contains 'Rx' lines in PCAN-View 1.1 format.");
+                throw new InvalidOperationException("No valid CAN frames found in the input file.");
 
             // ── Build PCAP ────────────────────────────────────────────────────
             Report(progress, $"🔧 Building {Path.GetFileName(opts.OutputPcap)} ...");
@@ -210,18 +161,18 @@ namespace PcapReplayer
 
             int    packetCount   = 0;
             bool   isFirstPacket = true;
-            var    batch         = new List<TrcCanFrame>();
-            double batchStartMs  = frames[0].TimeMs;
+            var    batch         = new List<CanFrame>();
+            double batchStartSec = frames[0].AbsoluteTimeSec;
 
             for (int fi = 0; fi <= frames.Count; fi++)
             {
-                bool       flush = fi == frames.Count;
-                TrcCanFrame? f  = fi < frames.Count ? frames[fi] : null;
+                bool      flush = fi == frames.Count;
+                CanFrame? f     = fi < frames.Count ? frames[fi] : null;
 
                 if (!flush && batch.Count > 0)
                 {
-                    double delta = f!.TimeMs - batchStartMs;
-                    if (delta > opts.BatchThresholdMs || batch.Count >= opts.FramesPerPacket)
+                    double deltaMs = (f!.AbsoluteTimeSec - batchStartSec) * 1000.0;
+                    if (deltaMs > opts.BatchThresholdMs || batch.Count >= opts.FramesPerPacket)
                         flush = true;
                 }
 
@@ -238,15 +189,15 @@ namespace PcapReplayer
                     foreach (var bf in batch)
                         payloadMs.Write(BuildUsrFrame(bf));
 
-                    byte[] payload   = payloadMs.ToArray();
-                    double pktTimeSec = baseEpochSec + (batch[0].TimeMs / 1000.0);
-                    byte[] udpPkt    = BuildUdpPacket(opts.SourceIP, opts.DestIP,
+                    byte[] payload    = payloadMs.ToArray();
+                    double pktTimeSec = batch[0].AbsoluteTimeSec;
+                    byte[] udpPkt     = BuildUdpPacket(opts.SourceIP, opts.DestIP,
                                                        SrcPort, opts.DestPort, payload);
                     WritePcapPacket(writer, udpPkt, pktTimeSec);
                     packetCount++;
 
                     batch.Clear();
-                    if (f != null) batchStartMs = f.TimeMs;
+                    if (f != null) batchStartSec = f.AbsoluteTimeSec;
                 }
 
                 if (f != null) batch.Add(f);
@@ -259,7 +210,7 @@ namespace PcapReplayer
             Report(progress, $"📄 Output : {opts.OutputPcap}");
             Report(progress, $"💡 Load in Replay tab to send to the gateway");
 
-            return new TrcConversionResult
+            return new ConversionResult
             {
                 FramesParsed   = frames.Count,
                 PacketsWritten = packetCount,
@@ -269,12 +220,111 @@ namespace PcapReplayer
             };
         }
 
+        private static void ParseTrcFile(string file, List<CanFrame> frames, List<string> warnings, out DateTime baseTime)
+        {
+            string content = File.ReadAllText(file);
+            baseTime = DateTime.UtcNow;
+            
+            var stMatch = TrcStartTimePattern.Match(content);
+            if (stMatch.Success &&
+                double.TryParse(stMatch.Groups[1].Value,
+                    NumberStyles.Float, CultureInfo.InvariantCulture, out double oleDate))
+            {
+                baseTime = DateTime.FromOADate(oleDate);
+            }
+
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            double baseEpochSec = (baseTime.ToUniversalTime() - epoch).TotalSeconds;
+
+            int lineNum = 0;
+            foreach (string line in File.ReadLines(file))
+            {
+                lineNum++;
+                var m = TrcLinePattern.Match(line);
+                if (!m.Success) continue;
+
+                if (!double.TryParse(m.Groups[1].Value, NumberStyles.Float, CultureInfo.InvariantCulture, out double timeMs))
+                {
+                    warnings.Add($"Line {lineNum}: could not parse timestamp \"{m.Groups[1].Value}\"");
+                    continue;
+                }
+
+                if (!uint.TryParse(m.Groups[2].Value, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out uint id))
+                {
+                    warnings.Add($"Line {lineNum}: could not parse CAN ID \"{m.Groups[2].Value}\"");
+                    continue;
+                }
+
+                if (!int.TryParse(m.Groups[3].Value, out int dlc) || dlc < 0 || dlc > 8)
+                {
+                    warnings.Add($"Line {lineNum}: invalid DLC \"{m.Groups[3].Value}\"");
+                    continue;
+                }
+
+                bool isExtended = id > 0x7FF;
+                uint id29 = id & 0x1FFFFFFF;
+                byte[] data = ParseTrcDataBytes(m.Groups[4].Value.Trim(), dlc);
+
+                double absoluteTimeSec = baseEpochSec + (timeMs / 1000.0);
+                frames.Add(new CanFrame(absoluteTimeSec, id29, isExtended, dlc, data));
+            }
+        }
+
+        private static void ParseCandumpFile(string file, List<CanFrame> frames, List<string> warnings, out DateTime baseTime)
+        {
+            baseTime = DateTime.UtcNow; // We will set this based on the first packet
+            bool baseTimeSet = false;
+            int lineNum = 0;
+
+            foreach (string line in File.ReadLines(file))
+            {
+                lineNum++;
+                var m = CandumpPattern.Match(line);
+                if (!m.Success) continue;
+
+                if (!double.TryParse(m.Groups[1].Value, NumberStyles.Float, CultureInfo.InvariantCulture, out double absoluteTimeSec))
+                {
+                    warnings.Add($"Line {lineNum}: could not parse timestamp \"{m.Groups[1].Value}\"");
+                    continue;
+                }
+
+                if (!uint.TryParse(m.Groups[2].Value, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out uint id))
+                {
+                    warnings.Add($"Line {lineNum}: could not parse CAN ID \"{m.Groups[2].Value}\"");
+                    continue;
+                }
+
+                string dataHex = m.Groups[3].Value;
+                int dlc = dataHex.Length / 2;
+                if (dlc > 8)
+                {
+                    warnings.Add($"Line {lineNum}: data length {dlc} exceeds 8 bytes");
+                    continue;
+                }
+
+                bool isExtended = m.Groups[2].Value.Length > 3 || id > 0x7FF;
+                uint id29 = id & 0x1FFFFFFF;
+
+                byte[] data = new byte[8];
+                for (int i = 0; i < dlc; i++)
+                {
+                    data[i] = byte.Parse(dataHex.Substring(i * 2, 2), NumberStyles.HexNumber);
+                }
+
+                if (!baseTimeSet)
+                {
+                    var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                    baseTime = epoch.AddSeconds(absoluteTimeSec).ToLocalTime();
+                    baseTimeSet = true;
+                }
+
+                frames.Add(new CanFrame(absoluteTimeSec, id29, isExtended, dlc, data));
+            }
+        }
+
         // ── Public helpers (called from tests) ────────────────────────────────
 
-        /// <summary>
-        /// Builds the 13-byte USR-CANET200 binary frame for a single CAN frame.
-        /// </summary>
-        public static byte[] BuildUsrFrame(TrcCanFrame f)
+        public static byte[] BuildUsrFrame(CanFrame f)
         {
             byte info = (byte)(f.DLC & 0x0F);
             if (f.IsExtended) info |= 0x80;
@@ -289,10 +339,6 @@ namespace PcapReplayer
             return frame;
         }
 
-        /// <summary>
-        /// Writes the 24-byte PCAP global header to <paramref name="writer"/>.
-        /// Link-type 1 = Ethernet.
-        /// </summary>
         public static void WritePcapGlobalHeader(BinaryWriter writer)
         {
             writer.Write(0xA1B2C3D4u); // magic
@@ -304,13 +350,7 @@ namespace PcapReplayer
             writer.Write(1u);          // link type: Ethernet
         }
 
-        /// <summary>
-        /// Builds a complete Ethernet + IPv4 + UDP packet byte array.
-        /// </summary>
-        public static byte[] BuildUdpPacket(
-            string srcIP, string dstIP,
-            int srcPort, int dstPort,
-            byte[] payload)
+        public static byte[] BuildUdpPacket(string srcIP, string dstIP, int srcPort, int dstPort, byte[] payload)
         {
             int totalLen = 14 + 20 + 8 + payload.Length;
             var pkt      = new byte[totalLen];
@@ -352,9 +392,6 @@ namespace PcapReplayer
             return pkt;
         }
 
-        /// <summary>
-        /// Writes a single PCAP packet record to <paramref name="writer"/>.
-        /// </summary>
         public static void WritePcapPacket(BinaryWriter writer, byte[] packet, double timestampSeconds)
         {
             uint tsSec  = (uint)Math.Floor(timestampSeconds);
@@ -368,7 +405,7 @@ namespace PcapReplayer
 
         // ── Private helpers ───────────────────────────────────────────────────
 
-        private static byte[] ParseDataBytes(string dataStr, int dlc)
+        private static byte[] ParseTrcDataBytes(string dataStr, int dlc)
         {
             var    data  = new byte[8];
             string[] hex = dataStr.Split(' ', StringSplitOptions.RemoveEmptyEntries);

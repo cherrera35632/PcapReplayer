@@ -92,14 +92,17 @@ namespace PcapReplayer
             var tabs = new TabControl { Dock = DockStyle.Fill, Font = new Font("Segoe UI", 9f) };
             tabs.TabPages.Add(BuildReplayTab());
             tabs.TabPages.Add(BuildMetadataTab());
-            tabs.TabPages.Add(BuildTrcTab());
+            tabs.TabPages.Add(BuildTrcLogTab());
             this.Controls.Add(tabs);
             _tabs = tabs;
 
             // Engine
             _engine = new ReplayEngine();
             _engine.OnLog      += Log;
-            _engine.OnProgress += count => { if (count % 1000 == 0) Log($"Sent {count} packets..."); };
+            _engine.OnProgress += count => { 
+                if (count == 50 || count == 100 || count == 500 || count % 1000 == 0) 
+                    Log($"Sent {count} packets..."); 
+            };
             _engine.OnComplete += () => { Log("Replay finished!"); EnableReplayControls(true); };
             _engine.OnError    += ex => { Log($"Error: {ex.Message}"); EnableReplayControls(true); };
 
@@ -758,9 +761,9 @@ namespace PcapReplayer
         // ══════════════════════════════════════════════════════════════════════
         //  TRC → USR PCAP TAB
         // ══════════════════════════════════════════════════════════════════════
-        private TabPage BuildTrcTab()
+        private TabPage BuildTrcLogTab()
         {
-            var tab = new TabPage("🔄  TRC → USR PCAP") { Padding = new Padding(10) };
+            var tab = new TabPage("🔄  TRC / LOG → USR PCAP") { Padding = new Padding(10) };
             int y   = 10;
 
             // ── USR-compatibility banner ──────────────────────────────────────
@@ -783,7 +786,7 @@ namespace PcapReplayer
             y += 56;
 
             // ── TRC file row ──────────────────────────────────────────────────
-            tab.Controls.Add(MakeLabel("TRC File:", 10, y));
+            tab.Controls.Add(MakeLabel("TRC or LOG file:", 10, y));
             txtTrcPath = new TextBox { Location = new Point(10, y + 20), Width = 500, ReadOnly = true };
             var btnTrcBrowse = new Button { Text = "...", Location = new Point(516, y + 19), Width = 40 };
             btnTrcBrowse.Click += BtnTrcBrowse_Click;
@@ -964,7 +967,7 @@ namespace PcapReplayer
             if (lblTrcOutputName == null) return;
             if (string.IsNullOrWhiteSpace(txtTrcPath?.Text))
             {
-                lblTrcOutputName.Text      = "Output: (select a .trc file)";
+                lblTrcOutputName.Text      = "Output: (select a .trc or .log file)";
                 lblTrcOutputName.ForeColor = Color.DimGray;
                 return;
             }
@@ -985,8 +988,8 @@ namespace PcapReplayer
         {
             using var ofd = new OpenFileDialog
             {
-                Title  = "Select PCAN-View TRC file",
-                Filter = "TRC Files|*.trc|All Files|*.*"
+                Title  = "Select capture file",
+                Filter = "Capture Files|*.trc;*.log|All Files|*.*"
             };
             if (ofd.ShowDialog() != DialogResult.OK) return;
             txtTrcPath.Text = ofd.FileName;
@@ -1010,7 +1013,7 @@ namespace PcapReplayer
         {
             if (string.IsNullOrWhiteSpace(txtTrcPath.Text))
             {
-                MessageBox.Show("Please select a .trc file first.", "No input file",
+                MessageBox.Show("Please select an input file first.", "No input file",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -1023,9 +1026,9 @@ namespace PcapReplayer
             if (!int.TryParse(txtTrcFramesPkt.Text, out int framesPkt))  framesPkt  = 10;
             if (!double.TryParse(txtTrcBatchMs.Text, out double batchMs)) batchMs   = 5.0;
 
-            var opts = new TrcConversionOptions
+            var opts = new ConversionOptions
             {
-                TrcFile         = txtTrcPath.Text,
+                InputFile       = txtTrcPath.Text,
                 OutputPcap      = BuildTrcOutputPath(),
                 MetadataHeader  = meta,
                 DestPort        = destPort,
@@ -1044,7 +1047,7 @@ namespace PcapReplayer
 
             try
             {
-                var result = await Task.Run(() => TrcConverter.Convert(opts, progress));
+                var result = await Task.Run(() => CanLogConverter.Convert(opts, progress));
 
                 TrcLog($"✅ Done — {result.FramesParsed} frames → {result.PacketsWritten} packets");
                 if (result.Warnings.Count > 0)
