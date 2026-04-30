@@ -868,8 +868,8 @@ namespace PcapReplayer
             AddSimpleField(grpNet, "Source IP:",   nx,       out txtTrcSourceIP,  "192.168.1.100", 110);
             AddSimpleField(grpNet, "Dest IP:",     nx + 130, out txtTrcDestIP,     "192.168.1.1",   110);
             AddSimpleField(grpNet, "Dest Port:",   nx + 260, out txtTrcDestPort,   "35251",          60);
-            AddSimpleField(grpNet, "Frames/Pkt:",  nx + 340, out txtTrcFramesPkt,  "10",             50);
-            AddSimpleField(grpNet, "Batch (ms):",  nx + 410, out txtTrcBatchMs,    "5",              50);
+            AddSimpleField(grpNet, "Frames/Pkt:",  nx + 340, out txtTrcFramesPkt,  "50",             50);
+            AddSimpleField(grpNet, "Batch (ms):",  nx + 410, out txtTrcBatchMs,    "10",             50);
             tab.Controls.Add(grpNet);
             y += 82;
 
@@ -1023,8 +1023,8 @@ namespace PcapReplayer
                           $"{txtTrcMfg.Text}|{txtTrcDatabase.Text}|{txtTrcCanName.Text}";
 
             if (!int.TryParse(txtTrcDestPort.Text,  out int destPort))   destPort   = 35251;
-            if (!int.TryParse(txtTrcFramesPkt.Text, out int framesPkt))  framesPkt  = 10;
-            if (!double.TryParse(txtTrcBatchMs.Text, out double batchMs)) batchMs   = 5.0;
+            if (!int.TryParse(txtTrcFramesPkt.Text, out int framesPkt))  framesPkt  = 50;
+            if (!double.TryParse(txtTrcBatchMs.Text, out double batchMs)) batchMs   = 10.0;
 
             var opts = new ConversionOptions
             {
