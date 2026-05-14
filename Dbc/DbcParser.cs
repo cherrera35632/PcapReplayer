@@ -215,8 +215,8 @@ namespace PcapReplayer
         }
 
         private static bool IsMultiplexToken(string token)
-            => token.Equals("M", StringComparison.Ordinal) ||
-               (token.Length > 1 && token[0] == 'm' && int.TryParse(token[1..], out _));
+            => token.Equals("M", StringComparison.OrdinalIgnoreCase) ||
+               (token.Length > 1 && (token[0] == 'm' || token[0] == 'M') && int.TryParse(token[1..], out _));
 
         private static string Unescape(string text)
             => text.Replace("\\\"", "\"");

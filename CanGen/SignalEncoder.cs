@@ -37,6 +37,8 @@ namespace PcapReplayer
                 return false;
             }
 
+            // Use AwayFromZero so midpoint defaults and UI-entered .5 values map to
+            // the nearest non-zero representable raw value instead of banker's rounding.
             raw = (long)Math.Round(rawFloat, MidpointRounding.AwayFromZero);
             if (!FitsInBitWidth(sig, raw, out error))
                 return false;
@@ -114,13 +116,11 @@ namespace PcapReplayer
             if (!sig.IsSigned)
                 return unchecked((ulong)raw);
 
-            if (sig.Length == 64)
-                return unchecked((ulong)raw);
+            ulong mask = sig.Length == 64
+                ? ulong.MaxValue
+                : (1UL << sig.Length) - 1;
 
-            if (raw >= 0)
-                return (ulong)raw;
-
-            return (1UL << sig.Length) - (ulong)(-raw);
+            return unchecked((ulong)raw) & mask;
         }
 
         private static void SetBit(byte[] data, int bitIndex)
@@ -130,6 +130,8 @@ namespace PcapReplayer
             data[byteIndex] |= (byte)(1 << bitInByte);
         }
 
+        // DBC Motorola/big-endian numbering walks MSB-first within a byte, then
+        // continues at the next byte's MSB position.
         private static int NextMotorolaBit(int bitPosition)
             => bitPosition % 8 == 0 ? bitPosition + 15 : bitPosition - 1;
     }

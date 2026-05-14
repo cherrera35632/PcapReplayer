@@ -12,6 +12,7 @@ namespace PcapReplayer
 {
     public sealed class CanTransmitter : ICanTransmitter
     {
+        private const double SpinThresholdMs = 1.5;
         private static readonly double TicksPerMs = Stopwatch.Frequency / 1000.0;
         private readonly IUdpSink? _testSink;
         private volatile bool _stopRequested;
@@ -137,9 +138,9 @@ namespace PcapReplayer
 
                 long remainingTicks = targetTimestamp - Stopwatch.GetTimestamp();
                 double remainingMs = remainingTicks / TicksPerMs;
-                if (remainingMs > 1.5)
+                if (remainingMs > SpinThresholdMs)
                 {
-                    int sleepMs = (int)Math.Floor(remainingMs - 1.5);
+                    int sleepMs = (int)Math.Floor(remainingMs - SpinThresholdMs);
                     if (sleepMs > 0)
                     {
                         Thread.Sleep(Math.Min(sleepMs, 10));

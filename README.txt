@@ -62,11 +62,12 @@
   ├── PcapAnalyzerTests.cs           11 tests: full classification using synthetic PCAPs
   ├── PayloadTransformerTests.cs     15 tests: NullTransformer, UsrMetadataTransformer,
   │                                            multi-asset independence invariants
+  ├── CanLogConverterTests.cs         3 tests: TRC / LOG conversion + USR framing
   ├── DbcParserTests.cs               6 tests: BO_/SG_/VAL_/multiplex skip coverage
   ├── SignalEncoderTests.cs          10 tests: physical→raw + Intel/Motorola packing
   ├── UsrFrameBuilderTests.cs         4 tests: 13-byte frame output + USR round-trip
   └── CanTransmitterTests.cs          4 tests: rate, mute, cancellation, batching
-  TOTAL: 88 tests, 0 failures
+  TOTAL: 91 tests, 0 failures
 
 
 --------------------------------------------------------------------------------

@@ -292,19 +292,33 @@ namespace PcapReplayer
 
         private static SignalTxState BuildSignalState(DbcSignal signal)
         {
-            double midpoint = (signal.Min + signal.Max) / 2.0;
-            SignalEncoder.TryEncodePhysical(signal, midpoint, out long raw, out string? error);
+            double physical = signal.Min + ((signal.Max - signal.Min) / 2.0);
+            bool ok = SignalEncoder.TryEncodePhysical(signal, physical, out long raw, out string? error);
 
-            if (signal.ValueTable is { Count: > 0 } && !signal.ValueTable.ContainsKey(raw))
+            if (!ok)
             {
-                raw = signal.ValueTable.Keys.OrderBy(v => Math.Abs(v - raw)).First();
-                SignalEncoder.TryEncodePhysical(signal, raw * signal.Factor + signal.Offset, out raw, out error);
+                physical = Math.Min(signal.Min, signal.Max);
+                ok = SignalEncoder.TryEncodePhysical(signal, physical, out raw, out error);
+            }
+
+            if (signal.ValueTable is { Count: > 0 })
+            {
+                long closestRaw = signal.ValueTable.Keys.OrderBy(v => Math.Abs(v - raw)).First();
+                physical = closestRaw * signal.Factor + signal.Offset;
+                ok = SignalEncoder.TryEncodePhysical(signal, physical, out raw, out error);
+            }
+
+            if (!ok)
+            {
+                raw = 0;
+                physical = signal.Offset;
+                error ??= "Unable to derive a valid default value from the DBC signal definition.";
             }
 
             return new SignalTxState
             {
                 Signal        = signal,
-                PhysicalValue = raw * signal.Factor + signal.Offset,
+                PhysicalValue = physical,
                 RawValue      = raw,
                 Error         = error,
                 IsMuted       = false
@@ -505,9 +519,15 @@ namespace PcapReplayer
                     if (cbo.SelectedItem is not CanValueOption option) return;
                     signal.RawValue      = option.Raw;
                     signal.PhysicalValue = option.Raw * signal.Signal.Factor + signal.Signal.Offset;
-                    SignalEncoder.TryEncodePhysical(signal.Signal, signal.PhysicalValue, out long raw, out string? error);
-                    signal.RawValue = raw;
-                    signal.Error    = error;
+                    if (SignalEncoder.TryEncodePhysical(signal.Signal, signal.PhysicalValue, out long raw, out string? error))
+                    {
+                        signal.RawValue = raw;
+                        signal.Error    = null;
+                    }
+                    else
+                    {
+                        signal.Error = error;
+                    }
                     UpdateSignalVisual(message, signal, cbo, rawLabel);
                 };
                 row.Controls.Add(cbo);
