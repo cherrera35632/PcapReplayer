@@ -1,0 +1,243 @@
+VERSION ""
+
+
+NS_ :
+    NS_DESC_
+    CM_
+    BA_DEF_
+    BA_
+    VAL_
+    CAT_DEF_
+    CAT_
+    FILTER
+    BA_DEF_DEF_
+    EV_DATA_
+    ENVVAR_DATA_
+    SGTYPE_
+    SGTYPE_VAL_
+    BA_DEF_SGTYPE_
+    BA_SGTYPE_
+    SIG_TYPE_REF_
+    VAL_TABLE_
+    SIG_GROUP_
+    SIG_VALTYPE_
+    SIGTYPE_VALTYPE_
+    BO_TX_BU_
+    BA_DEF_REL_
+    BA_REL_
+    BA_DEF_DEF_REL_
+    BU_SG_REL_
+    BU_EV_REL_
+    BU_BO_REL_
+    SG_MUL_VAL_
+
+BS_: 
+BU_: 
+
+
+BO_ 402653551 MSG1: 8 Vector__XXX
+   SG_ EngineSpeed : 0|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ ScaledDischargePressure : 16|16@1+ (1,-5000) [0|15000] "psi" Vector__XXX
+   SG_ Rate : 32|16@1+ (0.1,0) [0|0] "" Vector__XXX
+   SG_ TotalBBL : 48|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ SIGNAL4012Engine_SPeeed : 0|16@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550137598 MSG2: 8 Vector__XXX
+   SG_ TransGear : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Warning : 40|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ TransStatus : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550137854 MSG3: 8 Vector__XXX
+   SG_ HHP : 0|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Eng_Water_Temp : 16|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Eng_Oil_Pressure : 32|16@1+ (0.1,-750) [0|0] "psi" Vector__XXX
+   SG_ Discharge_Raw_Counts : 48|16@1+ (1,-750) [0|0] "" Vector__XXX
+
+BO_ 2550138110 MSG4: 8 Vector__XXX
+   SG_ PE_Temp : 0|16@1+ (1,-100) [0|0] "F" Vector__XXX
+   SG_ Battery_Voltage : 32|8@1+ (0.1,0) [0|0] "volts" Vector__XXX
+   SG_ Pump_Oil_Pressure : 16|16@1+ (0.1,-750) [0|0] "" Vector__XXX
+   SG_ Suction_Pressure : 48|16@1+ (0.1,-1000) [0|0] "psi" Vector__XXX
+   SG_ Fan_percent : 40|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550138366 MSG5: 8 Vector__XXX
+   SG_ Engine_Hours : 0|24@1+ (0.1,0) [0|0] "hours" Vector__XXX
+   SG_ FE_Hours : 24|24@1+ (0.1,0) [0|0] "" Vector__XXX
+   SG_ unknown_signal_005 : 48|16@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550138622 MSG6: 8 Vector__XXX
+   SG_ SPN1 : 0|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ FMI1 : 16|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ SPN2 : 32|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ FMI2 : 48|16@1+ (1,0) [0|0] "" Vector__XXX
+
+
+
+
+BO_ 2550139646 MSG10: 8 Vector__XXX
+   SG_ Disch_Pressure : 0|16@1+ (1,-5000) [0|0] "psi" Vector__XXX
+   SG_ Total_Strokes : 32|32@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550139902 11: 8 Vector__XXX
+   SG_ TransHours : 0|24@1+ (0.1,0) [0|0] "" Vector__XXX
+   SG_ PumpHours : 24|24@1+ (0.1,0) [0|0] "" Vector__XXX
+   SG_ Unknown_0B : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Flags : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+
+
+
+
+
+BO_ 2550141182 16: 8 Vector__XXX
+   SG_ Input_Scaled_1 : 0|24@1+ (0.01,-500000) [0|0] "" Vector__XXX
+   SG_ Input_1_Alarm : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Input_Scaled_2 : 32|24@1+ (0.01,-500000) [0|0] "" Vector__XXX
+   SG_ Input_2_Alarm : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550141438 17: 8 Vector__XXX
+   SG_ Input_Scaled_3 : 0|24@1+ (0.01,-500000) [0|0] "" Vector__XXX
+   SG_ Input_3_Alarm : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Input_Scaled_4 : 32|24@1+ (0.01,-500000) [0|0] "" Vector__XXX
+   SG_ Input_4_Alarm : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550141694 18: 8 Vector__XXX
+   SG_ Input_Scaled_5 : 0|24@1+ (0.01,-500000) [0|0] "" Vector__XXX
+   SG_ Input_5_Alarm : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Input_Scaled_6 : 32|24@1+ (0.01,-500000) [0|0] "" Vector__XXX
+   SG_ Input_6_Alarm : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550141950 19: 8 Vector__XXX
+   SG_ Input_Scaled_7 : 0|24@1+ (0.01,-500000) [0|0] "" Vector__XXX
+   SG_ Input_7_Alarm : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Input_Scaled_8 : 32|24@1+ (0.01,-500000) [0|0] "" Vector__XXX
+   SG_ Input_8_Alarm : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550142206 20: 8 Vector__XXX
+   SG_ RPM_K_Factor : 24|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Stroke_Length : 40|16@1+ (0.1,0) [0|0] "" Vector__XXX
+   SG_ Number_of_Plungers : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550142462 21: 8 Vector__XXX
+   SG_ Gear_Ratio : 0|16@1+ (0.01,0) [0|0] "" Vector__XXX
+   SG_ Plunger_Diameter : 16|16@1+ (0.01,0) [0|0] "" Vector__XXX
+   SG_ Offset_Multipler : 32|16@1+ (0.01,0) [0|0] "" Vector__XXX
+   SG_ PulsePerRev : 48|16@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550142718 22: 8 Vector__XXX
+   SG_ Disch_Raw_Low : 0|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Disch_Raw_High : 16|16@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550142974 23: 8 Vector__XXX
+   SG_ UnitID : 0|48@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ OPSD_Set_Point : 48|16@1+ (1,0) [0|0] "" Vector__XXX
+
+
+
+BO_ 2550143742 MSG1A: 8 Vector__XXX
+   SG_ Fan_Control : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Fan_Counts_10 : 8|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Fan_Counts_100 : 24|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Suction_Setpoint : 40|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Suction_Shutdown_PSI : 48|8@1+ (1,0) [0|0] "psi" Vector__XXX
+   SG_ Unit_Type : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550143998 MSG27: 8 Vector__XXX
+   SG_ EKill_Status : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Lube_Idle_SP : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Leak_Setpoint : 16|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Leak_Shutdown_Setpoint : 32|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Brake_Throttle_Inhibit : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550144254 MSG28: 8 Vector__XXX
+   SG_ Misc_Channel_Number : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Low_Alarm_Type : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Low_Alarm_Set_Point : 16|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ High_Alarm_Type : 32|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ High_Alarm_Set_Point : 40|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Channel_Type : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550144510 MSG29: 8 Vector__XXX
+   SG_ Misc_Channel_Number : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Multiplyer_times_100 : 16|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Units_low_times_100 : 32|16@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550144766 MSG30: 8 Vector__XXX
+   SG_ Misc_Channel_Number : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ High_Scale_times_100 : 8|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Low_Counts : 40|16@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550145022 MSG31: 8 Vector__XXX
+   SG_ Misc_Channel_Number : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ High_Counts : 8|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Frequency_KFactor_x_1000 : 24|32@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550145278 MSG32: 8 Vector__XXX
+   SG_ Misc_Channel_Number : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Label_Char_1 : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Label_Char_2 : 16|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Label_Char_3 : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Label_Char_4 : 32|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Label_Char_5 : 40|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Label_Char_6 : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Label_Char_7 : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550145534 MSG33: 8 Vector__XXX
+   SG_ Misc_Channel_Number : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Label_Char_8 : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Fine_Dampining : 16|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Fine_Damp_Range : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Course_Dampining : 32|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550145790 MSG34: 8 Vector__XXX
+   SG_ Off_Cycle_Greaser_SecondsStrokes : 48|16@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550146046 MSG35: 8 Vector__XXX
+   SG_ On_Cycle_Greaser_SecondsStrokes : 48|16@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550152446 MSG60: 8 Vector__XXX
+   SG_ Average_HHP : 24|16@1+ (1,0) [0|0] "hhp" Vector__XXX
+   SG_ Average_HHP_Hours : 40|16@1+ (0.01,0) [0|0] "hours" Vector__XXX
+
+BO_ 2550169854 MSG128: 8 Vector__XXX
+   SG_ Throttle_percent_64 : 0|8@1+ (1,0) [0|0] "out of 64" Vector__XXX
+   SG_ Requested_Gear : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ State : 16|8@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Disch_Low_Scale : 32|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Disch_High_Scale : 48|16@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550198014 MSGEE: 8 Vector__XXX
+   SG_ PressureAtOPSD : 8|16@1+ (1,0) [0|0] "psi" Vector__XXX
+
+BO_ 402718575 MSGFF: 8 Vector__XXX
+   SG_ ID_Serial_Num : 0|40@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ Pump_rev : 40|16@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ FCPC_Status : 56|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2550143486 RLG25: 0 Vector__XXX
+	SG_ Protection : 50|1@1+ (1,0) [0|1] "" Vector__XXX
+	SG_ WarmupOn : 48|1@1+ (1,0) [0|1] "" Vector__XXX
+	SG_ ShiftProhibit : 52|1@1+ (1,0) [0|1] "" Vector__XXX
+	SG_ Prelube : 49|1@1+ (1,0) [0|1] "" Vector__XXX
+	SG_ PressureMaintain : 54|1@1+ (1,0) [0|1] "" Vector__XXX
+	SG_ Suction : 60|1@1+ (1,0) [0|1] "" Vector__XXX
+	SG_ SuctionShutdownEnable : 57|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 2550143742 RLG26: 0 Vector__XXX
+	SG_ SuctionAlarmSetpoint : 40|8@1+ (1,0) [0|255] "psi" Vector__XXX
+	SG_ SuctionShutdownSetpoint : 48|8@1+ (1,0) [0|255] "psi" Vector__XXX
+
+BO_ 2550152190 RLG59: 0 Vector__XXX
+	SG_ MaxRPMSP : 1|16@1+ (1,0) [0|2200] "RPM" Vector__XXX
+
+
+
+
+CM_ BO_ 2550143486 "Rolligon Message 0x19";
+CM_ SG_ 2550143486 Protection "Enables shutdown and instant neutral protections";
+CM_ SG_ 2550143486 WarmupOn "This bit enables the transmission to go into warmup mode. Default for Cudd is ON.";
+CM_ SG_ 2550143486 ShiftProhibit "If HP in next gear exceeds max HP then disallow shift";
+CM_ BO_ 2550143742 "Rolligon Message 0x1A";
+CM_ SG_ 2550143742 SuctionAlarmSetpoint "Low Pressure Setpoint for Suction Pressure Alarm";
+CM_ SG_ 2550143742 SuctionShutdownSetpoint "Low Pressure Setpoint for Suction Pressure Shutdown";
+CM_ BO_ 2550152190 "Rolligon Message 0x3B";
+CM_ SG_ 2550152190 MaxRPMSP "Engine Speed Limit";

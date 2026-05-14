@@ -1,0 +1,798 @@
+VERSION "created by canmatrix"
+
+
+NS_ :
+
+BS_:
+
+BU_: 
+
+VAL_TABLE_ ArbitraryAddressCapable 0 "CA is not capable" 1 "CA is capable";
+VAL_TABLE_ BlendDualFuelModeOperatingStatus 0 "Disabled by Configuration" 1 "Operator Disabled" 2 "Automatically Disabled and Locked" 3 "Temporarily Disabled Due to Current Conditions" 4 "Pending" 5 "Active" 6 "Reserved" 7 "Reserved" 8 "Reserved" 9 "Reserved" 10 "Reserved" 11 "Reserved" 12 "Reserved" 13 "Reserved" 14 "Error" 15 "Not Available";
+VAL_TABLE_ BlendedDualFuelModeStatusReason 0 "Not Requested" 1 "Diagnostic Trouble Code Active" 2 "Engine Speed Too Low" 3 "Engine Speed Too High" 4 "Engine Load Too Low" 5 "Engine Load Too High" 6 "Coolant Temperature Too Low" 7 "Coolant Temperature Too High" 8 "Intake Manifold Air Temperature Too Low" 9 "Intake Manifold Air Temperature Too High" 10 "Gas System Pressure Too Low" 11 "Gas System Pressure Too High" 12 "Gas System Temperature Too Low" 13 "Gas System Temperature Too High" 14 "Engine Cylinder Cut-Out Mode Active" 15 "Aftertreatment Temperature Threshold Not Met" 16 "Engine System Protection Active" 17 "Gaseous Fuel Energy Content Too High" 18 "Gas Blending System Abnormal" 19 "Aftertreatment Warm Up In Progress" 20 "Gas System Leak Check In Progress" 21 "Engine Operating Time Too Low" 22 "Engine Under Acceleration" 23 "Gas Blending At Target" 24 "Gas Blending Normal Below Target" 25 "Gas Blending Normal Above Target" 26 "OEM ECU in Control" 27 "Knock Fault A1/A2" 28 "Knock Fault A3/A4" 29 "Knock Fault A5/A6" 30 "Knock Fault A7/A8" 31 "Knock Fault B1/B2" 32 "Knock Fault B3/B4" 33 "Knock Fault B5/B6" 34 "Knock Fault B7/B8" 35 "Gas System Leak Bank A" 36 "Gas System Leak Bank B" 37 "Gas System Sensor Fault Bank A" 38 "Gas System Sensor Fault Bank B" 39 "Charge Air Pressure Fault" 40 "Charge Air Temperature Fault" 41 "Commonr Rail Pressure Fault" 42 "Control Unit Fault" 43 "EGR Fault";
+VAL_TABLE_ EngRequestedSpeedCtrlConditions 0 "Transient Optimized for driveline disengaged and non-lockup conditions" 1 "Stability Optimized for driveline disengaged and non-lockup conditions" 2 "Stability Optimized for driveline engaged and/or in lockup condition 1" 3 "Stability Optimized for driveline engaged and/or in lockup condition 2";
+VAL_TABLE_ EngineDerateSource 0 "Normal" 1 "Engine Oil Temperature" 2 "Engine Oil Pressure" 3 "Engine Coolant Temperature" 4 "Engine Coolant Pressure" 5 "Engine Inlet Manifold Charge Air Pressure Abs" 6 "Engine Inlet Manifold Charge Air Temperature" 7 "Engine Intercooler Temperature" 8 "Engine Intercooler Pressure" 9 "Engine Crankcase Pressure" 10 "Fuel Diesel Temperature" 11 "Fuel Diesel Supply Pressure" 12 "Fuel Diesel Common Rail Pressure" 13 "Fuel Gas Rail Bank A Temperature" 14 "Fuel Gas Rail Bank A Pressure" 15 "Fuel Gas Rail Bank B Temperature" 16 "Fuel Gas Rail Bank B Pressure" 17 "Engine Oil Filter Pressure Delta" 18 "Engine Turbocharger 1 Speed" 19 "Engine Turbocharger 2 Speed" 20 "Engine Turbocharger 3 Speed" 21 "EGR Control" 22 "Boost Control" 23 "CR Control" 24 "EGT Spread" 25 "Exhaust Manifold Pressure" 26 "Suction Valve Current" 27 "Incorrect Pressure Sensor Diagnostic";
+VAL_TABLE_ EngineDualFuelModeCommand 0 "De-activate dual fuel mode" 1 "Activate dual fuel mode" 2 "Reserved" 3 "Not available";
+VAL_TABLE_ EngineDualFuelState 0 "Enabled" 1 "Disabled By Operator" 2 "Disabled Gas System Fault Bank A" 3 "Disabled Gas System Fault Bank B" 4 "Disabled Knock Sensor Fault Bank A" 5 "Disabled Knock Sensor Fault Bank B" 6 "Disabled Engine Sensor Fault" 7 "Disabled Engine Event State" 8 "Disabled ECU Fault" 9 "Disabled ECU9 In Control" 10 "Disabled EGR Fault";
+VAL_TABLE_ EngineOverrideControlMode 0 "Override disabled" 1 "Speed control" 2 "Torque control" 3 "Speed/torque limit control";
+VAL_TABLE_ EngineReferenceState 0 "Open" 1 "Initialisatise" 2 "Stall" 3 "First Edge" 4 "First Period" 5 "Search" 6 "Pattern Lock" 7 "Cycle Lock" 8 "Error";
+VAL_TABLE_ EngineRequestedTorque 0 "+0.000%" 1 "+0.125%" 2 "+0.250%" 3 "+0.375%" 4 "+0.500%" 5 "+0.625%" 6 "+0.750%" 7 "+0.875%" 8 "not available" 9 "not available" 10 "not available" 11 "not available" 12 "not available" 13 "not available" 14 "not available" 15 "not available";
+VAL_TABLE_ EngineState 0 "Startup" 1 "Stop" 2 "Run" 3 "Crank";
+VAL_TABLE_ Enum006 0 "Lamp Off" 1 "Lamp On" 2 "Reserved" 3 "Not available";
+VAL_TABLE_ Enum072 0 "Highest priority" 1 "High priority" 2 "Medium priority" 3 "Low priority";
+VAL_TABLE_ Enum073 0 "Slow Flash (1 Hz, 50 % duty cycle)" 1 "Fast Flash (2 Hz or faster, 50% duty cycle)" 2 "Reserved" 3 "Unavailable / Do Not Flash";
+VAL_TABLE_ Enum112 0 "Lamp Off" 1 "Lamp On" 2 "Short MIL for WWH OBD" 3 "Not available";
+VAL_TABLE_ Enum113 0 "Slow Flash (1 Hz, 50 % duty cycle)" 1 "Fast Flash (2 Hz or faster, 50% duty cycle)" 2 "Class C DTC" 3 "Unavailable / Do Not Flash";
+VAL_TABLE_ Enum117 0 "Not OK" 1 "OK" 2 "Error" 3 "Not available";
+VAL_TABLE_ GasRailState 0 "OK" 1 "Under Pressure" 2 "Over Pressure" 3 "Sensor Fault" 4 "Leak Detected";
+VAL_TABLE_ GasSystemState 0 "Ok" 1 "No CycleLock" 2 "Sensor Fault" 3 "Under Pressure" 4 "Over Pressure" 5 "Leak Detected";
+VAL_TABLE_ KnockSensorState 0 "Ok" 1 "Fault Knk 1" 2 "Fault Knk 2" 3 "Fault Knk 3" 4 "Fault Knk 4" 5 "Fault Knk 5" 6 "Fault Knk 6";
+VAL_TABLE_ SPNConversionMethod 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_TABLE_ TSC1ControlPurpose 0 "P1 : Accelerator Pedal/Operator Selection" 1 "P2 : Cruise Control" 2 "P3 : PTO Governor" 3 "P4 : Road Speed Governor" 4 "P5 : Engine Protection" 5 "P6 : Transient-Optimized Torque Limit" 6 "P7 : Automated Driving System Input" 7 "P8-P31 : Reserved for SAE Assignment" 8 "P8-P31 : Reserved for SAE Assignment" 9 "P8-P31 : Reserved for SAE Assignment" 10 "P8-P31 : Reserved for SAE Assignment" 11 "P8-P31 : Reserved for SAE Assignment" 12 "P8-P31 : Reserved for SAE Assignment" 13 "P8-P31 : Reserved for SAE Assignment" 14 "P8-P31 : Reserved for SAE Assignment" 15 "P8-P31 : Reserved for SAE Assignment" 16 "P8-P31 : Reserved for SAE Assignment" 17 "P8-P31 : Reserved for SAE Assignment" 18 "P8-P31 : Reserved for SAE Assignment" 19 "P8-P31 : Reserved for SAE Assignment" 20 "P8-P31 : Reserved for SAE Assignment" 21 "P8-P31 : Reserved for SAE Assignment" 22 "P8-P31 : Reserved for SAE Assignment" 23 "P8-P31 : Reserved for SAE Assignment" 24 "P8-P31 : Reserved for SAE Assignment" 25 "P8-P31 : Reserved for SAE Assignment" 26 "P8-P31 : Reserved for SAE Assignment" 27 "P8-P31 : Reserved for SAE Assignment" 28 "P8-P31 : Reserved for SAE Assignment" 29 "P8-P31 : Reserved for SAE Assignment" 30 "P8-P31 : Reserved for SAE Assignment" 31 "P32 : Temporary Powertrain Control";
+VAL_TABLE_ TSC1ControlPurposeP7InhibitCmd 0 "Sending TSC1 Control Purpose P7 is allowed" 1 "Sending TSC1 Control Purpose P7 is inhibited" 2 "Reserved" 3 "Not available";
+VAL_TABLE_ TSC1TransmissionRate 0 "1000 ms transmission rate" 1 "750 ms transmission rate" 2 "500 ms transmission rate" 3 "250 ms transmission rate" 4 "100 ms transmission rate" 5 "50 ms transmission rate" 6 "20 ms transmission rate" 7 "Use standard";
+
+BO_ 201326595 TSC1_Transmission: 8 Vector__XXX
+ SG_ EngineOverrideControlMode : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EngRequestedSpeedCtrlConditions : 2|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ OverrideControlModePriority : 4|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EngineRequestedSpeedSpeedLimit : 8|16@1+ (0.125,0) [0.000|8031.875] "rpm" Vector__XXX
+ SG_ EngineRequestedTorqueTorqueLimit : 24|8@1+ (1,-125) [-125|125] "%" Vector__XXX
+ SG_ TSC1TransmissionRate : 32|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ TSC1ControlPurpose : 35|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ EngineRequestedTorque : 40|4@1+ (0.125,0) [0.000|1.625] "%" Vector__XXX
+ SG_ MessageCounter : 56|4@1+ (1,0) [0|15] "count" Vector__XXX
+ SG_ MessageChecksum : 60|4@1+ (1,0) [0|15] "count" Vector__XXX
+
+BO_ 486449150 EPT5: 8 Vector__XXX
+ SG_ EngExhaustGasPort17Temperature : 0|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+ SG_ EngExhaustGasPort18Temperature : 16|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+ SG_ EngExhaustGasDOCInletTemp : 32|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+ SG_ EngExhaustGasDOCOutletTemp : 48|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+
+BO_ 486449406 EPT4: 8 Vector__XXX
+ SG_ EngineExhaustGasBankBPort7Temp : 0|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+ SG_ EngineExhaustGasBankAPort7Temp : 16|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+ SG_ EngineExhaustGasBankBPort8Temp : 32|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+ SG_ EngineExhaustGasBankAPort8Temp : 48|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+
+BO_ 486449662 EPT3: 8 Vector__XXX
+ SG_ EngineExhaustGasBankBPort5Temp : 0|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+ SG_ EngineExhaustGasBankAPort5Temp : 16|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+ SG_ EngineExhaustGasBankBPort6Temp : 32|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+ SG_ EngineExhaustGasBankAPort6Temp : 48|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+
+BO_ 486449918 EPT2: 8 Vector__XXX
+ SG_ EngineExhaustGasBankBPort3Temp : 0|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+ SG_ EngineExhaustGasBankAPort3Temp : 16|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+ SG_ EngineExhaustGasBankBPort4Temp : 32|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+ SG_ EngineExhaustGasBankAPort4Temp : 48|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+
+BO_ 486450174 EPT1: 8 Vector__XXX
+ SG_ EngineExhaustGasBankBPort1Temp : 0|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+ SG_ EngineExhaustGasBankAPort1Temp : 16|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+ SG_ EngineExhaustGasBankBPort2Temp : 32|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+ SG_ EngineExhaustGasBankAPort2Temp : 48|16@1+ (0.03125,-273) [-273.00000|1734.96875] "deg C" Vector__XXX
+
+BO_ 217069822 ETFR: 8 Vector__XXX
+ SG_ EngGsSubstitutionFuelPrcntageCmd : 0|8@1+ (0.5,0) [0|125] "%" Vector__XXX
+ SG_ EngineCylinderGasMassFlowRateCmd : 8|16@1+ (0.00006103515625,0) [0E-014|3.92181396484375] "kg/s" Vector__XXX
+ SG_ EngineCylDieselMassFlowRateCmd : 24|16@1+ (0.00006103515625,0) [0E-014|3.92181396484375] "kg/s" Vector__XXX
+ SG_ EngineCylinderTorque : 40|16@1+ (1,0) [0|64255] "Nm" Vector__XXX
+ SG_ EngineDualFuelModeCommand : 56|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 419364865 PropB_00: 8 Vector__XXX
+ SG_ EngDerateSourceNone : 2|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EngDreateSourceOilPressure : 6|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EngDreateSourceChargeAirPressure : 12|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EngDreateSourceOilFltPressDelta : 14|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EngDreateSourceCommonRailPres : 20|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EngDreateSourceCoolantTemp : 36|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EngDreateSourceChargeAirTemp : 38|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EngDreateSourceOilTemp : 42|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EngDreateSourceDieselTemp : 58|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EngDreateSourceECUVoltageLo : 60|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EngDreateSourceECUVoltageHi : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 419368961 PropB_10: 8 Vector__XXX
+ SG_ Engine_Speed : 0|16@1+ (0.05,0) [0.00|3276.75] "RPM" Vector__XXX
+ SG_ Engine_Delivered_Torque : 16|16@1+ (0.25,0) [0.00|16383.75] "N.m" Vector__XXX
+ SG_ Coolant_Temperature : 32|8@1+ (0.64,-40) [-40.00|123.20] "Deg C" Vector__XXX
+ SG_ Engine_Oil_Pressure : 40|8@1+ (4,0) [0|1020] "kPa" Vector__XXX
+ SG_ Diesel_Consumption : 48|8@1+ (0.04,0) [0.00|10.20] "kg/min" Vector__XXX
+ SG_ Gas_Consumption : 56|8@1+ (0.04,0) [0.00|10.20] "kg/min" Vector__XXX
+
+BO_ 419369985 PropB_14: 8 Vector__XXX
+ SG_ Fuel_Gas_Rail_Bank_A_Pressure : 0|10@1+ (10,0) [0|10230] "kPa" Vector__XXX
+ SG_ Fuel_Gas_Rail_Bank_B_Pressure : 30|10@1+ (10,0) [0|10230] "kPa" Vector__XXX
+ SG_ Diesel_Substitution_Target : 50|10@1+ (1,0) [0|1020] "%" Vector__XXX
+
+BO_ 419370241 PropB_15: 8 Vector__XXX
+ SG_ Fuel_Gas_Rail_Bank_A_Temperature : 0|10@1+ (0.1,-40) [-40|62.3] "Deg C" Vector__XXX
+ SG_ Fuel_Gas_Rail_Bank_B_Temperature : 30|10@1+ (0.1,-40) [-40|62.3] "Deg C" Vector__XXX
+ SG_ Diesel_Substitution_Actual : 50|10@1+ (1,0) [0|1020] "%" Vector__XXX
+
+BO_ 419370497 PropB_16: 8 Vector__XXX
+ SG_ Engine_Reference_State : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Engine_Derate_Source : 4|5@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Knock_Sensor_State : 12|4@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Engine_State : 16|3@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Gas_System_State : 20|3@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Gas_Rail_State_A : 28|3@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Gas_Rail_State_B : 36|3@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Dual_Fuel_State : 44|4@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 419371265 PropB_19: 8 Vector__XXX
+ SG_ Engine_Load_Percent : 22|8@1+ (1,0) [0|255] "%" Vector__XXX
+ SG_ Charge_Air_Temp : 12|10@1+ (0.1,-40) [-40|62.3] "Deg C" Vector__XXX
+ SG_ Charge_Air_Pressure : 0|12@1+ (0.1,0) [0|409.5] "kPa" Vector__XXX
+
+BO_ 419184897 AF4: 8 Vector__XXX
+ SG_ EngFuel2InjectrMeterngRail1Press : 0|16@1+ (2,0) [0|128510] "kPa" Vector__XXX
+ SG_ EngFuel2InjectrMeterngRail2Press : 16|16@1+ (2,0) [0|128510] "kPa" Vector__XXX
+ SG_ EngFuel2InjectrMeterngRail1Temp : 32|8@1+ (1,-40) [-40|210] "deg C" Vector__XXX
+ SG_ EngFuel2InjectrMeterngRail2Temp : 40|8@1+ (1,-40) [-40|210] "deg C" Vector__XXX
+ SG_ EngFuel2InjectrMtrngRail1Press2 : 48|16@1+ (2,0) [0|128510] "kPa" Vector__XXX
+
+BO_ 217061121 KL1: 8 Vector__XXX
+ SG_ EngineCylinder1KnockLevel : 0|8@1+ (1,0) [0|250] "%" Vector__XXX
+ SG_ EngineCylinder2KnockLevel : 8|8@1+ (1,0) [0|250] "%" Vector__XXX
+ SG_ EngineCylinder3KnockLevel : 16|8@1+ (1,0) [0|250] "%" Vector__XXX
+ SG_ EngineCylinder4KnockLevel : 24|8@1+ (1,0) [0|250] "%" Vector__XXX
+ SG_ EngineCylinder5KnockLevel : 32|8@1+ (1,0) [0|250] "%" Vector__XXX
+ SG_ EngineCylinder6KnockLevel : 40|8@1+ (1,0) [0|250] "%" Vector__XXX
+ SG_ EngineCylinder7KnockLevel : 48|8@1+ (1,0) [0|250] "%" Vector__XXX
+ SG_ EngineCylinder8KnockLevel : 56|8@1+ (1,0) [0|250] "%" Vector__XXX
+
+BO_ 217061377 KL2: 8 Vector__XXX
+ SG_ EngineCylinder9KnockLevel : 0|8@1+ (1,0) [0|250] "%" Vector__XXX
+ SG_ EngineCylinder10KnockLevel : 8|8@1+ (1,0) [0|250] "%" Vector__XXX
+ SG_ EngineCylinder11KnockLevel : 16|8@1+ (1,0) [0|250] "%" Vector__XXX
+ SG_ EngineCylinder12KnockLevel : 24|8@1+ (1,0) [0|250] "%" Vector__XXX
+ SG_ EngineCylinder13KnockLevel : 32|8@1+ (1,0) [0|250] "%" Vector__XXX
+ SG_ EngineCylinder14KnockLevel : 40|8@1+ (1,0) [0|250] "%" Vector__XXX
+ SG_ EngineCylinder15KnockLevel : 48|8@1+ (1,0) [0|250] "%" Vector__XXX
+ SG_ EngineCylinder16KnockLevel : 56|8@1+ (1,0) [0|250] "%" Vector__XXX
+
+BO_ 217056257 EEC1: 8 Vector__XXX
+ SG_ ActualEnginePercentTorque : 16|8@1+ (1,-125) [-125|125] "%" Vector__XXX
+ SG_ EngineSpeed : 24|16@1+ (0.125,0) [0.000|8031.875] "rpm" Vector__XXX
+
+BO_ 217056001 EEC2: 3 Vector__XXX
+ SG_ EnginePercentLoadAtCurrentSpeed : 16|8@1+ (1,0) [0|250] "%" Vector__XXX
+
+BO_ 419219457 EEC13: 8 Vector__XXX
+ SG_ EngGasSubstitutionFuelPercentage : 24|8@1+ (0.5,0) [0|125] "%" Vector__XXX
+
+BO_ 419079937 DFM1: 8 Vector__XXX
+ SG_ BlendDualFuelModePercentTimeActv : 40|8@1+ (0.4,0) [0|100] "%" Vector__XXX
+ SG_ BlendDualFlMdeDslFlPrcntDisplacd : 48|8@1+ (0.4,0) [0|100] "%" Vector__XXX
+ SG_ BlndDualFlMdeEstInstDslSvngRtPrc : 56|8@1+ (0.4,0) [0|100] "%" Vector__XXX
+
+BO_ 419079425 DFM3: 8 Vector__XXX
+ SG_ BlndDualFlMdeEstInstFlSavngRat : 0|16@1+ (0.05,0) [0.00|3212.75] "l/h" Vector__XXX
+ SG_ BlendDualFuelModeOperatingStatus : 16|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ BlendedDualFuelModeStatusReason : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 285057537 GFI3: 8 Vector__XXX
+ SG_ EngineFuelSystem2GasMassFlowRate : 16|16@1+ (0.05,0) [0.00|3212.75] "kg/h" Vector__XXX
+
+BO_ 419361281 LFE1: 8 Vector__XXX
+ SG_ EngineFuelRate : 0|16@1+ (0.05,0) [0.00|3212.75] "l/h" Vector__XXX
+
+BO_ 486445569 EI1: 8 Vector__XXX
+ SG_ InstantaneousEstimatedBrakePower : 48|16@1+ (0.5,0) [0|32127.5] "kW" Vector__XXX
+
+BO_ 419357953 HOURS: 8 Vector__XXX
+ SG_ EngineTotalHoursOfOperation : 0|32@1+ (0.05,0) [0.00|210554060.75] "h" Vector__XXX
+
+BO_ 419362561 VEP1: 8 Vector__XXX
+ SG_ KeyswitchBatteryPotential : 48|16@1+ (0.05,0) [0.00|3212.75] "V" Vector__XXX
+
+BO_ 419355137 SOFT: 8 Vector__XXX
+ SG_ SoftwareIdentification : 15|1600@0+ (1,0) [0|3.402823669209384634633746074E+038] "ASCII" Vector__XXX
+
+BO_ 419351041 DM01_Primary: 0 Vector__XXX
+ SG_ ProtectLamp : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ AmberWarningLamp : 2|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ RedStopLamp : 4|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ MalfunctionIndicatorLamp : 6|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ FlashProtectLamp : 8|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ FlashAmberWarningLamp : 10|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ FlashRedStopLamp : 12|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ FlashMalfunctionIndicatorLamp : 14|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ SuspectParameterNumber : 23|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier : 32|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount : 40|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod : 47|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber2 : 55|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier2 : 64|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount2 : 72|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod2 : 79|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber3 : 87|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier3 : 96|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount3 : 104|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod3 : 111|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber4 : 119|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier4 : 128|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount4 : 136|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod4 : 143|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber5 : 151|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier5 : 160|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount5 : 168|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod5 : 175|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber6 : 183|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier6 : 192|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount6 : 200|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod6 : 207|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber7 : 215|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier7 : 224|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount7 : 232|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod7 : 239|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber8 : 247|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier8 : 256|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount8 : 264|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod8 : 271|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber9 : 279|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier9 : 288|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount9 : 296|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod9 : 303|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber10 : 311|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier10 : 320|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount10 : 328|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod10 : 335|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber11 : 343|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier11 : 352|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount11 : 360|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod11 : 367|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber12 : 375|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier12 : 384|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount12 : 392|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod12 : 399|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 419351806 DM03: 0 Vector__XXX
+
+BO_ 419353598 DM11: 0 Vector__XXX
+
+BO_ 485228033 TPDT: 8 Vector__XXX
+ SG_ SequenceNumber : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ PacketizedData : 8|56@1+ (1,0) [0|72057594037927935] "" Vector__XXX
+
+BO_ 418316030 ACM: 8 Vector__XXX
+ SG_ NAMEOfControllerApplication : 0|64@1+ (1,0) [0|18446744073709551615] "" Vector__XXX
+ SG_ IdentityNumber : 0|21@1+ (1,0) [0|2097151] "" Vector__XXX
+ SG_ ManufacturerCode : 21|11@1+ (1,0) [0|2047] "" Vector__XXX
+ SG_ ECUInstance : 32|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ FunctionInstance : 35|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ Function : 40|8@1+ (1,0) [0|254] "" Vector__XXX
+ SG_ VehicleSystem : 49|7@1+ (1,0) [0|126] "" Vector__XXX
+ SG_ VehicleSystemInstance : 56|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ IndustryGroup : 60|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ ArbitraryAddressCapable : 63|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 418390273 ESSI1: 8 Vector__XXX
+ SG_ EngSpeedSnsr1TimingPatternStatus : 54|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 419351276 DM01_Secondary: 0 Vector__XXX
+ SG_ ProtectLamp : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ AmberWarningLamp : 2|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ RedStopLamp : 4|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ MalfunctionIndicatorLamp : 6|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ FlashProtectLamp : 8|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ FlashAmberWarningLamp : 10|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ FlashRedStopLamp : 12|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ FlashMalfunctionIndicatorLamp : 14|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ SuspectParameterNumber : 23|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier : 32|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount : 40|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod : 47|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber2 : 55|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier2 : 64|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount2 : 72|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod2 : 79|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber3 : 87|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier3 : 96|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount3 : 104|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod3 : 111|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber4 : 119|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier4 : 128|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount4 : 136|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod4 : 143|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber5 : 151|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier5 : 160|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount5 : 168|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod5 : 175|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber6 : 183|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier6 : 192|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount6 : 200|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod6 : 207|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber7 : 215|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier7 : 224|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount7 : 232|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod7 : 239|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber8 : 247|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier8 : 256|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount8 : 264|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod8 : 271|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber9 : 279|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier9 : 288|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount9 : 296|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod9 : 303|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber10 : 311|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier10 : 320|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount10 : 328|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod10 : 335|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber11 : 343|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier11 : 352|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount11 : 360|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod11 : 367|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SuspectParameterNumber12 : 375|19@0+ (1,0) [0|524287] "" Vector__XXX
+ SG_ FailureModeIdentifier12 : 384|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ OccurrenceCount12 : 392|7@1+ (1,0) [0|127] "" Vector__XXX
+ SG_ SPNConversionMethod12 : 399|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 201326597 TSC1_Frac_Control_1: 8 Vector__XXX
+ SG_ EngineOverrideControlMode : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EngRequestedSpeedCtrlConditions : 2|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ OverrideControlModePriority : 4|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EngineRequestedSpeedSpeedLimit : 8|16@1+ (0.125,0) [0.000|8031.875] "rpm" Vector__XXX
+ SG_ EngineRequestedTorqueTorqueLimit : 24|8@1+ (1,-125) [-125|125] "%" Vector__XXX
+ SG_ TSC1TransmissionRate : 32|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ TSC1ControlPurpose : 35|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ EngineRequestedTorque : 40|4@1+ (0.125,0) [0.000|1.625] "%" Vector__XXX
+ SG_ MessageCounter : 56|4@1+ (1,0) [0|15] "count" Vector__XXX
+ SG_ MessageChecksum : 60|4@1+ (1,0) [0|15] "count" Vector__XXX
+
+BO_ 201326599 TSC1_Frac_Control_2: 8 Vector__XXX
+ SG_ EngineOverrideControlMode : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EngRequestedSpeedCtrlConditions : 2|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ OverrideControlModePriority : 4|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EngineRequestedSpeedSpeedLimit : 8|16@1+ (0.125,0) [0.000|8031.875] "rpm" Vector__XXX
+ SG_ EngineRequestedTorqueTorqueLimit : 24|8@1+ (1,-125) [-125|125] "%" Vector__XXX
+ SG_ TSC1TransmissionRate : 32|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ TSC1ControlPurpose : 35|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ EngineRequestedTorque : 40|4@1+ (0.125,0) [0.000|1.625] "%" Vector__XXX
+ SG_ MessageCounter : 56|4@1+ (1,0) [0|15] "count" Vector__XXX
+ SG_ MessageChecksum : 60|4@1+ (1,0) [0|15] "count" Vector__XXX
+
+BO_ 419374341 PropB_25: 0 Vector__XXX
+
+
+CM_ BO_ 201326595  "Torque/Speed Control 1 - SA configurable in Tune";
+CM_ BO_ 486449150  "Exhaust Port Temperature 5";
+CM_ BO_ 486449406  "Exhaust Port Temperature 4";
+CM_ BO_ 486449662  "Exhaust Port Temperature 3";
+CM_ BO_ 486449918  "Exhaust Port Temperature 2";
+CM_ BO_ 486450174  "Exhaust Port Temperature 1";
+CM_ BO_ 217069822  "Engine Torque / Fuel Request";
+CM_ BO_ 419184897  "Alternate Fuel 4";
+CM_ BO_ 217061121  "Engine Knock Level #1";
+CM_ BO_ 217061377  "Engine Knock Level #2";
+CM_ BO_ 217056257  "Electronic Engine Controller 1";
+CM_ BO_ 217056001  "Electronic Engine Controller 2";
+CM_ BO_ 419219457  "Electronic Engine Controller 13";
+CM_ BO_ 419079937  "Dual Fuel Mode 1";
+CM_ BO_ 419079425  "Dual Fuel Mode 3";
+CM_ BO_ 285057537  "Fuel Information 3 (Gaseous)";
+CM_ BO_ 419361281  "Fuel Economy (Liquid)";
+CM_ BO_ 486445569  "Engine Information 1";
+CM_ BO_ 419357953  "Engine Hours, Revolutions";
+CM_ BO_ 419362561  "Vehicle Electrical Power 1";
+CM_ BO_ 419355137  "Software Identification";
+CM_ BO_ 419351041  "Active Diagnostic Trouble Codes";
+CM_ BO_ 419351806  "Diagnostic Data Clear/Reset for Previously Active DTCs";
+CM_ BO_ 419353598  "Diagnostic Data Clear/Reset for Active DTCs";
+CM_ BO_ 485228033  "Transport Protocol - Data Transfer";
+CM_ BO_ 418316030  "Address Claimed";
+CM_ BO_ 418390273  "Engine Speed Sensor Information 1";
+CM_ BO_ 419351276  "Active Diagnostic Trouble Codes";
+CM_ BO_ 201326597  "Torque/Speed Control 1 - SA configurable in Tune";
+CM_ BO_ 201326599  "Torque/Speed Control 1 - SA configurable in Tune";
+CM_ BO_ 419374341  "Diagnostic Data Clear/Reset for Active DTCs";
+
+
+
+BA_DEF_ BO_ "GenMsgCycleTime" INT 0 65535;
+BA_DEF_ BO_ "Receivable" STRING;
+BA_DEF_ BO_ "Sendable" STRING;
+BA_DEF_ SG_ "DisplayDecimalPlaces" INT 0 65535;
+BA_DEF_ SG_ "GenSigStartValue" FLOAT 0 100000000000;
+BA_DEF_ SG_ "HexadecimalOutput" STRING;
+BA_DEF_ SG_ "LongName" STRING;
+BA_DEF_  "Title" STRING;
+BA_DEF_DEF_ "Title" "canmatrix-Export";
+
+BA_ "Title"   "MES 16V Common - Main - 01.00.0005";
+
+BA_ "GenMsgCycleTime" BO_ 201326595 10;
+BA_ "Receivable" BO_ 201326595 "True";
+BA_ "Sendable" BO_ 201326595 "True";
+BA_ "GenMsgCycleTime" BO_ 486449150 1000;
+BA_ "Receivable" BO_ 486449150 "True";
+BA_ "Sendable" BO_ 486449150 "True";
+BA_ "GenMsgCycleTime" BO_ 486449406 1000;
+BA_ "Receivable" BO_ 486449406 "True";
+BA_ "Sendable" BO_ 486449406 "True";
+BA_ "GenMsgCycleTime" BO_ 486449662 1000;
+BA_ "Receivable" BO_ 486449662 "True";
+BA_ "Sendable" BO_ 486449662 "True";
+BA_ "GenMsgCycleTime" BO_ 486449918 1000;
+BA_ "Receivable" BO_ 486449918 "True";
+BA_ "Sendable" BO_ 486449918 "True";
+BA_ "GenMsgCycleTime" BO_ 486450174 1000;
+BA_ "Receivable" BO_ 486450174 "True";
+BA_ "Sendable" BO_ 486450174 "True";
+BA_ "GenMsgCycleTime" BO_ 217069822 20;
+BA_ "Receivable" BO_ 217069822 "True";
+BA_ "Sendable" BO_ 217069822 "True";
+BA_ "GenMsgCycleTime" BO_ 419364865 100;
+BA_ "Receivable" BO_ 419364865 "True";
+BA_ "Sendable" BO_ 419364865 "True";
+BA_ "GenMsgCycleTime" BO_ 419368961 100;
+BA_ "Receivable" BO_ 419368961 "True";
+BA_ "Sendable" BO_ 419368961 "True";
+BA_ "GenMsgCycleTime" BO_ 419369985 100;
+BA_ "Receivable" BO_ 419369985 "True";
+BA_ "Sendable" BO_ 419369985 "True";
+BA_ "GenMsgCycleTime" BO_ 419370241 100;
+BA_ "Receivable" BO_ 419370241 "True";
+BA_ "Sendable" BO_ 419370241 "True";
+BA_ "GenMsgCycleTime" BO_ 419370497 100;
+BA_ "Receivable" BO_ 419370497 "True";
+BA_ "Sendable" BO_ 419370497 "True";
+BA_ "GenMsgCycleTime" BO_ 419371265 100;
+BA_ "Receivable" BO_ 419371265 "True";
+BA_ "Sendable" BO_ 419371265 "True";
+BA_ "GenMsgCycleTime" BO_ 419184897 500;
+BA_ "Receivable" BO_ 419184897 "True";
+BA_ "Sendable" BO_ 419184897 "True";
+BA_ "GenMsgCycleTime" BO_ 217061121 5000;
+BA_ "Receivable" BO_ 217061121 "True";
+BA_ "Sendable" BO_ 217061121 "True";
+BA_ "GenMsgCycleTime" BO_ 217061377 5000;
+BA_ "Receivable" BO_ 217061377 "True";
+BA_ "Sendable" BO_ 217061377 "True";
+BA_ "GenMsgCycleTime" BO_ 217056257 50;
+BA_ "Receivable" BO_ 217056257 "True";
+BA_ "Sendable" BO_ 217056257 "True";
+BA_ "GenMsgCycleTime" BO_ 217056001 50;
+BA_ "Receivable" BO_ 217056001 "True";
+BA_ "Sendable" BO_ 217056001 "True";
+BA_ "GenMsgCycleTime" BO_ 419219457 1000;
+BA_ "Receivable" BO_ 419219457 "True";
+BA_ "Sendable" BO_ 419219457 "True";
+BA_ "GenMsgCycleTime" BO_ 419079937 1000;
+BA_ "Receivable" BO_ 419079937 "True";
+BA_ "Sendable" BO_ 419079937 "True";
+BA_ "GenMsgCycleTime" BO_ 419079425 1000;
+BA_ "Receivable" BO_ 419079425 "True";
+BA_ "Sendable" BO_ 419079425 "True";
+BA_ "GenMsgCycleTime" BO_ 285057537 500;
+BA_ "Receivable" BO_ 285057537 "True";
+BA_ "Sendable" BO_ 285057537 "True";
+BA_ "GenMsgCycleTime" BO_ 419361281 100;
+BA_ "Receivable" BO_ 419361281 "True";
+BA_ "Sendable" BO_ 419361281 "True";
+BA_ "GenMsgCycleTime" BO_ 486445569 100;
+BA_ "Receivable" BO_ 486445569 "True";
+BA_ "Sendable" BO_ 486445569 "True";
+BA_ "Receivable" BO_ 419357953 "True";
+BA_ "Sendable" BO_ 419357953 "True";
+BA_ "GenMsgCycleTime" BO_ 419362561 1000;
+BA_ "Receivable" BO_ 419362561 "True";
+BA_ "Sendable" BO_ 419362561 "True";
+BA_ "Receivable" BO_ 419355137 "True";
+BA_ "Sendable" BO_ 419355137 "True";
+BA_ "Receivable" BO_ 419351041 "True";
+BA_ "Sendable" BO_ 419351041 "True";
+BA_ "Receivable" BO_ 419351806 "True";
+BA_ "Sendable" BO_ 419351806 "True";
+BA_ "Receivable" BO_ 419353598 "True";
+BA_ "Sendable" BO_ 419353598 "True";
+BA_ "Receivable" BO_ 485228033 "True";
+BA_ "Sendable" BO_ 485228033 "True";
+BA_ "Receivable" BO_ 418316030 "True";
+BA_ "Sendable" BO_ 418316030 "True";
+BA_ "Receivable" BO_ 418390273 "True";
+BA_ "Sendable" BO_ 418390273 "True";
+BA_ "Receivable" BO_ 419351276 "True";
+BA_ "Sendable" BO_ 419351276 "True";
+BA_ "GenMsgCycleTime" BO_ 201326597 10;
+BA_ "Receivable" BO_ 201326597 "True";
+BA_ "Sendable" BO_ 201326597 "True";
+BA_ "GenMsgCycleTime" BO_ 201326599 10;
+BA_ "Receivable" BO_ 201326599 "True";
+BA_ "Sendable" BO_ 201326599 "True";
+BA_ "Receivable" BO_ 419374341 "True";
+BA_ "Sendable" BO_ 419374341 "True";
+
+BA_ "LongName" SG_ 201326595 EngineOverrideControlMode "Engine Override Control Mode";
+BA_ "LongName" SG_ 201326595 EngRequestedSpeedCtrlConditions "Engine Requested Speed Control Conditions";
+BA_ "LongName" SG_ 201326595 OverrideControlModePriority "Override Control Mode Priority";
+BA_ "LongName" SG_ 201326595 EngineRequestedSpeedSpeedLimit "Engine Requested Speed/Speed Limit";
+BA_ "LongName" SG_ 201326595 EngineRequestedTorqueTorqueLimit "Engine Requested Torque/Torque Limit";
+BA_ "LongName" SG_ 201326595 TSC1TransmissionRate "TSC1 Transmission Rate";
+BA_ "LongName" SG_ 201326595 TSC1ControlPurpose "TSC1 Control Purpose";
+BA_ "LongName" SG_ 201326595 EngineRequestedTorque "Engine Requested Torque (Fractional)";
+BA_ "LongName" SG_ 201326595 MessageCounter "Message Counter";
+BA_ "LongName" SG_ 201326595 MessageChecksum "Message Checksum";
+BA_ "LongName" SG_ 486449150 EngExhaustGasPort17Temperature "Engine Exhaust Gas Port 17 Temperature";
+BA_ "LongName" SG_ 486449150 EngExhaustGasPort18Temperature "Engine Exhaust Gas Port 18 Temperature";
+BA_ "LongName" SG_ 486449150 EngExhaustGasDOCInletTemp "Engine Exhaust Gas Port 19 Temperature";
+BA_ "LongName" SG_ 486449150 EngExhaustGasDOCOutletTemp "Engine Exhaust Gas Port 20 Temperature";
+BA_ "LongName" SG_ 486449406 EngineExhaustGasBankBPort7Temp "Engine Exhaust Gas Port 13 Temperature";
+BA_ "LongName" SG_ 486449406 EngineExhaustGasBankAPort7Temp "Engine Exhaust Gas Port 14 Temperature";
+BA_ "LongName" SG_ 486449406 EngineExhaustGasBankBPort8Temp "Engine Exhaust Gas Port 15 Temperature";
+BA_ "LongName" SG_ 486449406 EngineExhaustGasBankAPort8Temp "Engine Exhaust Gas Port 16 Temperature";
+BA_ "LongName" SG_ 486449662 EngineExhaustGasBankBPort5Temp "Engine Exhaust Gas Port 9 Temperature";
+BA_ "LongName" SG_ 486449662 EngineExhaustGasBankAPort5Temp "Engine Exhaust Gas Port 10 Temperature";
+BA_ "LongName" SG_ 486449662 EngineExhaustGasBankBPort6Temp "Engine Exhaust Gas Port 11 Temperature";
+BA_ "LongName" SG_ 486449662 EngineExhaustGasBankAPort6Temp "Engine Exhaust Gas Port 12 Temperature";
+BA_ "LongName" SG_ 486449918 EngineExhaustGasBankBPort3Temp "Engine Exhaust Gas Port 5 Temperature";
+BA_ "LongName" SG_ 486449918 EngineExhaustGasBankAPort3Temp "Engine Exhaust Gas Port 6 Temperature";
+BA_ "LongName" SG_ 486449918 EngineExhaustGasBankBPort4Temp "Engine Exhaust Gas Port 7 Temperature";
+BA_ "LongName" SG_ 486449918 EngineExhaustGasBankAPort4Temp "Engine Exhaust Gas Port 8 Temperature";
+BA_ "LongName" SG_ 486450174 EngineExhaustGasBankBPort1Temp "Engine Exhaust Gas Port 1 Temperature";
+BA_ "LongName" SG_ 486450174 EngineExhaustGasBankAPort1Temp "Engine Exhaust Gas Port 2 Temperature";
+BA_ "LongName" SG_ 486450174 EngineExhaustGasBankBPort2Temp "Engine Exhaust Gas Port 3 Temperature";
+BA_ "LongName" SG_ 486450174 EngineExhaustGasBankAPort2Temp "Engine Exhaust Gas Port 4 Temperature";
+BA_ "LongName" SG_ 217069822 EngGsSubstitutionFuelPrcntageCmd "Engine Gas Substitution Fuel Percentage Command";
+BA_ "LongName" SG_ 217069822 EngineCylinderGasMassFlowRateCmd "Engine Cylinder Gas Mass Flow Rate Command";
+BA_ "LongName" SG_ 217069822 EngineCylDieselMassFlowRateCmd "Engine Cylinder Diesel Mass Flow Rate Command";
+BA_ "LongName" SG_ 217069822 EngineCylinderTorque "Engine Cylinder Torque";
+BA_ "LongName" SG_ 217069822 EngineDualFuelModeCommand "Engine Dual Fuel Mode Command";
+BA_ "LongName" SG_ 419184897 EngFuel2InjectrMeterngRail1Press "Engine Fuel 2 Injector Metering Rail 1 Pressure";
+BA_ "LongName" SG_ 419184897 EngFuel2InjectrMeterngRail2Press "Engine Fuel 2 Injector Metering Rail 2 Pressure";
+BA_ "LongName" SG_ 419184897 EngFuel2InjectrMeterngRail1Temp "Engine Fuel 2 Injector Metering Rail 1 Temperature";
+BA_ "LongName" SG_ 419184897 EngFuel2InjectrMeterngRail2Temp "Engine Fuel 2 Injector Metering Rail 2 Temperature";
+BA_ "LongName" SG_ 419184897 EngFuel2InjectrMtrngRail1Press2 "Engine Fuel 2 Injector Metering Rail 1 Pressure 2";
+BA_ "LongName" SG_ 217061121 EngineCylinder1KnockLevel "Engine Cylinder 1 Knock Level";
+BA_ "LongName" SG_ 217061121 EngineCylinder2KnockLevel "Engine Cylinder 2 Knock Level";
+BA_ "LongName" SG_ 217061121 EngineCylinder3KnockLevel "Engine Cylinder 3 Knock Level";
+BA_ "LongName" SG_ 217061121 EngineCylinder4KnockLevel "Engine Cylinder 4 Knock Level";
+BA_ "LongName" SG_ 217061121 EngineCylinder5KnockLevel "Engine Cylinder 5 Knock Level";
+BA_ "LongName" SG_ 217061121 EngineCylinder6KnockLevel "Engine Cylinder 6 Knock Level";
+BA_ "LongName" SG_ 217061121 EngineCylinder7KnockLevel "Engine Cylinder 7 Knock Level";
+BA_ "LongName" SG_ 217061121 EngineCylinder8KnockLevel "Engine Cylinder 8 Knock Level";
+BA_ "LongName" SG_ 217061377 EngineCylinder9KnockLevel "Engine Cylinder 9 Knock Level";
+BA_ "LongName" SG_ 217061377 EngineCylinder10KnockLevel "Engine Cylinder 10 Knock Level";
+BA_ "LongName" SG_ 217061377 EngineCylinder11KnockLevel "Engine Cylinder 11 Knock Level";
+BA_ "LongName" SG_ 217061377 EngineCylinder12KnockLevel "Engine Cylinder 12 Knock Level";
+BA_ "LongName" SG_ 217061377 EngineCylinder13KnockLevel "Engine Cylinder 13 Knock Level";
+BA_ "LongName" SG_ 217061377 EngineCylinder14KnockLevel "Engine Cylinder 14 Knock Level";
+BA_ "LongName" SG_ 217061377 EngineCylinder15KnockLevel "Engine Cylinder 15 Knock Level";
+BA_ "LongName" SG_ 217061377 EngineCylinder16KnockLevel "Engine Cylinder 16 Knock Level";
+BA_ "LongName" SG_ 217056257 ActualEnginePercentTorque "Actual Engine - Percent Torque";
+BA_ "LongName" SG_ 217056257 EngineSpeed "Engine Speed";
+BA_ "LongName" SG_ 217056001 EnginePercentLoadAtCurrentSpeed "Engine Percent Load At Current Speed";
+BA_ "LongName" SG_ 419219457 EngGasSubstitutionFuelPercentage "Engine Gas Substitution Fuel Percentage";
+BA_ "LongName" SG_ 419079937 BlendDualFuelModePercentTimeActv "Blended Dual Fuel Mode Percent Time Active";
+BA_ "LongName" SG_ 419079937 BlendDualFlMdeDslFlPrcntDisplacd "Blended Dual Fuel Mode Diesel Fuel Percent Displaced";
+BA_ "LongName" SG_ 419079937 BlndDualFlMdeEstInstDslSvngRtPrc "Blended Dual Fuel Mode Estimated Instantaneous Diesel Savings Rate Percentage";
+BA_ "LongName" SG_ 419079425 BlndDualFlMdeEstInstFlSavngRat "Blended Dual Fuel Mode Estimated Instantaneous Fuel Savings Rate";
+BA_ "LongName" SG_ 419079425 BlendDualFuelModeOperatingStatus "Blended Dual Fuel Mode Operating Status";
+BA_ "LongName" SG_ 419079425 BlendedDualFuelModeStatusReason "Blended Dual Fuel Mode Status Reason";
+BA_ "LongName" SG_ 285057537 EngineFuelSystem2GasMassFlowRate "Engine Fuel System 2 Gas Mass Flow Rate";
+BA_ "LongName" SG_ 419361281 EngineFuelRate "Engine Fuel Rate";
+BA_ "LongName" SG_ 486445569 InstantaneousEstimatedBrakePower "Instantaneous Estimated Brake Power";
+BA_ "LongName" SG_ 419357953 EngineTotalHoursOfOperation "Engine Total Hours of Operation";
+BA_ "LongName" SG_ 419362561 KeyswitchBatteryPotential "Key Switch Battery Potential";
+BA_ "LongName" SG_ 419355137 SoftwareIdentification "Software Identification";
+BA_ "LongName" SG_ 419351041 ProtectLamp "Protect Lamp";
+BA_ "LongName" SG_ 419351041 AmberWarningLamp "Amber Warning Lamp";
+BA_ "LongName" SG_ 419351041 RedStopLamp "Red Stop Lamp";
+BA_ "LongName" SG_ 419351041 MalfunctionIndicatorLamp "Malfunction Indicator Lamp";
+BA_ "LongName" SG_ 419351041 FlashProtectLamp "Flash Protect Lamp";
+BA_ "LongName" SG_ 419351041 FlashAmberWarningLamp "Flash Amber Warning Lamp (AWL)";
+BA_ "LongName" SG_ 419351041 FlashRedStopLamp "Flash Red Stop Lamp (RSL)";
+BA_ "LongName" SG_ 419351041 FlashMalfunctionIndicatorLamp "Flash Malfunction Indicator Lamp";
+BA_ "LongName" SG_ 419351041 SuspectParameterNumber "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351041 FailureModeIdentifier "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351041 OccurrenceCount "Occurrence Count";
+BA_ "LongName" SG_ 419351041 SPNConversionMethod "SPN Conversion Method";
+BA_ "LongName" SG_ 419351041 SuspectParameterNumber2 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351041 FailureModeIdentifier2 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351041 OccurrenceCount2 "Occurrence Count";
+BA_ "LongName" SG_ 419351041 SPNConversionMethod2 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351041 SuspectParameterNumber3 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351041 FailureModeIdentifier3 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351041 OccurrenceCount3 "Occurrence Count";
+BA_ "LongName" SG_ 419351041 SPNConversionMethod3 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351041 SuspectParameterNumber4 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351041 FailureModeIdentifier4 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351041 OccurrenceCount4 "Occurrence Count";
+BA_ "LongName" SG_ 419351041 SPNConversionMethod4 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351041 SuspectParameterNumber5 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351041 FailureModeIdentifier5 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351041 OccurrenceCount5 "Occurrence Count";
+BA_ "LongName" SG_ 419351041 SPNConversionMethod5 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351041 SuspectParameterNumber6 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351041 FailureModeIdentifier6 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351041 OccurrenceCount6 "Occurrence Count";
+BA_ "LongName" SG_ 419351041 SPNConversionMethod6 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351041 SuspectParameterNumber7 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351041 FailureModeIdentifier7 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351041 OccurrenceCount7 "Occurrence Count";
+BA_ "LongName" SG_ 419351041 SPNConversionMethod7 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351041 SuspectParameterNumber8 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351041 FailureModeIdentifier8 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351041 OccurrenceCount8 "Occurrence Count";
+BA_ "LongName" SG_ 419351041 SPNConversionMethod8 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351041 SuspectParameterNumber9 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351041 FailureModeIdentifier9 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351041 OccurrenceCount9 "Occurrence Count";
+BA_ "LongName" SG_ 419351041 SPNConversionMethod9 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351041 SuspectParameterNumber10 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351041 FailureModeIdentifier10 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351041 OccurrenceCount10 "Occurrence Count";
+BA_ "LongName" SG_ 419351041 SPNConversionMethod10 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351041 SuspectParameterNumber11 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351041 FailureModeIdentifier11 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351041 OccurrenceCount11 "Occurrence Count";
+BA_ "LongName" SG_ 419351041 SPNConversionMethod11 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351041 SuspectParameterNumber12 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351041 FailureModeIdentifier12 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351041 OccurrenceCount12 "Occurrence Count";
+BA_ "LongName" SG_ 419351041 SPNConversionMethod12 "SPN Conversion Method";
+BA_ "LongName" SG_ 485228033 SequenceNumber "Sequence Number (TPDT)";
+BA_ "LongName" SG_ 485228033 PacketizedData "Packetized Data (TPDT)";
+BA_ "LongName" SG_ 418316030 NAMEOfControllerApplication "NAME of Controller Application (for address claimed)";
+BA_ "LongName" SG_ 418316030 IdentityNumber "Identity Number";
+BA_ "LongName" SG_ 418316030 ManufacturerCode "Manufacturer Code";
+BA_ "LongName" SG_ 418316030 ECUInstance "ECU Instance";
+BA_ "LongName" SG_ 418316030 FunctionInstance "Function Instance";
+BA_ "LongName" SG_ 418316030 VehicleSystem "Vehicle System";
+BA_ "LongName" SG_ 418316030 VehicleSystemInstance "Vehicle System Instance";
+BA_ "LongName" SG_ 418316030 IndustryGroup "Industry Group";
+BA_ "LongName" SG_ 418316030 ArbitraryAddressCapable "Arbitrary Address Capable";
+BA_ "LongName" SG_ 418390273 EngSpeedSnsr1TimingPatternStatus "Engine Speed Sensor 1 Timing Pattern Status";
+BA_ "LongName" SG_ 419351276 ProtectLamp "Protect Lamp";
+BA_ "LongName" SG_ 419351276 AmberWarningLamp "Amber Warning Lamp";
+BA_ "LongName" SG_ 419351276 RedStopLamp "Red Stop Lamp";
+BA_ "LongName" SG_ 419351276 MalfunctionIndicatorLamp "Malfunction Indicator Lamp";
+BA_ "LongName" SG_ 419351276 FlashProtectLamp "Flash Protect Lamp";
+BA_ "LongName" SG_ 419351276 FlashAmberWarningLamp "Flash Amber Warning Lamp (AWL)";
+BA_ "LongName" SG_ 419351276 FlashRedStopLamp "Flash Red Stop Lamp (RSL)";
+BA_ "LongName" SG_ 419351276 FlashMalfunctionIndicatorLamp "Flash Malfunction Indicator Lamp";
+BA_ "LongName" SG_ 419351276 SuspectParameterNumber "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351276 FailureModeIdentifier "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351276 OccurrenceCount "Occurrence Count";
+BA_ "LongName" SG_ 419351276 SPNConversionMethod "SPN Conversion Method";
+BA_ "LongName" SG_ 419351276 SuspectParameterNumber2 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351276 FailureModeIdentifier2 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351276 OccurrenceCount2 "Occurrence Count";
+BA_ "LongName" SG_ 419351276 SPNConversionMethod2 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351276 SuspectParameterNumber3 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351276 FailureModeIdentifier3 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351276 OccurrenceCount3 "Occurrence Count";
+BA_ "LongName" SG_ 419351276 SPNConversionMethod3 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351276 SuspectParameterNumber4 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351276 FailureModeIdentifier4 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351276 OccurrenceCount4 "Occurrence Count";
+BA_ "LongName" SG_ 419351276 SPNConversionMethod4 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351276 SuspectParameterNumber5 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351276 FailureModeIdentifier5 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351276 OccurrenceCount5 "Occurrence Count";
+BA_ "LongName" SG_ 419351276 SPNConversionMethod5 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351276 SuspectParameterNumber6 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351276 FailureModeIdentifier6 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351276 OccurrenceCount6 "Occurrence Count";
+BA_ "LongName" SG_ 419351276 SPNConversionMethod6 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351276 SuspectParameterNumber7 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351276 FailureModeIdentifier7 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351276 OccurrenceCount7 "Occurrence Count";
+BA_ "LongName" SG_ 419351276 SPNConversionMethod7 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351276 SuspectParameterNumber8 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351276 FailureModeIdentifier8 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351276 OccurrenceCount8 "Occurrence Count";
+BA_ "LongName" SG_ 419351276 SPNConversionMethod8 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351276 SuspectParameterNumber9 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351276 FailureModeIdentifier9 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351276 OccurrenceCount9 "Occurrence Count";
+BA_ "LongName" SG_ 419351276 SPNConversionMethod9 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351276 SuspectParameterNumber10 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351276 FailureModeIdentifier10 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351276 OccurrenceCount10 "Occurrence Count";
+BA_ "LongName" SG_ 419351276 SPNConversionMethod10 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351276 SuspectParameterNumber11 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351276 FailureModeIdentifier11 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351276 OccurrenceCount11 "Occurrence Count";
+BA_ "LongName" SG_ 419351276 SPNConversionMethod11 "SPN Conversion Method";
+BA_ "LongName" SG_ 419351276 SuspectParameterNumber12 "Suspect Parameter Number";
+BA_ "LongName" SG_ 419351276 FailureModeIdentifier12 "Failure Mode Identifier";
+BA_ "LongName" SG_ 419351276 OccurrenceCount12 "Occurrence Count";
+BA_ "LongName" SG_ 419351276 SPNConversionMethod12 "SPN Conversion Method";
+BA_ "LongName" SG_ 201326597 EngineOverrideControlMode "Engine Override Control Mode";
+BA_ "LongName" SG_ 201326597 EngRequestedSpeedCtrlConditions "Engine Requested Speed Control Conditions";
+BA_ "LongName" SG_ 201326597 OverrideControlModePriority "Override Control Mode Priority";
+BA_ "LongName" SG_ 201326597 EngineRequestedSpeedSpeedLimit "Engine Requested Speed/Speed Limit";
+BA_ "LongName" SG_ 201326597 EngineRequestedTorqueTorqueLimit "Engine Requested Torque/Torque Limit";
+BA_ "LongName" SG_ 201326597 TSC1TransmissionRate "TSC1 Transmission Rate";
+BA_ "LongName" SG_ 201326597 TSC1ControlPurpose "TSC1 Control Purpose";
+BA_ "LongName" SG_ 201326597 EngineRequestedTorque "Engine Requested Torque (Fractional)";
+BA_ "LongName" SG_ 201326597 MessageCounter "Message Counter";
+BA_ "LongName" SG_ 201326597 MessageChecksum "Message Checksum";
+BA_ "LongName" SG_ 201326599 EngineOverrideControlMode "Engine Override Control Mode";
+BA_ "LongName" SG_ 201326599 EngRequestedSpeedCtrlConditions "Engine Requested Speed Control Conditions";
+BA_ "LongName" SG_ 201326599 OverrideControlModePriority "Override Control Mode Priority";
+BA_ "LongName" SG_ 201326599 EngineRequestedSpeedSpeedLimit "Engine Requested Speed/Speed Limit";
+BA_ "LongName" SG_ 201326599 EngineRequestedTorqueTorqueLimit "Engine Requested Torque/Torque Limit";
+BA_ "LongName" SG_ 201326599 TSC1TransmissionRate "TSC1 Transmission Rate";
+BA_ "LongName" SG_ 201326599 TSC1ControlPurpose "TSC1 Control Purpose";
+BA_ "LongName" SG_ 201326599 EngineRequestedTorque "Engine Requested Torque (Fractional)";
+BA_ "LongName" SG_ 201326599 MessageCounter "Message Counter";
+BA_ "LongName" SG_ 201326599 MessageChecksum "Message Checksum";
+
+VAL_ 201326595 EngineOverrideControlMode 0 "Override disabled" 1 "Speed control" 2 "Torque control" 3 "Speed/torque limit control";
+VAL_ 201326595 EngRequestedSpeedCtrlConditions 0 "Transient Optimized for driveline disengaged and non-lockup conditions" 1 "Stability Optimized for driveline disengaged and non-lockup conditions" 2 "Stability Optimized for driveline engaged and/or in lockup condition 1" 3 "Stability Optimized for driveline engaged and/or in lockup condition 2";
+VAL_ 201326595 OverrideControlModePriority 0 "Highest priority" 1 "High priority" 2 "Medium priority" 3 "Low priority";
+VAL_ 201326595 TSC1TransmissionRate 0 "1000 ms transmission rate" 1 "750 ms transmission rate" 2 "500 ms transmission rate" 3 "250 ms transmission rate" 4 "100 ms transmission rate" 5 "50 ms transmission rate" 6 "20 ms transmission rate" 7 "Use standard";
+VAL_ 201326595 TSC1ControlPurpose 0 "P1 : Accelerator Pedal/Operator Selection" 1 "P2 : Cruise Control" 2 "P3 : PTO Governor" 3 "P4 : Road Speed Governor" 4 "P5 : Engine Protection" 5 "P6 : Transient-Optimized Torque Limit" 6 "P7 : Automated Driving System Input" 7 "P8-P31 : Reserved for SAE Assignment" 8 "P8-P31 : Reserved for SAE Assignment" 9 "P8-P31 : Reserved for SAE Assignment" 10 "P8-P31 : Reserved for SAE Assignment" 11 "P8-P31 : Reserved for SAE Assignment" 12 "P8-P31 : Reserved for SAE Assignment" 13 "P8-P31 : Reserved for SAE Assignment" 14 "P8-P31 : Reserved for SAE Assignment" 15 "P8-P31 : Reserved for SAE Assignment" 16 "P8-P31 : Reserved for SAE Assignment" 17 "P8-P31 : Reserved for SAE Assignment" 18 "P8-P31 : Reserved for SAE Assignment" 19 "P8-P31 : Reserved for SAE Assignment" 20 "P8-P31 : Reserved for SAE Assignment" 21 "P8-P31 : Reserved for SAE Assignment" 22 "P8-P31 : Reserved for SAE Assignment" 23 "P8-P31 : Reserved for SAE Assignment" 24 "P8-P31 : Reserved for SAE Assignment" 25 "P8-P31 : Reserved for SAE Assignment" 26 "P8-P31 : Reserved for SAE Assignment" 27 "P8-P31 : Reserved for SAE Assignment" 28 "P8-P31 : Reserved for SAE Assignment" 29 "P8-P31 : Reserved for SAE Assignment" 30 "P8-P31 : Reserved for SAE Assignment" 31 "P32 : Temporary Powertrain Control";
+VAL_ 201326595 EngineRequestedTorque 0 "+0.000%" 1 "+0.125%" 2 "+0.250%" 3 "+0.375%" 4 "+0.500%" 5 "+0.625%" 6 "+0.750%" 7 "+0.875%" 8 "not available" 9 "not available" 10 "not available" 11 "not available" 12 "not available" 13 "not available" 14 "not available" 15 "not available";
+VAL_ 217069822 EngineDualFuelModeCommand 0 "De-activate dual fuel mode" 1 "Activate dual fuel mode" 2 "Reserved" 3 "Not available";
+VAL_ 419370497 Engine_Reference_State 0 "Open" 1 "Initialisatise" 2 "Stall" 3 "First Edge" 4 "First Period" 5 "Search" 6 "Pattern Lock" 7 "Cycle Lock" 8 "Error";
+VAL_ 419370497 Engine_Derate_Source 0 "Normal" 1 "Engine Oil Temperature" 2 "Engine Oil Pressure" 3 "Engine Coolant Temperature" 4 "Engine Coolant Pressure" 5 "Engine Inlet Manifold Charge Air Pressure Abs" 6 "Engine Inlet Manifold Charge Air Temperature" 7 "Engine Intercooler Temperature" 8 "Engine Intercooler Pressure" 9 "Engine Crankcase Pressure" 10 "Fuel Diesel Temperature" 11 "Fuel Diesel Supply Pressure" 12 "Fuel Diesel Common Rail Pressure" 13 "Fuel Gas Rail Bank A Temperature" 14 "Fuel Gas Rail Bank A Pressure" 15 "Fuel Gas Rail Bank B Temperature" 16 "Fuel Gas Rail Bank B Pressure" 17 "Engine Oil Filter Pressure Delta" 18 "Engine Turbocharger 1 Speed" 19 "Engine Turbocharger 2 Speed" 20 "Engine Turbocharger 3 Speed" 21 "EGR Control" 22 "Boost Control" 23 "CR Control" 24 "EGT Spread" 25 "Exhaust Manifold Pressure" 26 "Suction Valve Current" 27 "Incorrect Pressure Sensor Diagnostic";
+VAL_ 419370497 Knock_Sensor_State 0 "Ok" 1 "Fault Knk 1" 2 "Fault Knk 2" 3 "Fault Knk 3" 4 "Fault Knk 4" 5 "Fault Knk 5" 6 "Fault Knk 6";
+VAL_ 419370497 Engine_State 0 "Startup" 1 "Stop" 2 "Run" 3 "Crank";
+VAL_ 419370497 Gas_System_State 0 "Ok" 1 "No CycleLock" 2 "Sensor Fault" 3 "Under Pressure" 4 "Over Pressure" 5 "Leak Detected";
+VAL_ 419370497 Gas_Rail_State_A 0 "OK" 1 "Under Pressure" 2 "Over Pressure" 3 "Sensor Fault" 4 "Leak Detected";
+VAL_ 419370497 Gas_Rail_State_B 0 "OK" 1 "Under Pressure" 2 "Over Pressure" 3 "Sensor Fault" 4 "Leak Detected";
+VAL_ 419370497 Dual_Fuel_State 0 "Enabled" 1 "Disabled By Operator" 2 "Disabled Gas System Fault Bank A" 3 "Disabled Gas System Fault Bank B" 4 "Disabled Knock Sensor Fault Bank A" 5 "Disabled Knock Sensor Fault Bank B" 6 "Disabled Engine Sensor Fault" 7 "Disabled Engine Event State" 8 "Disabled ECU Fault" 9 "Disabled ECU9 In Control" 10 "Disabled EGR Fault";
+VAL_ 419371265 Charge_Air_Temp 0 "Normal" 1 "Engine Oil Temperature" 2 "Engine Oil Pressure" 3 "Engine Coolant Temperature" 4 "Engine Coolant Pressure" 5 "Engine Inlet Manifold Charge Air Pressure Abs" 6 "Engine Inlet Manifold Charge Air Temperature" 7 "Engine Intercooler Temperature" 8 "Engine Intercooler Pressure" 9 "Engine Crankcase Pressure" 10 "Fuel Diesel Temperature" 11 "Fuel Diesel Supply Pressure" 12 "Fuel Diesel Common Rail Pressure" 13 "Fuel Gas Rail Bank A Temperature" 14 "Fuel Gas Rail Bank A Pressure" 15 "Fuel Gas Rail Bank B Temperature" 16 "Fuel Gas Rail Bank B Pressure" 17 "Engine Oil Filter Pressure Delta" 18 "Engine Turbocharger 1 Speed" 19 "Engine Turbocharger 2 Speed" 20 "Engine Turbocharger 3 Speed" 21 "EGR Control" 22 "Boost Control" 23 "CR Control" 24 "EGT Spread" 25 "Exhaust Manifold Pressure" 26 "Suction Valve Current" 27 "Incorrect Pressure Sensor Diagnostic";
+VAL_ 419371265 Charge_Air_Pressure 0 "Enabled" 1 "Disabled By Operator" 2 "Disabled Gas System Fault Bank A" 3 "Disabled Gas System Fault Bank B" 4 "Disabled Knock Sensor Fault Bank A" 5 "Disabled Knock Sensor Fault Bank B" 6 "Disabled Engine Sensor Fault" 7 "Disabled Engine Event State" 8 "Disabled ECU Fault" 9 "Disabled ECU9 In Control" 10 "Disabled EGR Fault";
+VAL_ 419079425 BlendDualFuelModeOperatingStatus 0 "Disabled by Configuration" 1 "Operator Disabled" 2 "Automatically Disabled and Locked" 3 "Temporarily Disabled Due to Current Conditions" 4 "Pending" 5 "Active" 6 "Reserved" 7 "Reserved" 8 "Reserved" 9 "Reserved" 10 "Reserved" 11 "Reserved" 12 "Reserved" 13 "Reserved" 14 "Error" 15 "Not Available";
+VAL_ 419079425 BlendedDualFuelModeStatusReason 0 "Not Requested" 1 "Diagnostic Trouble Code Active" 2 "Engine Speed Too Low" 3 "Engine Speed Too High" 4 "Engine Load Too Low" 5 "Engine Load Too High" 6 "Coolant Temperature Too Low" 7 "Coolant Temperature Too High" 8 "Intake Manifold Air Temperature Too Low" 9 "Intake Manifold Air Temperature Too High" 10 "Gas System Pressure Too Low" 11 "Gas System Pressure Too High" 12 "Gas System Temperature Too Low" 13 "Gas System Temperature Too High" 14 "Engine Cylinder Cut-Out Mode Active" 15 "Aftertreatment Temperature Threshold Not Met" 16 "Engine System Protection Active" 17 "Gaseous Fuel Energy Content Too High" 18 "Gas Blending System Abnormal" 19 "Aftertreatment Warm Up In Progress" 20 "Gas System Leak Check In Progress" 21 "Engine Operating Time Too Low" 22 "Engine Under Acceleration" 23 "Gas Blending At Target" 24 "Gas Blending Normal Below Target" 25 "Gas Blending Normal Above Target" 26 "OEM ECU in Control" 27 "Knock Fault A1/A2" 28 "Knock Fault A3/A4" 29 "Knock Fault A5/A6" 30 "Knock Fault A7/A8" 31 "Knock Fault B1/B2" 32 "Knock Fault B3/B4" 33 "Knock Fault B5/B6" 34 "Knock Fault B7/B8" 35 "Gas System Leak Bank A" 36 "Gas System Leak Bank B" 37 "Gas System Sensor Fault Bank A" 38 "Gas System Sensor Fault Bank B" 39 "Charge Air Pressure Fault" 40 "Charge Air Temperature Fault" 41 "Commonr Rail Pressure Fault" 42 "Control Unit Fault" 43 "EGR Fault";
+VAL_ 419351041 ProtectLamp 0 "Lamp Off" 1 "Lamp On" 2 "Reserved" 3 "Not available";
+VAL_ 419351041 AmberWarningLamp 0 "Lamp Off" 1 "Lamp On" 2 "Reserved" 3 "Not available";
+VAL_ 419351041 RedStopLamp 0 "Lamp Off" 1 "Lamp On" 2 "Reserved" 3 "Not available";
+VAL_ 419351041 MalfunctionIndicatorLamp 0 "Lamp Off" 1 "Lamp On" 2 "Short MIL for WWH OBD" 3 "Not available";
+VAL_ 419351041 FlashProtectLamp 0 "Slow Flash (1 Hz, 50 % duty cycle)" 1 "Fast Flash (2 Hz or faster, 50% duty cycle)" 2 "Reserved" 3 "Unavailable / Do Not Flash";
+VAL_ 419351041 FlashAmberWarningLamp 0 "Slow Flash (1 Hz, 50 % duty cycle)" 1 "Fast Flash (2 Hz or faster, 50% duty cycle)" 2 "Reserved" 3 "Unavailable / Do Not Flash";
+VAL_ 419351041 FlashRedStopLamp 0 "Slow Flash (1 Hz, 50 % duty cycle)" 1 "Fast Flash (2 Hz or faster, 50% duty cycle)" 2 "Reserved" 3 "Unavailable / Do Not Flash";
+VAL_ 419351041 FlashMalfunctionIndicatorLamp 0 "Slow Flash (1 Hz, 50 % duty cycle)" 1 "Fast Flash (2 Hz or faster, 50% duty cycle)" 2 "Class C DTC" 3 "Unavailable / Do Not Flash";
+VAL_ 419351041 SPNConversionMethod 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351041 SPNConversionMethod2 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351041 SPNConversionMethod3 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351041 SPNConversionMethod4 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351041 SPNConversionMethod5 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351041 SPNConversionMethod6 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351041 SPNConversionMethod7 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351041 SPNConversionMethod8 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351041 SPNConversionMethod9 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351041 SPNConversionMethod10 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351041 SPNConversionMethod11 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351041 SPNConversionMethod12 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 418316030 ArbitraryAddressCapable 0 "CA is not capable" 1 "CA is capable";
+VAL_ 418390273 EngSpeedSnsr1TimingPatternStatus 0 "Not OK" 1 "OK" 2 "Error" 3 "Not available";
+VAL_ 419351276 ProtectLamp 0 "Lamp Off" 1 "Lamp On" 2 "Reserved" 3 "Not available";
+VAL_ 419351276 AmberWarningLamp 0 "Lamp Off" 1 "Lamp On" 2 "Reserved" 3 "Not available";
+VAL_ 419351276 RedStopLamp 0 "Lamp Off" 1 "Lamp On" 2 "Reserved" 3 "Not available";
+VAL_ 419351276 MalfunctionIndicatorLamp 0 "Lamp Off" 1 "Lamp On" 2 "Short MIL for WWH OBD" 3 "Not available";
+VAL_ 419351276 FlashProtectLamp 0 "Slow Flash (1 Hz, 50 % duty cycle)" 1 "Fast Flash (2 Hz or faster, 50% duty cycle)" 2 "Reserved" 3 "Unavailable / Do Not Flash";
+VAL_ 419351276 FlashAmberWarningLamp 0 "Slow Flash (1 Hz, 50 % duty cycle)" 1 "Fast Flash (2 Hz or faster, 50% duty cycle)" 2 "Reserved" 3 "Unavailable / Do Not Flash";
+VAL_ 419351276 FlashRedStopLamp 0 "Slow Flash (1 Hz, 50 % duty cycle)" 1 "Fast Flash (2 Hz or faster, 50% duty cycle)" 2 "Reserved" 3 "Unavailable / Do Not Flash";
+VAL_ 419351276 FlashMalfunctionIndicatorLamp 0 "Slow Flash (1 Hz, 50 % duty cycle)" 1 "Fast Flash (2 Hz or faster, 50% duty cycle)" 2 "Class C DTC" 3 "Unavailable / Do Not Flash";
+VAL_ 419351276 SPNConversionMethod 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351276 SPNConversionMethod2 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351276 SPNConversionMethod3 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351276 SPNConversionMethod4 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351276 SPNConversionMethod5 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351276 SPNConversionMethod6 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351276 SPNConversionMethod7 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351276 SPNConversionMethod8 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351276 SPNConversionMethod9 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351276 SPNConversionMethod10 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351276 SPNConversionMethod11 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 419351276 SPNConversionMethod12 0 "Convert SPN per Version 4" 1 "Convert SPN per Version 1, 2 or 3";
+VAL_ 201326597 EngineOverrideControlMode 0 "Override disabled" 1 "Speed control" 2 "Torque control" 3 "Speed/torque limit control";
+VAL_ 201326597 EngRequestedSpeedCtrlConditions 0 "Transient Optimized for driveline disengaged and non-lockup conditions" 1 "Stability Optimized for driveline disengaged and non-lockup conditions" 2 "Stability Optimized for driveline engaged and/or in lockup condition 1" 3 "Stability Optimized for driveline engaged and/or in lockup condition 2";
+VAL_ 201326597 OverrideControlModePriority 0 "Highest priority" 1 "High priority" 2 "Medium priority" 3 "Low priority";
+VAL_ 201326597 TSC1TransmissionRate 0 "1000 ms transmission rate" 1 "750 ms transmission rate" 2 "500 ms transmission rate" 3 "250 ms transmission rate" 4 "100 ms transmission rate" 5 "50 ms transmission rate" 6 "20 ms transmission rate" 7 "Use standard";
+VAL_ 201326597 TSC1ControlPurpose 0 "P1 : Accelerator Pedal/Operator Selection" 1 "P2 : Cruise Control" 2 "P3 : PTO Governor" 3 "P4 : Road Speed Governor" 4 "P5 : Engine Protection" 5 "P6 : Transient-Optimized Torque Limit" 6 "P7 : Automated Driving System Input" 7 "P8-P31 : Reserved for SAE Assignment" 8 "P8-P31 : Reserved for SAE Assignment" 9 "P8-P31 : Reserved for SAE Assignment" 10 "P8-P31 : Reserved for SAE Assignment" 11 "P8-P31 : Reserved for SAE Assignment" 12 "P8-P31 : Reserved for SAE Assignment" 13 "P8-P31 : Reserved for SAE Assignment" 14 "P8-P31 : Reserved for SAE Assignment" 15 "P8-P31 : Reserved for SAE Assignment" 16 "P8-P31 : Reserved for SAE Assignment" 17 "P8-P31 : Reserved for SAE Assignment" 18 "P8-P31 : Reserved for SAE Assignment" 19 "P8-P31 : Reserved for SAE Assignment" 20 "P8-P31 : Reserved for SAE Assignment" 21 "P8-P31 : Reserved for SAE Assignment" 22 "P8-P31 : Reserved for SAE Assignment" 23 "P8-P31 : Reserved for SAE Assignment" 24 "P8-P31 : Reserved for SAE Assignment" 25 "P8-P31 : Reserved for SAE Assignment" 26 "P8-P31 : Reserved for SAE Assignment" 27 "P8-P31 : Reserved for SAE Assignment" 28 "P8-P31 : Reserved for SAE Assignment" 29 "P8-P31 : Reserved for SAE Assignment" 30 "P8-P31 : Reserved for SAE Assignment" 31 "P32 : Temporary Powertrain Control";
+VAL_ 201326597 EngineRequestedTorque 0 "+0.000%" 1 "+0.125%" 2 "+0.250%" 3 "+0.375%" 4 "+0.500%" 5 "+0.625%" 6 "+0.750%" 7 "+0.875%" 8 "not available" 9 "not available" 10 "not available" 11 "not available" 12 "not available" 13 "not available" 14 "not available" 15 "not available";
+VAL_ 201326599 EngineOverrideControlMode 0 "Override disabled" 1 "Speed control" 2 "Torque control" 3 "Speed/torque limit control";
+VAL_ 201326599 EngRequestedSpeedCtrlConditions 0 "Transient Optimized for driveline disengaged and non-lockup conditions" 1 "Stability Optimized for driveline disengaged and non-lockup conditions" 2 "Stability Optimized for driveline engaged and/or in lockup condition 1" 3 "Stability Optimized for driveline engaged and/or in lockup condition 2";
+VAL_ 201326599 OverrideControlModePriority 0 "Highest priority" 1 "High priority" 2 "Medium priority" 3 "Low priority";
+VAL_ 201326599 TSC1TransmissionRate 0 "1000 ms transmission rate" 1 "750 ms transmission rate" 2 "500 ms transmission rate" 3 "250 ms transmission rate" 4 "100 ms transmission rate" 5 "50 ms transmission rate" 6 "20 ms transmission rate" 7 "Use standard";
+VAL_ 201326599 TSC1ControlPurpose 0 "P1 : Accelerator Pedal/Operator Selection" 1 "P2 : Cruise Control" 2 "P3 : PTO Governor" 3 "P4 : Road Speed Governor" 4 "P5 : Engine Protection" 5 "P6 : Transient-Optimized Torque Limit" 6 "P7 : Automated Driving System Input" 7 "P8-P31 : Reserved for SAE Assignment" 8 "P8-P31 : Reserved for SAE Assignment" 9 "P8-P31 : Reserved for SAE Assignment" 10 "P8-P31 : Reserved for SAE Assignment" 11 "P8-P31 : Reserved for SAE Assignment" 12 "P8-P31 : Reserved for SAE Assignment" 13 "P8-P31 : Reserved for SAE Assignment" 14 "P8-P31 : Reserved for SAE Assignment" 15 "P8-P31 : Reserved for SAE Assignment" 16 "P8-P31 : Reserved for SAE Assignment" 17 "P8-P31 : Reserved for SAE Assignment" 18 "P8-P31 : Reserved for SAE Assignment" 19 "P8-P31 : Reserved for SAE Assignment" 20 "P8-P31 : Reserved for SAE Assignment" 21 "P8-P31 : Reserved for SAE Assignment" 22 "P8-P31 : Reserved for SAE Assignment" 23 "P8-P31 : Reserved for SAE Assignment" 24 "P8-P31 : Reserved for SAE Assignment" 25 "P8-P31 : Reserved for SAE Assignment" 26 "P8-P31 : Reserved for SAE Assignment" 27 "P8-P31 : Reserved for SAE Assignment" 28 "P8-P31 : Reserved for SAE Assignment" 29 "P8-P31 : Reserved for SAE Assignment" 30 "P8-P31 : Reserved for SAE Assignment" 31 "P32 : Temporary Powertrain Control";
+VAL_ 201326599 EngineRequestedTorque 0 "+0.000%" 1 "+0.125%" 2 "+0.250%" 3 "+0.375%" 4 "+0.500%" 5 "+0.625%" 6 "+0.750%" 7 "+0.875%" 8 "not available" 9 "not available" 10 "not available" 11 "not available" 12 "not available" 13 "not available" 14 "not available" 15 "not available";

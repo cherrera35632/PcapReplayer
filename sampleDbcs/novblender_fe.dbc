@@ -1,0 +1,118 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_:
+
+BO_ 2565865726 MSG_F000_BLENDER: 8 Vector__XXX
+ SG_ SelectedDischargeRate : 0|16@1+ (0.01,-50) [0|0] "BPM" Vector__XXX
+
+BO_ 2565865982 MSG_F001_BLENDER: 8 Vector__XXX
+ SG_ PrimaryDischargeRate : 0|16@1+ (0.01,-50) [0|0] "BPM" Vector__XXX
+ SG_ BackupDischargeRate1 : 16|16@1+ (0.01,-50) [0|0] "BPM" Vector__XXX
+ SG_ BackupDischargeRate2 : 32|16@1+ (0.01,-50) [0|0] "BPM" Vector__XXX
+
+BO_ 2565866238 MSG_F002_BLENDER: 8 Vector__XXX
+ SG_ SelectedSuctionRate : 0|16@1+ (0.01,-50) [0|0] "BPM" Vector__XXX
+
+BO_ 2565866494 MSG_F003_BLENDER: 8 Vector__XXX
+ SG_ PrimarySuctionRate : 0|16@1+ (0.01,-50) [0|0] "BPM" Vector__XXX
+ SG_ BackupSuctionRate1 : 16|16@1+ (0.01,-50) [0|0] "BPM" Vector__XXX
+ SG_ BackupSuctionRate2 : 32|16@1+ (0.01,-50) [0|0] "BPM" Vector__XXX
+
+BO_ 2565867006 MSG_F005_BLENDER: 8 Vector__XXX
+ SG_ MeasuredDensity : 0|16@1+ (0.01,-15) [0|0] "PSA" Vector__XXX
+
+BO_ 2565867262 MSG_F006_BLENDER: 8 Vector__XXX
+ SG_ CalculatedDensity : 0|16@1+ (0.01,-7.5) [0|0] "PSA" Vector__XXX
+
+BO_ 2565867518 MSG_F007_BLENDER: 8 Vector__XXX
+ SG_ Auger1RPM : 0|16@1+ (1,0) [0|0] "RPM" Vector__XXX
+ SG_ Auger2RPM : 16|16@1+ (1,0) [0|0] "RPM" Vector__XXX
+ SG_ Auger3RPM : 32|16@1+ (1,0) [0|0] "RPM" Vector__XXX
+ SG_ SandRate : 48|16@1+ (1,0) [0|0] "L/M" Vector__XXX
+
+BO_ 2565868286 MSG_F00A_BLENDER: 8 Vector__XXX
+ SG_ chem01Rate : 0|16@1+ (0.01,-37.5) [0|0] "G/P/M" Vector__XXX
+
+BO_ 2565868542 MSG_F00B_BLENDER: 8 Vector__XXX
+ SG_ chem02Rate : 0|16@1+ (0.01,-37.5) [0|0] "%" Vector__XXX
+
+BO_ 2565868798 MSG_F00C_BLENDER: 8 Vector__XXX
+ SG_ chem03Rate : 0|16@1+ (0.01,-37.5) [0|0] "#" Vector__XXX
+
+BO_ 2565869054 MSG_F00D_BLENDER: 8 Vector__XXX
+ SG_ chem04Rate : 0|16@1+ (0.01,-37.5) [0|0] "#/M" Vector__XXX
+
+BO_ 2565869310 MSG_F00E_BLENDER: 8 Vector__XXX
+ SG_ chem05Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+
+BO_ 2565869566 MSG_F00F_BLENDER: 8 Vector__XXX
+ SG_ chem06Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+
+BO_ 2565869822 MSG_F010_BLENDER: 8 Vector__XXX
+ SG_ chem07Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+
+BO_ 2565870078 MSG_F011_BLENDER: 8 Vector__XXX
+ SG_ chem08Rate : 0|16@1+ (0,-37.5) [0|0] "GPM" Vector__XXX
+
+BO_ 2565870334 MSG_F012_BLENDER: 8 Vector__XXX
+ SG_ chem09Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+
+BO_ 2565870590 MSG_F013_BLENDER: 8 Vector__XXX
+ SG_ chem10Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+
+BO_ 2565873406 MSG_F01E_BLENDER: 8 Vector__XXX
+ SG_ TubLevel : 0|16@1+ (0.01,-25) [0|0] "Per" Vector__XXX
+
+BO_ 2565874430 MSG_F022_BLENDER: 8 Vector__XXX
+ SG_ DischargePressure : 0|24@1+ (0.01,-3750) [0|0] "" Vector__XXX
+ SG_ CurrentStage : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2565882110 MSG_F040_BLENDER: 8 Vector__XXX
+ SG_ DischargeManifoldPressure : 0|16@1+ (0.01,0) [0|0] "PSI" Vector__XXX
+ SG_ SuctionManifoldPressure : 16|16@1+ (0.01,0) [0|0] "PSI" Vector__XXX
+
+BO_ 2565867774 Quickchange: 8 Vector__XXX
+ SG_ NewSignal_0001 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ NewSignal_0002 : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ NewSignal_0003 : 16|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ NewSignal_0004 : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ NewSignal_0005 : 32|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ NewSignal_0006 : 40|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ NewSignal_0007 : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+
+
+
+

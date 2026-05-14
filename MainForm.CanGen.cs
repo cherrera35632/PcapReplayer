@@ -107,6 +107,7 @@ namespace PcapReplayer
             var split = new SplitContainer
             {
                 Dock          = DockStyle.Fill,
+                Width         = 634,   // must be set before MinSize properties; avoids Width−Panel2MinSize going negative
                 Panel1MinSize = 180,
                 Panel2MinSize = 200
             };
