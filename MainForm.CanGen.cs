@@ -59,17 +59,17 @@ namespace PcapReplayer
             pnlCanConfig.Controls.Add(txtCanTargetIp);
 
             pnlCanConfig.Controls.Add(new Label { Text = "Port:", Location = new Point(120, 56), AutoSize = true });
-            txtCanTargetPort = new TextBox { Text = "35251", Location = new Point(120, 76), Width = 70 };
+            txtCanTargetPort = new TextBox { Text = "35281", Location = new Point(120, 76), Width = 70 };
             pnlCanConfig.Controls.Add(txtCanTargetPort);
 
             pnlCanConfig.Controls.Add(new Label { Text = "Source IP:", Location = new Point(200, 56), AutoSize = true });
-            txtCanSourceIp = new TextBox { Text = "192.168.1.100", Location = new Point(200, 76), Width = 120 };
+            txtCanSourceIp = new TextBox { Text = "127.0.0.2", Location = new Point(200, 76), Width = 120 };
             pnlCanConfig.Controls.Add(txtCanSourceIp);
 
             pnlCanConfig.Controls.Add(new Label { Text = "USR Header:", Location = new Point(330, 56), AutoSize = true });
             txtCanUsrHeader = new TextBox
             {
-                Text     = "AssetId|EquipType|Mfg|Database|CANName|HwId",
+                Text     = "123456|P|R|dbcName|C1|1",
                 Location = new Point(330, 76),
                 Width    = 230,
                 Font     = new Font("Consolas", 8.5f)
@@ -248,6 +248,10 @@ namespace PcapReplayer
                 _canMessages = BuildMessageStates(_canDatabase);
                 txtCanDbcPath.Text = ofd.FileName;
                 txtCanGenLog.Clear();
+
+                // Auto-update the Database field (index 3) in the USR header with the DBC name
+                UpdateUsrHeaderDbcName(Path.GetFileNameWithoutExtension(ofd.FileName));
+
                 RebuildCanTree();
 
                 CanGenLog($"DBC loaded: {Path.GetFileName(ofd.FileName)} ({_canDatabase.MessageCount} msgs, {_canDatabase.SignalCount} sigs, {_canDatabase.MultiplexedSignalsSkipped} multiplexed signals skipped)");
@@ -264,10 +268,21 @@ namespace PcapReplayer
             UpdateCanStartState();
         }
 
+        private void UpdateUsrHeaderDbcName(string dbcName)
+        {
+            string current = txtCanUsrHeader.Text;
+            string[] parts = current.Split('|');
+            if (parts.Length >= 4)
+            {
+                parts[3] = dbcName;
+                txtCanUsrHeader.Text = string.Join("|", parts);
+            }
+        }
+
         private List<MessageTxState> BuildMessageStates(DbcDatabase database)
         {
             var result = new List<MessageTxState>();
-            foreach (var message in database.Messages)
+            foreach (var message in database.Messages.OrderBy(m => m.Name, StringComparer.OrdinalIgnoreCase))
             {
                 var state = new MessageTxState
                 {
@@ -374,20 +389,28 @@ namespace PcapReplayer
 
         private void RefreshTreeLabels()
         {
-            foreach (TreeNode parent in tvCanMessages.Nodes)
+            tvCanMessages.BeginUpdate();
+            try
             {
-                foreach (TreeNode child in parent.Nodes)
+                foreach (TreeNode parent in tvCanMessages.Nodes)
                 {
-                    if (child.Tag is MessageTxState message)
+                    foreach (TreeNode child in parent.Nodes)
                     {
-                        child.Text = FormatMessageNodeText(message);
-                        foreach (TreeNode signalNode in child.Nodes)
+                        if (child.Tag is MessageTxState message)
                         {
-                            if (signalNode.Tag is SignalNodeTag signalTag)
-                                signalNode.Text = FormatSignalText(signalTag.Signal);
+                            child.Text = FormatMessageNodeText(message);
+                            foreach (TreeNode signalNode in child.Nodes)
+                            {
+                                if (signalNode.Tag is SignalNodeTag signalTag)
+                                    signalNode.Text = FormatSignalText(signalTag.Signal);
+                            }
                         }
                     }
                 }
+            }
+            finally
+            {
+                tvCanMessages.EndUpdate();
             }
         }
 
@@ -583,24 +606,61 @@ namespace PcapReplayer
 
             UsrFrameBuilder.BuildDataBytes(message);
             UpdateCanStartState();
-            RefreshTreeLabels();
+            // Only refresh the selected message node instead of the entire tree
+            RefreshSelectedMessageNode();
+        }
+
+        private void RefreshSelectedMessageNode()
+        {
+            var selectedNode = tvCanMessages.SelectedNode;
+            if (selectedNode == null) return;
+
+            // Find the message node (could be the selected node or its parent)
+            TreeNode? messageNode = selectedNode.Tag is MessageTxState
+                ? selectedNode
+                : selectedNode.Tag is SignalNodeTag ? selectedNode.Parent : null;
+
+            if (messageNode?.Tag is not MessageTxState msg) return;
+
+            tvCanMessages.BeginUpdate();
+            try
+            {
+                messageNode.Text = FormatMessageNodeText(msg);
+                foreach (TreeNode signalNode in messageNode.Nodes)
+                {
+                    if (signalNode.Tag is SignalNodeTag signalTag)
+                        signalNode.Text = FormatSignalText(signalTag.Signal);
+                }
+            }
+            finally
+            {
+                tvCanMessages.EndUpdate();
+            }
         }
 
         private void UpdateSignalNodeText(SignalTxState signal)
         {
-            foreach (TreeNode parent in tvCanMessages.Nodes)
+            tvCanMessages.BeginUpdate();
+            try
             {
-                foreach (TreeNode messageNode in parent.Nodes)
+                foreach (TreeNode parent in tvCanMessages.Nodes)
                 {
-                    foreach (TreeNode signalNode in messageNode.Nodes)
+                    foreach (TreeNode messageNode in parent.Nodes)
                     {
-                        if (signalNode.Tag is SignalNodeTag tag && ReferenceEquals(tag.Signal, signal))
+                        foreach (TreeNode signalNode in messageNode.Nodes)
                         {
-                            signalNode.Text = FormatSignalText(signal);
-                            return;
+                            if (signalNode.Tag is SignalNodeTag tag && ReferenceEquals(tag.Signal, signal))
+                            {
+                                signalNode.Text = FormatSignalText(signal);
+                                return;
+                            }
                         }
                     }
                 }
+            }
+            finally
+            {
+                tvCanMessages.EndUpdate();
             }
         }
 
