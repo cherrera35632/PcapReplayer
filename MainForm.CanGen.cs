@@ -274,7 +274,7 @@ namespace PcapReplayer
                     Name       = message.Name,
                     CanId      = message.CanId,
                     IsExtended = message.IsExtended,
-                    Dlc        = (byte)Math.Min(8, message.Dlc),
+                    Dlc        = (byte)Math.Min(8, (int)message.Dlc),
                     Comment    = message.Comment,
                     PeriodMs   = 100,
                     Enabled    = true
@@ -393,13 +393,13 @@ namespace PcapReplayer
 
         private void TvCanMessages_AfterSelect(object? sender, TreeViewEventArgs e)
         {
-            if (e.Node.Tag is MessageTxState message)
+            if (e.Node?.Tag is MessageTxState message)
             {
                 ShowMessageDetails(message);
                 return;
             }
 
-            if (e.Node.Tag is SignalNodeTag signalTag)
+            if (e.Node?.Tag is SignalNodeTag signalTag)
             {
                 ShowMessageDetails(signalTag.Message);
                 return;

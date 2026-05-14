@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -9,27 +10,27 @@ namespace PcapReplayer
     public static class DbcParser
     {
         private static readonly Regex BoPattern = new(
-            @"^BO_\s+(\d+)\s+(\S+)\s*:\s*(\d+)\s*(\S+)?",
+            "^BO_\\s+(\\d+)\\s+(\\S+)\\s*:\\s*(\\d+)\\s*(\\S+)?",
             RegexOptions.Compiled);
 
         private static readonly Regex SignalPattern = new(
-            @"^(\d+)\|(\d+)@([01])([+-])\s+\(([-+0-9.eE]+),([-+0-9.eE]+)\)\s+\[([-+0-9.eE]+)\|([-+0-9.eE]+)\]\s+\"([^\"]*)\"(?:\s+(.*))?$",
+            "^(\\d+)\\|(\\d+)@([01])([+-])\\s+\\(([-+0-9.eE]+),([-+0-9.eE]+)\\)\\s+\\[([-+0-9.eE]+)\\|([-+0-9.eE]+)\\]\\s+\"([^\"]*)\"(?:\\s+(.*))?$",
             RegexOptions.Compiled);
 
         private static readonly Regex MessageCommentPattern = new(
-            @"^CM_\s+BO_\s+(\d+)\s+\"((?:\\.|[^\"])*)\";",
+            "^CM_\\s+BO_\\s+(\\d+)\\s+\"((?:\\\\.|[^\"])*)\";",
             RegexOptions.Compiled);
 
         private static readonly Regex SignalCommentPattern = new(
-            @"^CM_\s+SG_\s+(\d+)\s+(\S+)\s+\"((?:\\.|[^\"])*)\";",
+            "^CM_\\s+SG_\\s+(\\d+)\\s+(\\S+)\\s+\"((?:\\\\.|[^\"])*)\";",
             RegexOptions.Compiled);
 
         private static readonly Regex ValueEntryPattern = new(
-            @"(-?\d+)\s+\"([^\"]*)\"",
+            "(-?\\d+)\\s+\"([^\"]*)\"",
             RegexOptions.Compiled);
 
         private static readonly Regex SpnPattern = new(
-            @"\bSPN\D*(\d+)\b",
+            "\\bSPN\\D*(\\d+)\\b",
             RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         public static DbcDatabase ParseFile(string path)
@@ -38,7 +39,7 @@ namespace PcapReplayer
         public static DbcDatabase Parse(string dbcText)
         {
             var db              = new DbcDatabase();
-            var messagesByRawId = new System.Collections.Generic.Dictionary<uint, DbcMessage>();
+            var messagesByRawId = new Dictionary<uint, DbcMessage>();
             DbcMessage? current = null;
 
             using var reader = new StringReader(dbcText ?? string.Empty);
@@ -77,9 +78,7 @@ namespace PcapReplayer
                 }
 
                 if (trimmed.StartsWith("VAL_ ", StringComparison.Ordinal))
-                {
                     ApplyValueTable(trimmed, messagesByRawId);
-                }
             }
 
             return db;
@@ -161,7 +160,7 @@ namespace PcapReplayer
             return true;
         }
 
-        private static void ApplyComment(string line, System.Collections.Generic.Dictionary<uint, DbcMessage> messagesByRawId)
+        private static void ApplyComment(string line, Dictionary<uint, DbcMessage> messagesByRawId)
         {
             var msgComment = MessageCommentPattern.Match(line);
             if (msgComment.Success)
@@ -190,28 +189,21 @@ namespace PcapReplayer
                 signal.Spn = spn;
         }
 
-        private static void ApplyValueTable(string line, System.Collections.Generic.Dictionary<uint, DbcMessage> messagesByRawId)
+        private static void ApplyValueTable(string line, Dictionary<uint, DbcMessage> messagesByRawId)
         {
-            int firstSpace = line.IndexOf(' ');
-            int secondSpace = line.IndexOf(' ', firstSpace + 1);
-            if (secondSpace < 0) return;
-
-            string remainder = line[(secondSpace + 1)..].Trim();
-            string[] parts = remainder.Split(' ', 3, StringSplitOptions.RemoveEmptyEntries);
-            if (parts.Length < 3) return;
-
-            if (!uint.TryParse(parts[0], NumberStyles.Integer, CultureInfo.InvariantCulture, out uint rawId))
-                return;
-
+            string[] parts = line.Split(' ', 4, StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length < 4) return;
+            if (!uint.TryParse(parts[1], NumberStyles.Integer, CultureInfo.InvariantCulture, out uint rawId)) return;
             if (!messagesByRawId.TryGetValue(rawId, out var message)) return;
-            var signal = message.Signals.FirstOrDefault(s => s.Name == parts[1]);
+
+            var signal = message.Signals.FirstOrDefault(s => s.Name == parts[2]);
             if (signal == null) return;
 
-            string valuePart = parts[2];
+            string valuePart = parts[3];
             if (valuePart.EndsWith(";", StringComparison.Ordinal))
                 valuePart = valuePart[..^1];
 
-            var table = new System.Collections.Generic.Dictionary<long, string>();
+            var table = new Dictionary<long, string>();
             foreach (Match match in ValueEntryPattern.Matches(valuePart))
             {
                 long raw = long.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);

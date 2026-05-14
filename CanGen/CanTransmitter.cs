@@ -16,7 +16,11 @@ namespace PcapReplayer
         private readonly IUdpSink? _testSink;
         private volatile bool _stopRequested;
 
-        public CanTransmitter(IUdpSink? sink = null)
+        public CanTransmitter()
+        {
+        }
+
+        internal CanTransmitter(IUdpSink? sink)
         {
             _testSink = sink;
         }
