@@ -106,10 +106,9 @@ namespace PcapReplayer
 
             var split = new SplitContainer
             {
-                Dock             = DockStyle.Fill,
-                SplitterDistance = 235,
-                Panel1MinSize    = 180,
-                Panel2MinSize    = 320
+                Dock          = DockStyle.Fill,
+                Panel1MinSize = 180,
+                Panel2MinSize = 200
             };
 
             tvCanMessages = new TreeView
