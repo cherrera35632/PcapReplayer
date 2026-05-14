@@ -276,8 +276,8 @@ namespace PcapReplayer
                     IsExtended = message.IsExtended,
                     Dlc        = (byte)Math.Min(8, (int)message.Dlc),
                     Comment    = message.Comment,
-                    PeriodMs   = 100,
-                    Enabled    = true
+                    PeriodMs   = 1000,
+                    Enabled    = false
                 };
 
                 foreach (var signal in message.Signals)
@@ -321,7 +321,7 @@ namespace PcapReplayer
                 PhysicalValue = physical,
                 RawValue      = raw,
                 Error         = error,
-                IsMuted       = false
+                IsMuted       = true
             };
         }
 
@@ -623,7 +623,7 @@ namespace PcapReplayer
                 int.Parse(txtCanTargetPort.Text.Trim()),
                 txtCanSourceIp.Text.Trim(),
                 txtCanUsrHeader.Text.Trim(),
-                _canMessages.Where(m => m.Enabled).ToList());
+                _canMessages);
 
             _canTxCts = new CancellationTokenSource();
             SetCanTxRunning(true);
@@ -673,10 +673,12 @@ namespace PcapReplayer
                 return "Source IP is invalid.";
             if (!int.TryParse(txtCanTargetPort.Text.Trim(), out int port) || port < 1 || port > 65535)
                 return "Target port must be between 1 and 65535.";
-            if (!_canMessages.Any(m => m.Enabled))
-                return "At least one message must be enabled.";
 
-            var invalidSignal = _canMessages.SelectMany(m => m.Signals).FirstOrDefault(s => !string.IsNullOrEmpty(s.Error));
+            // Only validate signals that are not muted (muted signals don't contribute to the frame)
+            var invalidSignal = _canMessages
+                .Where(m => m.Enabled)
+                .SelectMany(m => m.Signals)
+                .FirstOrDefault(s => !s.IsMuted && !string.IsNullOrEmpty(s.Error));
             if (invalidSignal != null)
                 return $"Signal '{invalidSignal.Signal.Name}' has an invalid value: {invalidSignal.Error}";
 
@@ -693,7 +695,7 @@ namespace PcapReplayer
         {
             if (this.InvokeRequired) { this.Invoke(() => SetCanTxRunning(running)); return; }
             pnlCanConfig.Enabled   = !running;
-            grpCanMessages.Enabled = !running;
+            // Keep grpCanMessages enabled during TX so users can toggle messages/signals in real time
             btnCanStart.Enabled    = !running && GetCanStartValidationError() == null;
             btnCanStop.Enabled     = running;
         }

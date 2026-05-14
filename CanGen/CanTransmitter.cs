@@ -59,13 +59,11 @@ namespace PcapReplayer
             if (cfg.TargetPort < 1 || cfg.TargetPort > 65535)
                 throw new ArgumentException("Target port must be between 1 and 65535.", nameof(cfg));
 
-            List<MessageTxState> enabledMessages = cfg.Messages.Where(m => m.Enabled).ToList();
-            if (enabledMessages.Count == 0)
-                throw new ArgumentException("At least one enabled CAN message is required.", nameof(cfg));
+            IReadOnlyList<MessageTxState> allMessages = cfg.Messages;
 
             byte[] headerBytes = Encoding.ASCII.GetBytes(cfg.UsrMetadataHeader);
             long now = Stopwatch.GetTimestamp();
-            foreach (var message in enabledMessages)
+            foreach (var message in allMessages)
                 message.NextSendTs = now;
 
             var target = new IPEndPoint(IPAddress.Parse(cfg.TargetIp), cfg.TargetPort);
@@ -76,12 +74,21 @@ namespace PcapReplayer
 
             try
             {
-                OnLog?.Invoke($"CAN TX starting: {enabledMessages.Count} messages → {cfg.TargetIp}:{cfg.TargetPort}");
+                OnLog?.Invoke($"CAN TX starting: {allMessages.Count} messages → {cfg.TargetIp}:{cfg.TargetPort}");
 
                 while (true)
                 {
                     ct.ThrowIfCancellationRequested();
                     ThrowIfStopRequested();
+
+                    // Dynamically filter to enabled messages so real-time toggling is reflected
+                    List<MessageTxState> enabledMessages = allMessages.Where(m => m.Enabled).ToList();
+                    if (enabledMessages.Count == 0)
+                    {
+                        // No messages enabled; sleep briefly and re-check
+                        Thread.Sleep(10);
+                        continue;
+                    }
 
                     long nextDue = enabledMessages.Min(m => m.NextSendTs);
                     WaitUntil(nextDue, ct);

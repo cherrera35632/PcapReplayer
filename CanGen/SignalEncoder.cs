@@ -126,6 +126,7 @@ namespace PcapReplayer
         private static void SetBit(byte[] data, int bitIndex)
         {
             int byteIndex  = bitIndex / 8;
+            if (byteIndex < 0 || byteIndex >= data.Length) return;
             int bitInByte  = bitIndex % 8;
             data[byteIndex] |= (byte)(1 << bitInByte);
         }
