@@ -22,6 +22,8 @@ namespace PcapReplayer
         public SortedDictionary<int, MultiplexGroup>? MultiplexGroups { get; set; }
         /// <summary>Index into <see cref="MultiplexGroups"/> keys for round-robin TX.</summary>
         public int ActiveMuxRoundRobinIndex { get; set; }
+        /// <summary>Interval in ms between successive mux group transmissions (round-robin spacing).</summary>
+        public int MuxRoundRobinIntervalMs { get; set; } = 100;
 
         /// <summary>True when the message has multiplexed signal groups.</summary>
         public bool IsMultiplexed => MultiplexGroups is { Count: > 0 };

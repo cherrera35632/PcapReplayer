@@ -108,7 +108,10 @@ namespace PcapReplayer
                     sink.Send(packet, packet.Length, target);
 
                     foreach (var message in dueMessages)
-                        message.NextSendTs += (long)(message.PeriodMs * TicksPerMs);
+                    {
+                        int intervalMs = message.IsMultiplexed ? message.MuxRoundRobinIntervalMs : message.PeriodMs;
+                        message.NextSendTs += (long)(intervalMs * TicksPerMs);
+                    }
 
                     totalFrames += dueMessages.Count;
                     OnTxCount?.Invoke(totalFrames);
