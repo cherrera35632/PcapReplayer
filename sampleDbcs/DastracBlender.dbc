@@ -1,0 +1,2239 @@
+VERSION "DASTRAC Blender (Blender 1, SA=0xCE). Blender 2 = same payloads at PGN+0x100."
+
+NS_ :
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+
+BS_:
+
+BU_: DASTRAC BLENDER1
+
+VAL_TABLE_ BlenderOpcode 1 "RequestJobProfiles" 2 "RequestChannelConfig" 3 "RequestSystemSerialConfig" 4 "RequestPIDConfig" 5 "SetDensoBase" 6 "SetInlineDensoBase" 10 "AlternateBlenderNumber" 11 "SuctionEmpty" 12 "SuctionWater" 13 "DischargeEmpty" 14 "DischargeWater" 15 "InlineEmpty" 16 "InlineWater" 28 "ResetAuger1Total" 29 "ResetAuger2Total" 30 "ResetAuger3Total" 31 "ResetAuger4Total" 34 "ResetSand1Total" 35 "ResetSand2Total" ;
+
+BO_ 2565865678 RuntimeDischarge1: 8 DASTRAC
+ SG_ SelectedDischargeRate : 7|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ DischargeGrandTotal : 23|24@0+ (0.01,0) [0|167772.15] "BBL" BLENDER1
+ SG_ DischargeStageTotal : 47|24@0+ (0.01,0) [0|167772.15] "BBL" BLENDER1
+
+BO_ 2565865934 RuntimeDischarge2: 8 DASTRAC
+ SG_ PrimaryDischargeRate : 7|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ BackupDischargeRate1 : 23|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ BackupDischargeRate2 : 39|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+
+BO_ 2565866190 RuntimeSuction1: 8 DASTRAC
+ SG_ SelectedSuctionRate : 7|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ SuctionGrandTotal : 23|24@0+ (0.01,0) [0|167772.15] "BBL" BLENDER1
+ SG_ SuctionStageTotal : 47|24@0+ (0.01,0) [0|167772.15] "BBL" BLENDER1
+
+BO_ 2565866446 RuntimeSuction2: 8 DASTRAC
+ SG_ PrimarySuctionRate : 7|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ BackupSuctionRate1 : 23|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ BackupSuctionRate2 : 39|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ Auger4RPM : 55|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+
+BO_ 2565866702 CalcSuction: 8 DASTRAC
+ SG_ CalcSuctionRatePSA : 7|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ CalcSuctionRateDensitometer : 23|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+
+BO_ 2565866958 Density: 8 DASTRAC
+ SG_ MeasuredDensity : 7|16@0- (0.01,-15) [-342.68|312.67] "PSA" BLENDER1
+ SG_ TargetDensity : 23|16@0- (0.01,-7.5) [-335.18|320.17] "PSA" BLENDER1
+ SG_ TargetVolume : 39|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ Auger4AutoMode : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565867214 DensityCalc: 8 DASTRAC
+ SG_ CalculatedDensity : 7|16@0- (0.01,-7.5) [-335.18|320.17] "PSA" BLENDER1
+ SG_ InlineDensitometerPSA : 23|16@0- (0.01,-15) [-342.68|312.67] "PSA" BLENDER1
+
+BO_ 2565867470 AugerRPM: 8 DASTRAC
+ SG_ Auger1RPM : 7|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+ SG_ Auger2RPM : 23|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+ SG_ Auger3RPM : 39|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+ SG_ SandRate : 55|16@0+ (1,0) [0|65535] "LBSMIN" BLENDER1
+
+BO_ 2565867726 SandTotals: 8 DASTRAC
+ SG_ SandStageTotal : 7|24@0+ (1,0) [0|16777215] "LBS" BLENDER1
+ SG_ SandGrandTotal : 31|24@0+ (1,0) [0|16777215] "LBS" BLENDER1
+ SG_ VoltageSystem : 55|16@0+ (0.01,0) [0|655.35] "VDC" BLENDER1
+
+BO_ 2565867982 AugerHoldpoint: 8 DASTRAC
+ SG_ Auger1Holdpoint : 7|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+ SG_ Auger2Holdpoint : 23|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+ SG_ Auger3Holdpoint : 39|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+ SG_ Auger4Holdpoint : 55|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+
+BO_ 2565873358 MiscIO1: 8 DASTRAC
+ SG_ TubLevel : 7|16@0- (0.01,-25) [-352.68|302.67] "%" BLENDER1
+ SG_ MiscInput1 : 23|24@0- (0.01,-3750) [-87636.08|80136.07] "" BLENDER1
+ SG_ MiscInput2 : 47|24@0- (0.01,-3750) [-87636.08|80136.07] "" BLENDER1
+
+BO_ 2565873614 MiscIO2: 8 DASTRAC
+ SG_ MiscInput3 : 7|24@0- (0.01,-3750) [-87636.08|80136.07] "" BLENDER1
+ SG_ MiscInput4 : 31|24@0- (0.01,-3750) [-87636.08|80136.07] "" BLENDER1
+ SG_ CalcCombSuctionRate : 55|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+
+BO_ 2565873870 MiscIO3: 8 DASTRAC
+ SG_ MiscInput5 : 7|24@0- (0.01,-3750) [-87636.08|80136.07] "" BLENDER1
+ SG_ MiscInput6 : 31|24@0- (0.01,-3750) [-87636.08|80136.07] "" BLENDER1
+ SG_ CalcCombDischargeRate : 55|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+
+BO_ 2565874126 PressuresAndSGU: 8 DASTRAC
+ SG_ CasingPressure : 7|24@0- (0.01,-3750) [-87636.08|80136.07] "" BLENDER1
+ SG_ WellheadPressure : 31|24@0- (0.01,-3750) [-87636.08|80136.07] "" BLENDER1
+ SG_ SuctionDensoSGU : 55|16@0- (0.001,-7.5) [-40.268|25.267] "SGU" BLENDER1
+
+BO_ 2565874382 StateAndModes: 8 DASTRAC
+ SG_ DischargePressure : 7|24@0- (0.01,-3750) [-87636.08|80136.07] "" BLENDER1
+ SG_ CurrentStage : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ RunMode : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Auger1AutoMode : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Auger2AutoMode : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Auger3AutoMode : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565874638 RawCounts_01_04: 8 DASTRAC
+ SG_ RawCount01 : 7|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount02 : 23|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount03 : 39|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount04 : 55|16@0+ (1,0) [0|65535] "" BLENDER1
+
+BO_ 2565874894 RawCounts_05_08: 8 DASTRAC
+ SG_ RawCount05 : 7|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount06 : 23|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount07 : 39|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount08 : 55|16@0+ (1,0) [0|65535] "" BLENDER1
+
+BO_ 2565875150 RawCounts_09_12: 8 DASTRAC
+ SG_ RawCount09 : 7|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount10 : 23|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount11 : 39|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount12 : 55|16@0+ (1,0) [0|65535] "" BLENDER1
+
+BO_ 2565875406 RawCounts_13_16: 8 DASTRAC
+ SG_ RawCount13 : 7|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount14 : 23|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount15 : 39|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount16 : 55|16@0+ (1,0) [0|65535] "" BLENDER1
+
+BO_ 2565875662 RawCounts_17_20: 8 DASTRAC
+ SG_ RawCount17 : 7|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount18 : 23|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount19 : 39|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount20 : 55|16@0+ (1,0) [0|65535] "" BLENDER1
+
+BO_ 2565875918 RawCounts_21_24: 8 DASTRAC
+ SG_ RawCount21 : 7|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount22 : 23|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount23 : 39|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount24 : 55|16@0+ (1,0) [0|65535] "" BLENDER1
+
+BO_ 2565876174 RawCounts_25_28: 8 DASTRAC
+ SG_ RawCount25 : 7|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount26 : 23|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount27 : 39|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount28 : 55|16@0+ (1,0) [0|65535] "" BLENDER1
+
+BO_ 2565876430 RawCounts_29_32: 8 DASTRAC
+ SG_ RawCount29 : 7|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount30 : 23|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount31 : 39|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount32 : 55|16@0+ (1,0) [0|65535] "" BLENDER1
+
+BO_ 2565876686 RawCounts_33_36: 8 DASTRAC
+ SG_ RawCount33 : 7|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount34 : 23|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount35 : 39|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount36 : 55|16@0+ (1,0) [0|65535] "" BLENDER1
+
+BO_ 2565876942 PIDStatus01: 8 DASTRAC
+ SG_ PIDNominal01 : 7|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDActual01 : 31|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDControl01 : 55|16@0- (0.1,0) [-3276.8|3276.7] "%" BLENDER1
+
+BO_ 2565877198 PIDStatus02: 8 DASTRAC
+ SG_ PIDNominal02 : 7|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDActual02 : 31|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDControl02 : 55|16@0- (0.1,0) [-3276.8|3276.7] "%" BLENDER1
+
+BO_ 2565877454 PIDStatus03: 8 DASTRAC
+ SG_ PIDNominal03 : 7|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDActual03 : 31|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDControl03 : 55|16@0- (0.1,0) [-3276.8|3276.7] "%" BLENDER1
+
+BO_ 2565877710 PIDStatus04: 8 DASTRAC
+ SG_ PIDNominal04 : 7|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDActual04 : 31|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDControl04 : 55|16@0- (0.1,0) [-3276.8|3276.7] "%" BLENDER1
+
+BO_ 2565877966 PIDStatus05: 8 DASTRAC
+ SG_ PIDNominal05 : 7|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDActual05 : 31|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDControl05 : 55|16@0- (0.1,0) [-3276.8|3276.7] "%" BLENDER1
+
+BO_ 2565878222 PIDStatus06: 8 DASTRAC
+ SG_ PIDNominal06 : 7|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDActual06 : 31|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDControl06 : 55|16@0- (0.1,0) [-3276.8|3276.7] "%" BLENDER1
+
+BO_ 2565878478 PIDStatus07: 8 DASTRAC
+ SG_ PIDNominal07 : 7|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDActual07 : 31|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDControl07 : 55|16@0- (0.1,0) [-3276.8|3276.7] "%" BLENDER1
+
+BO_ 2565878734 PIDStatus08: 8 DASTRAC
+ SG_ PIDNominal08 : 7|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDActual08 : 31|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDControl08 : 55|16@0- (0.1,0) [-3276.8|3276.7] "%" BLENDER1
+
+BO_ 2565878990 PIDStatus09: 8 DASTRAC
+ SG_ PIDNominal09 : 7|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDActual09 : 31|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDControl09 : 55|16@0- (0.1,0) [-3276.8|3276.7] "%" BLENDER1
+
+BO_ 2565879246 PIDStatus10: 8 DASTRAC
+ SG_ PIDNominal10 : 7|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDActual10 : 31|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDControl10 : 55|16@0- (0.1,0) [-3276.8|3276.7] "%" BLENDER1
+
+BO_ 2565879502 PIDStatus11: 8 DASTRAC
+ SG_ PIDNominal11 : 7|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDActual11 : 31|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDControl11 : 55|16@0- (0.1,0) [-3276.8|3276.7] "%" BLENDER1
+
+BO_ 2565879758 PIDStatus12: 8 DASTRAC
+ SG_ PIDNominal12 : 7|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDActual12 : 31|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDControl12 : 55|16@0- (0.1,0) [-3276.8|3276.7] "%" BLENDER1
+
+BO_ 2565880014 PIDStatus13: 8 DASTRAC
+ SG_ PIDNominal13 : 7|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDActual13 : 31|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDControl13 : 55|16@0- (0.1,0) [-3276.8|3276.7] "%" BLENDER1
+
+BO_ 2565880270 PIDStatus14: 8 DASTRAC
+ SG_ PIDNominal14 : 7|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDActual14 : 31|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDControl14 : 55|16@0- (0.1,0) [-3276.8|3276.7] "%" BLENDER1
+
+BO_ 2565880526 PIDStatus15: 8 DASTRAC
+ SG_ PIDNominal15 : 7|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDActual15 : 31|24@0- (0.01,0) [-83886.08|83886.07] "" BLENDER1
+ SG_ PIDControl15 : 55|16@0- (0.1,0) [-3276.8|3276.7] "%" BLENDER1
+
+BO_ 2565880782 RawCounts_37_40: 8 DASTRAC
+ SG_ RawCount37 : 7|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount38 : 23|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount39 : 39|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ RawCount40 : 55|16@0+ (1,0) [0|65535] "" BLENDER1
+
+BO_ 2565882062 ManifoldPressures: 8 DASTRAC
+ SG_ DischargeManifoldPressure : 7|16@0+ (0.01,0) [0|655.35] "PSI" BLENDER1
+ SG_ SuctionManifoldPressure : 23|16@0+ (0.01,0) [0|655.35] "PSI" BLENDER1
+
+BO_ 2565882318 CombSuctionRates: 8 DASTRAC
+ SG_ SelectedCombSuctionRate : 7|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ PrimaryCombSuctionRate : 23|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ BackupCombSuctionRate1 : 39|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ BackupCombSuctionRate2 : 55|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+
+BO_ 2565882574 CombDischargeRates: 8 DASTRAC
+ SG_ SelectedCombDischargeRate : 7|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ PrimaryCombDischargeRate : 23|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ BackupCombDischargeRate1 : 39|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ BackupCombDischargeRate2 : 55|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+
+BO_ 2565882830 RoadSuctionRates: 8 DASTRAC
+ SG_ SelectedRoadSuctionRate : 7|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ PrimaryRoadSuctionRate : 23|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ BackupRoadSuctionRate1 : 39|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ BackupRoadSuctionRate2 : 55|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+
+BO_ 2565883086 CurbSuctionRates: 8 DASTRAC
+ SG_ SelectedCurbSuctionRate : 7|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ PrimaryCurbSuctionRate : 23|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ BackupCurbSuctionRate1 : 39|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ BackupCurbSuctionRate2 : 55|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+
+BO_ 2565883342 RoadDischargeRates: 8 DASTRAC
+ SG_ SelectedRoadDischargeRate : 7|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ PrimaryRoadDischargeRate : 23|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ BackupRoadDischargeRate1 : 39|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ BackupRoadDischargeRate2 : 55|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+
+BO_ 2565883598 CurbDischargeRates: 8 DASTRAC
+ SG_ SelectedCurbDischargeRate : 7|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ PrimaryCurbDischargeRate : 23|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ BackupCurbDischargeRate1 : 39|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+ SG_ BackupCurbDischargeRate2 : 55|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+
+BO_ 2565883854 ChemRatios_1_4: 8 DASTRAC
+ SG_ ChemProgRatio1 : 7|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemProgRatio2 : 23|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemProgRatio3 : 39|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemProgRatio4 : 55|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+
+BO_ 2565884110 ChemRatios_5_8: 8 DASTRAC
+ SG_ ChemProgRatio5 : 7|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemProgRatio6 : 23|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemProgRatio7 : 39|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemProgRatio8 : 55|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+
+BO_ 2565884366 ChemRatios_9_10_PumpRPM: 8 DASTRAC
+ SG_ ChemProgRatio9 : 7|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemProgRatio10 : 23|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ DischargePumpRPM : 39|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+ SG_ SuctionPumpRPM : 55|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+
+BO_ 2565886158 DualBlender: 8 DASTRAC
+ SG_ DualBlenderRateCalcDensity : 7|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ DualBlenderMeasuredDensity : 23|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ CurbSideDischargePumpRPM : 39|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+ SG_ CurbSideSuctionPumpRPM : 55|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+
+BO_ 2565887182 Slipstream: 8 DASTRAC
+ SG_ SlipstreamRate : 23|16@0- (0.01,-50) [-377.68|277.67] "BPM" BLENDER1
+
+BO_ 2565888206 BlenderIDPressures: 8 DASTRAC
+ SG_ BlenderNumber : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ RoadSideDischargeManifoldPressure : 31|16@0+ (0.01,0) [0|655.35] "PSI" BLENDER1
+ SG_ CurbSideDischargeManifoldPressure : 47|16@0+ (0.01,0) [0|655.35] "PSI" BLENDER1
+
+BO_ 2565888462 AugerTotals_1_2: 8 DASTRAC
+ SG_ Auger1Total : 7|32@0+ (1,0) [0|4294967295] "" BLENDER1
+ SG_ Auger2Total : 39|32@0+ (1,0) [0|4294967295] "" BLENDER1
+
+BO_ 2565890254 AugerTotals_3_4: 8 DASTRAC
+ SG_ Auger3Total : 7|32@0+ (1,0) [0|4294967295] "" BLENDER1
+ SG_ Auger4Total : 39|32@0+ (1,0) [0|4294967295] "" BLENDER1
+
+BO_ 2565890510 DischargeSandTotals: 8 DASTRAC
+ SG_ DischargeSand1Total : 7|32@0+ (1,0) [0|4294967295] "" BLENDER1
+ SG_ DischargeSand2Total : 39|32@0+ (1,0) [0|4294967295] "" BLENDER1
+
+BO_ 2565891022 SlipstreamTotals: 8 DASTRAC
+ SG_ SlipstreamStageTotal : 7|32@0+ (0.01,0) [0|42949672.95] "BBL" BLENDER1
+ SG_ SlipstreamGrandTotal : 39|32@0+ (0.01,0) [0|42949672.95] "BBL" BLENDER1
+
+BO_ 2565939406 Auger1Config: 8 DASTRAC
+ SG_ Auger1Delivery : 7|16@0+ (0.01,0) [0|655.35] "LBS_PER_REV" BLENDER1
+ SG_ Auger1Priority : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Auger1HoldPoint : 31|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+ SG_ Auger1MaxRPM : 47|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+ SG_ Auger1SandPolynomial : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565939662 Auger2Config: 8 DASTRAC
+ SG_ Auger2Delivery : 7|16@0+ (0.01,0) [0|655.35] "LBS_PER_REV" BLENDER1
+ SG_ Auger2Priority : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Auger2HoldPoint : 31|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+ SG_ Auger2MaxRPM : 47|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+ SG_ Auger2SandPolynomial : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565939918 Auger3Config: 8 DASTRAC
+ SG_ Auger3Delivery : 7|16@0+ (0.01,0) [0|655.35] "LBS_PER_REV" BLENDER1
+ SG_ Auger3Priority : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Auger3HoldPoint : 31|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+ SG_ Auger3MaxRPM : 47|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+ SG_ Auger3SandPolynomial : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565940174 RateMeterAndChem1: 8 DASTRAC
+ SG_ DischargeRateMeterSelection : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SuctionRateMeterSelection : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ DualBlenderMode : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ DryChem1Density : 31|16@0+ (0.01,0) [0|655.35] "LBS_CUFT" BLENDER1
+ SG_ DryChem1Capacity : 47|24@0+ (1E-06,0) [0|16.777215] "CUFT_REV" BLENDER1
+
+BO_ 2565940430 Chem2AndSandCalcs: 8 DASTRAC
+ SG_ DryChem2Density : 7|16@0+ (0.01,0) [0|655.35] "LBS_CUFT" BLENDER1
+ SG_ DryChem2Capacity : 23|24@0+ (1E-06,0) [0|16.777215] "CUFT_REV" BLENDER1
+ SG_ SandCurveSelection : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SandRateMethod : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SuctionCalculationType : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565940686 SerialNumberAndSandFactor: 8 DASTRAC
+ SG_ SerialSelectIndex : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialNumber1 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialNumber2 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialNumber3 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialNumber4 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialNumber5 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SandFactor : 55|16@0+ (0.001,0) [0|65.535] "" BLENDER1
+
+BO_ 2565940942 DensoBlendCfg: 8 DASTRAC
+ SG_ DensitometerSignalType : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ InlineDensitometerSignalType : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ BaseFluidSGUValue : 23|16@0+ (0.001,0) [0|65.535] "" BLENDER1
+ SG_ InlineBaseFluidSGUValue : 39|16@0+ (0.001,0) [0|65.535] "" BLENDER1
+ SG_ TwinBlenderMode : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ AutoDischargePressureEnabled : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565941198 Auger4Config: 8 DASTRAC
+ SG_ Auger4Delivery : 7|16@0+ (0.01,0) [0|655.35] "LBS_PER_REV" BLENDER1
+ SG_ Auger4Priority : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Auger4HoldPoint : 31|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+ SG_ Auger4MaxRPM : 47|16@0+ (1,0) [0|65535] "RPM" BLENDER1
+ SG_ Auger4SandPolynomial : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565941454 SuctionSandTrac: 8 DASTRAC
+ SG_ SuctSandTracSize : 7|8@0+ (1,0) [0|255] "in" BLENDER1
+ SG_ SuctSandTracEmpty : 15|16@0+ (0.001,0) [0|65.535] "V" BLENDER1
+ SG_ SuctSandTracWater : 31|16@0+ (0.001,0) [0|65.535] "V" BLENDER1
+ SG_ SuctSandTracSlopeAdj : 47|16@0+ (0.001,0) [0|65.535] "" BLENDER1
+ SG_ AutoDischargePressureSetpoint : 63|8@0+ (1,0) [0|255] "PSI" BLENDER1
+
+BO_ 2565941710 DischargeSandTrac: 8 DASTRAC
+ SG_ DischSandTracSize : 7|8@0+ (1,0) [0|255] "in" BLENDER1
+ SG_ DischSandTracEmpty : 15|16@0+ (0.001,0) [0|65.535] "V" BLENDER1
+ SG_ DischSandTracWater : 31|16@0+ (0.001,0) [0|65.535] "V" BLENDER1
+ SG_ DischSandTracSlopeAdj : 47|16@0+ (0.001,0) [0|65.535] "" BLENDER1
+ SG_ DischargeBaseSGUSource : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565941966 InlineSandTrac: 8 DASTRAC
+ SG_ InlineSandTracSize : 7|8@0+ (1,0) [0|255] "in" BLENDER1
+ SG_ InlineSandTracEmpty : 15|16@0+ (0.001,0) [0|65.535] "V" BLENDER1
+ SG_ InlineSandTracWater : 31|16@0+ (0.001,0) [0|65.535] "V" BLENDER1
+ SG_ InlineSandTracSlopeAdj : 47|16@0+ (0.001,0) [0|65.535] "" BLENDER1
+ SG_ InlineBaseSGUSource : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565942222 RateChannelSources: 8 DASTRAC
+ SG_ RoadDischRate : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CurbDischRate : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CmbDischRate : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ RoadSuctRate : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CurbSuctRate : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CmbSuctRate : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ ChemicalsSuctionRate : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ DensitySuctionRate : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565942478 ChemOverrides_1: 8 DASTRAC
+ SG_ ChemOverrideFlags : 7|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ ChemOverrideTarget1 : 23|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemOverrideTarget2 : 39|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemOverrideTarget3 : 55|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+
+BO_ 2565942734 ChemOverrides_2: 8 DASTRAC
+ SG_ ChemOverrideTarget4 : 7|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemOverrideTarget5 : 23|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemOverrideTarget6 : 39|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemOverrideTarget7 : 55|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+
+BO_ 2565942990 ChemOverrides_3: 8 DASTRAC
+ SG_ ChemOverrideTarget8 : 7|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemOverrideTarget9 : 23|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemOverrideTarget10 : 39|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ DischargePumpDeadHeadTest : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ MaxSuctionSignalOutput : 63|8@0+ (1,0) [0|255] "BBL" BLENDER1
+
+BO_ 2565943502 SerialOutputCfg: 8 DASTRAC
+ SG_ Delimiter : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ DataPoints : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ BaudRate : 23|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565943758 SerialChars_01_08: 8 DASTRAC
+ SG_ SerialChar01 : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar02 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar03 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar04 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar05 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar06 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar07 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar08 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565944014 SerialChars_09_16: 8 DASTRAC
+ SG_ SerialChar09 : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar10 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar11 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar12 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar13 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar14 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar15 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar16 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565944270 SerialChars_17_24: 8 DASTRAC
+ SG_ SerialChar17 : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar18 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar19 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar20 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar21 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar22 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar23 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar24 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565944526 SerialChars_25_32: 8 DASTRAC
+ SG_ SerialChar25 : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar26 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar27 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar28 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar29 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar30 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar31 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar32 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565944782 SerialChars_33_40: 8 DASTRAC
+ SG_ SerialChar33 : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar34 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar35 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar36 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar37 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar38 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar39 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar40 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565945038 SerialChars_41_48: 8 DASTRAC
+ SG_ SerialChar41 : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar42 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar43 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar44 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar45 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar46 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar47 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SerialChar48 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565947086 DischargeSignalCfg: 8 DASTRAC
+ SG_ DischargeSignalOutputMIN : 7|16@0+ (0.01,0) [0|655.35] "VDC" BLENDER1
+ SG_ DischargeSignalOutputMAX : 23|16@0+ (0.01,0) [0|655.35] "VDC" BLENDER1
+ SG_ DischargeSignalType : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SuctionOutputSignal : 47|16@0+ (0.1,0) [0|6553.5] "BPM" BLENDER1
+
+BO_ 2565947342 HydraulicSignalCfg: 8 DASTRAC
+ SG_ AugerHydraulicMIN : 7|16@0+ (1,0) [0|65535] "mA" BLENDER1
+ SG_ AugerHydraulicMAX : 23|16@0+ (1,0) [0|65535] "mA" BLENDER1
+ SG_ SuctionHydraulicMIN : 39|16@0+ (1,0) [0|65535] "mA" BLENDER1
+ SG_ SuctionHydraulicMAX : 55|16@0+ (1,0) [0|65535] "mA" BLENDER1
+
+BO_ 2565948622 BlenderType: 8 DASTRAC
+ SG_ BlenderType : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ JobType : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ OperationMode : 23|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565951694 BlenderCmd: 8 DASTRAC
+ SG_ Header : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ ClearAllTotals : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ ClearStageTotal : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ ClearGrandTotal : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ ClearAllStageTotals : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ ToggleRunMode : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ ToggleHoldOrHoldMode : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Opcode : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565931214 JobProfile_StageBlock1: 8 DASTRAC
+ SG_ Index M : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ TargetVolume_01 m1 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_01 m1 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_01 m1 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_02 m2 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_02 m2 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_02 m2 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_03 m3 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_03 m3 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_03 m3 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_04 m4 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_04 m4 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_04 m4 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_05 m5 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_05 m5 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_05 m5 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_06 m6 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_06 m6 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_06 m6 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_07 m7 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_07 m7 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_07 m7 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_08 m8 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_08 m8 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_08 m8 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_09 m9 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_09 m9 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_09 m9 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_10 m10 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_10 m10 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_10 m10 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_11 m11 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_11 m11 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_11 m11 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_12 m12 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_12 m12 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_12 m12 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_13 m13 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_13 m13 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_13 m13 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_14 m14 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_14 m14 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_14 m14 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_15 m15 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_15 m15 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_15 m15 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_16 m16 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_16 m16 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_16 m16 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_17 m17 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_17 m17 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_17 m17 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_18 m18 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_18 m18 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_18 m18 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_19 m19 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_19 m19 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_19 m19 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_20 m20 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_20 m20 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_20 m20 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_21 m21 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_21 m21 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_21 m21 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_22 m22 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_22 m22 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_22 m22 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_23 m23 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_23 m23 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_23 m23 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_24 m24 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_24 m24 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_24 m24 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_25 m25 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_25 m25 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_25 m25 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_26 m26 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_26 m26 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_26 m26 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_27 m27 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_27 m27 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_27 m27 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_28 m28 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_28 m28 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_28 m28 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_29 m29 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_29 m29 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_29 m29 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_30 m30 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_30 m30 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_30 m30 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_31 m31 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_31 m31 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_31 m31 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_32 m32 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_32 m32 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_32 m32 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_33 m33 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_33 m33 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_33 m33 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_34 m34 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_34 m34 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_34 m34 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_35 m35 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_35 m35 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_35 m35 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_36 m36 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_36 m36 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_36 m36 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_37 m37 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_37 m37 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_37 m37 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_38 m38 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_38 m38 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_38 m38 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_39 m39 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_39 m39 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_39 m39 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_40 m40 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_40 m40 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_40 m40 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_41 m41 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_41 m41 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_41 m41 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_42 m42 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_42 m42 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_42 m42 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_43 m43 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_43 m43 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_43 m43 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_44 m44 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_44 m44 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_44 m44 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_45 m45 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_45 m45 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_45 m45 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_46 m46 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_46 m46 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_46 m46 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_47 m47 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_47 m47 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_47 m47 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_48 m48 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_48 m48 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_48 m48 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_49 m49 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_49 m49 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_49 m49 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ TargetVolume_50 m50 : 15|24@0+ (0.1,0) [0|1677721.5] "BBL" BLENDER1
+ SG_ StartDensity_50 m50 : 39|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+ SG_ EndDensity_50 m50 : 55|16@0+ (0.01,0) [0|655.35] "PSA" BLENDER1
+
+BO_ 2565931470 JobProfile_ChemBlock1: 8 DASTRAC
+ SG_ Index M : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ ChemRate1_01 m1 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_01 m1 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_01 m1 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_02 m2 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_02 m2 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_02 m2 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_03 m3 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_03 m3 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_03 m3 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_04 m4 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_04 m4 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_04 m4 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_05 m5 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_05 m5 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_05 m5 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_06 m6 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_06 m6 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_06 m6 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_07 m7 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_07 m7 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_07 m7 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_08 m8 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_08 m8 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_08 m8 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_09 m9 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_09 m9 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_09 m9 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_10 m10 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_10 m10 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_10 m10 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_11 m11 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_11 m11 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_11 m11 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_12 m12 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_12 m12 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_12 m12 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_13 m13 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_13 m13 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_13 m13 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_14 m14 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_14 m14 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_14 m14 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_15 m15 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_15 m15 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_15 m15 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_16 m16 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_16 m16 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_16 m16 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_17 m17 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_17 m17 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_17 m17 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_18 m18 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_18 m18 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_18 m18 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_19 m19 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_19 m19 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_19 m19 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_20 m20 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_20 m20 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_20 m20 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_21 m21 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_21 m21 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_21 m21 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_22 m22 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_22 m22 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_22 m22 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_23 m23 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_23 m23 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_23 m23 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_24 m24 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_24 m24 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_24 m24 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_25 m25 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_25 m25 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_25 m25 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_26 m26 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_26 m26 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_26 m26 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_27 m27 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_27 m27 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_27 m27 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_28 m28 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_28 m28 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_28 m28 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_29 m29 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_29 m29 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_29 m29 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_30 m30 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_30 m30 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_30 m30 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_31 m31 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_31 m31 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_31 m31 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_32 m32 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_32 m32 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_32 m32 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_33 m33 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_33 m33 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_33 m33 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_34 m34 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_34 m34 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_34 m34 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_35 m35 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_35 m35 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_35 m35 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_36 m36 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_36 m36 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_36 m36 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_37 m37 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_37 m37 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_37 m37 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_38 m38 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_38 m38 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_38 m38 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_39 m39 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_39 m39 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_39 m39 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_40 m40 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_40 m40 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_40 m40 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_41 m41 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_41 m41 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_41 m41 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_42 m42 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_42 m42 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_42 m42 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_43 m43 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_43 m43 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_43 m43 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_44 m44 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_44 m44 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_44 m44 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_45 m45 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_45 m45 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_45 m45 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_46 m46 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_46 m46 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_46 m46 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_47 m47 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_47 m47 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_47 m47 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_48 m48 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_48 m48 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_48 m48 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_49 m49 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_49 m49 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_49 m49 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate1_50 m50 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate2_50 m50 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate3_50 m50 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+
+BO_ 2565931726 JobProfile_ChemBlock2: 8 DASTRAC
+ SG_ Index M : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ ChemRate4_01 m1 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_01 m1 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_01 m1 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_02 m2 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_02 m2 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_02 m2 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_03 m3 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_03 m3 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_03 m3 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_04 m4 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_04 m4 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_04 m4 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_05 m5 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_05 m5 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_05 m5 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_06 m6 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_06 m6 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_06 m6 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_07 m7 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_07 m7 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_07 m7 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_08 m8 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_08 m8 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_08 m8 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_09 m9 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_09 m9 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_09 m9 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_10 m10 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_10 m10 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_10 m10 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_11 m11 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_11 m11 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_11 m11 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_12 m12 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_12 m12 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_12 m12 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_13 m13 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_13 m13 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_13 m13 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_14 m14 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_14 m14 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_14 m14 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_15 m15 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_15 m15 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_15 m15 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_16 m16 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_16 m16 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_16 m16 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_17 m17 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_17 m17 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_17 m17 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_18 m18 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_18 m18 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_18 m18 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_19 m19 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_19 m19 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_19 m19 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_20 m20 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_20 m20 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_20 m20 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_21 m21 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_21 m21 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_21 m21 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_22 m22 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_22 m22 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_22 m22 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_23 m23 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_23 m23 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_23 m23 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_24 m24 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_24 m24 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_24 m24 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_25 m25 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_25 m25 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_25 m25 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_26 m26 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_26 m26 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_26 m26 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_27 m27 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_27 m27 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_27 m27 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_28 m28 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_28 m28 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_28 m28 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_29 m29 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_29 m29 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_29 m29 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_30 m30 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_30 m30 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_30 m30 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_31 m31 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_31 m31 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_31 m31 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_32 m32 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_32 m32 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_32 m32 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_33 m33 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_33 m33 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_33 m33 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_34 m34 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_34 m34 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_34 m34 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_35 m35 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_35 m35 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_35 m35 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_36 m36 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_36 m36 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_36 m36 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_37 m37 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_37 m37 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_37 m37 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_38 m38 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_38 m38 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_38 m38 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_39 m39 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_39 m39 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_39 m39 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_40 m40 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_40 m40 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_40 m40 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_41 m41 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_41 m41 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_41 m41 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_42 m42 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_42 m42 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_42 m42 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_43 m43 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_43 m43 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_43 m43 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_44 m44 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_44 m44 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_44 m44 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_45 m45 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_45 m45 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_45 m45 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_46 m46 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_46 m46 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_46 m46 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_47 m47 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_47 m47 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_47 m47 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_48 m48 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_48 m48 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_48 m48 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_49 m49 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_49 m49 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_49 m49 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate4_50 m50 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate5_50 m50 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate6_50 m50 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+
+BO_ 2565931982 JobProfile_ChemBlock3: 8 DASTRAC
+ SG_ Index M : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ ChemRate7_01 m1 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_01 m1 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_01 m1 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_02 m2 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_02 m2 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_02 m2 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_03 m3 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_03 m3 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_03 m3 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_04 m4 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_04 m4 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_04 m4 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_05 m5 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_05 m5 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_05 m5 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_06 m6 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_06 m6 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_06 m6 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_07 m7 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_07 m7 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_07 m7 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_08 m8 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_08 m8 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_08 m8 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_09 m9 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_09 m9 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_09 m9 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_10 m10 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_10 m10 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_10 m10 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_11 m11 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_11 m11 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_11 m11 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_12 m12 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_12 m12 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_12 m12 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_13 m13 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_13 m13 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_13 m13 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_14 m14 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_14 m14 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_14 m14 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_15 m15 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_15 m15 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_15 m15 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_16 m16 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_16 m16 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_16 m16 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_17 m17 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_17 m17 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_17 m17 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_18 m18 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_18 m18 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_18 m18 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_19 m19 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_19 m19 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_19 m19 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_20 m20 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_20 m20 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_20 m20 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_21 m21 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_21 m21 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_21 m21 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_22 m22 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_22 m22 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_22 m22 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_23 m23 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_23 m23 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_23 m23 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_24 m24 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_24 m24 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_24 m24 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_25 m25 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_25 m25 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_25 m25 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_26 m26 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_26 m26 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_26 m26 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_27 m27 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_27 m27 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_27 m27 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_28 m28 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_28 m28 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_28 m28 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_29 m29 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_29 m29 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_29 m29 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_30 m30 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_30 m30 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_30 m30 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_31 m31 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_31 m31 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_31 m31 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_32 m32 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_32 m32 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_32 m32 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_33 m33 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_33 m33 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_33 m33 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_34 m34 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_34 m34 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_34 m34 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_35 m35 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_35 m35 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_35 m35 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_36 m36 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_36 m36 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_36 m36 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_37 m37 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_37 m37 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_37 m37 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_38 m38 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_38 m38 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_38 m38 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_39 m39 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_39 m39 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_39 m39 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_40 m40 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_40 m40 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_40 m40 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_41 m41 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_41 m41 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_41 m41 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_42 m42 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_42 m42 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_42 m42 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_43 m43 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_43 m43 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_43 m43 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_44 m44 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_44 m44 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_44 m44 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_45 m45 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_45 m45 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_45 m45 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_46 m46 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_46 m46 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_46 m46 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_47 m47 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_47 m47 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_47 m47 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_48 m48 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_48 m48 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_48 m48 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_49 m49 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_49 m49 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_49 m49 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ ChemRate7_50 m50 : 15|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate8_50 m50 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantFactor_50 m50 : 47|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+
+BO_ 2565932238 JobProfile_ChemBlock4: 8 DASTRAC
+ SG_ Index M : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ ProppantDensity_01 m1 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_01 m1 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_01 m1 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_02 m2 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_02 m2 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_02 m2 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_03 m3 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_03 m3 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_03 m3 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_04 m4 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_04 m4 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_04 m4 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_05 m5 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_05 m5 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_05 m5 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_06 m6 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_06 m6 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_06 m6 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_07 m7 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_07 m7 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_07 m7 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_08 m8 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_08 m8 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_08 m8 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_09 m9 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_09 m9 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_09 m9 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_10 m10 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_10 m10 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_10 m10 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_11 m11 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_11 m11 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_11 m11 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_12 m12 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_12 m12 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_12 m12 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_13 m13 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_13 m13 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_13 m13 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_14 m14 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_14 m14 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_14 m14 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_15 m15 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_15 m15 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_15 m15 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_16 m16 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_16 m16 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_16 m16 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_17 m17 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_17 m17 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_17 m17 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_18 m18 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_18 m18 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_18 m18 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_19 m19 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_19 m19 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_19 m19 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_20 m20 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_20 m20 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_20 m20 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_21 m21 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_21 m21 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_21 m21 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_22 m22 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_22 m22 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_22 m22 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_23 m23 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_23 m23 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_23 m23 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_24 m24 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_24 m24 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_24 m24 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_25 m25 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_25 m25 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_25 m25 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_26 m26 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_26 m26 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_26 m26 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_27 m27 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_27 m27 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_27 m27 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_28 m28 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_28 m28 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_28 m28 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_29 m29 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_29 m29 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_29 m29 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_30 m30 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_30 m30 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_30 m30 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_31 m31 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_31 m31 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_31 m31 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_32 m32 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_32 m32 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_32 m32 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_33 m33 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_33 m33 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_33 m33 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_34 m34 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_34 m34 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_34 m34 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_35 m35 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_35 m35 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_35 m35 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_36 m36 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_36 m36 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_36 m36 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_37 m37 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_37 m37 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_37 m37 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_38 m38 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_38 m38 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_38 m38 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_39 m39 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_39 m39 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_39 m39 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_40 m40 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_40 m40 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_40 m40 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_41 m41 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_41 m41 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_41 m41 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_42 m42 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_42 m42 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_42 m42 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_43 m43 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_43 m43 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_43 m43 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_44 m44 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_44 m44 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_44 m44 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_45 m45 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_45 m45 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_45 m45 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_46 m46 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_46 m46 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_46 m46 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_47 m47 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_47 m47 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_47 m47 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_48 m48 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_48 m48 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_48 m48 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_49 m49 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_49 m49 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_49 m49 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ProppantDensity_50 m50 : 15|16@0+ (0.01,0) [0|655.35] "SGU" BLENDER1
+ SG_ ChemRate9_50 m50 : 31|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+ SG_ ChemRate10_50 m50 : 47|16@0+ (0.01,0) [0|655.35] "GAL_PER_KGAL" BLENDER1
+
+BO_ 2565935310 ChannelCfg_FuncMul: 8 DASTRAC
+ SG_ Index M : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_01 m1 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_01 m1 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_01 m1 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_01 m1 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_02 m2 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_02 m2 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_02 m2 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_02 m2 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_03 m3 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_03 m3 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_03 m3 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_03 m3 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_04 m4 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_04 m4 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_04 m4 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_04 m4 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_05 m5 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_05 m5 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_05 m5 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_05 m5 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_06 m6 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_06 m6 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_06 m6 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_06 m6 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_07 m7 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_07 m7 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_07 m7 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_07 m7 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_08 m8 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_08 m8 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_08 m8 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_08 m8 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_09 m9 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_09 m9 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_09 m9 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_09 m9 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_10 m10 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_10 m10 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_10 m10 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_10 m10 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_11 m11 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_11 m11 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_11 m11 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_11 m11 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_12 m12 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_12 m12 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_12 m12 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_12 m12 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_13 m13 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_13 m13 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_13 m13 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_13 m13 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_14 m14 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_14 m14 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_14 m14 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_14 m14 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_15 m15 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_15 m15 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_15 m15 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_15 m15 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_16 m16 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_16 m16 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_16 m16 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_16 m16 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_17 m17 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_17 m17 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_17 m17 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_17 m17 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_18 m18 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_18 m18 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_18 m18 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_18 m18 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_19 m19 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_19 m19 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_19 m19 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_19 m19 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_20 m20 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_20 m20 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_20 m20 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_20 m20 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_21 m21 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_21 m21 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_21 m21 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_21 m21 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_22 m22 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_22 m22 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_22 m22 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_22 m22 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_23 m23 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_23 m23 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_23 m23 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_23 m23 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_24 m24 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_24 m24 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_24 m24 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_24 m24 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_25 m25 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_25 m25 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_25 m25 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_25 m25 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_26 m26 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_26 m26 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_26 m26 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_26 m26 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_27 m27 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_27 m27 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_27 m27 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_27 m27 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_28 m28 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_28 m28 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_28 m28 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_28 m28 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_29 m29 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_29 m29 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_29 m29 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_29 m29 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_30 m30 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_30 m30 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_30 m30 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_30 m30 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_31 m31 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_31 m31 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_31 m31 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_31 m31 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_32 m32 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_32 m32 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_32 m32 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_32 m32 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_33 m33 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_33 m33 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_33 m33 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_33 m33 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_34 m34 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_34 m34 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_34 m34 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_34 m34 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_35 m35 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_35 m35 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_35 m35 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_35 m35 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_36 m36 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_36 m36 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_36 m36 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_36 m36 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_37 m37 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_37 m37 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_37 m37 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_37 m37 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_38 m38 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_38 m38 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_38 m38 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_38 m38 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_39 m39 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_39 m39 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_39 m39 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_39 m39 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Function_40 m40 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Multiplier_40 m40 : 23|16@0+ (0.01,0) [0|655.35] "" BLENDER1
+ SG_ UnitsLow_40 m40 : 39|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ SignalType_40 m40 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565935566 ChannelCfg_HiZero: 8 DASTRAC
+ SG_ Index M : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ UnitsHigh_01 m1 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_01 m1 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_02 m2 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_02 m2 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_03 m3 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_03 m3 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_04 m4 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_04 m4 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_05 m5 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_05 m5 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_06 m6 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_06 m6 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_07 m7 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_07 m7 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_08 m8 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_08 m8 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_09 m9 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_09 m9 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_10 m10 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_10 m10 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_11 m11 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_11 m11 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_12 m12 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_12 m12 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_13 m13 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_13 m13 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_14 m14 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_14 m14 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_15 m15 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_15 m15 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_16 m16 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_16 m16 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_17 m17 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_17 m17 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_18 m18 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_18 m18 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_19 m19 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_19 m19 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_20 m20 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_20 m20 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_21 m21 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_21 m21 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_22 m22 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_22 m22 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_23 m23 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_23 m23 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_24 m24 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_24 m24 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_25 m25 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_25 m25 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_26 m26 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_26 m26 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_27 m27 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_27 m27 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_28 m28 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_28 m28 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_29 m29 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_29 m29 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_30 m30 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_30 m30 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_31 m31 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_31 m31 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_32 m32 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_32 m32 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_33 m33 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_33 m33 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_34 m34 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_34 m34 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_35 m35 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_35 m35 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_36 m36 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_36 m36 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_37 m37 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_37 m37 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_38 m38 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_38 m38 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_39 m39 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_39 m39 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ UnitsHigh_40 m40 : 15|32@0- (0.01,0) [-21474836.48|21474836.47] "" BLENDER1
+ SG_ ZeroCounts_40 m40 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+
+BO_ 2565935822 ChannelCfg_SpanK: 8 DASTRAC
+ SG_ Index M : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_01 m1 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_01 m1 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_01 m1 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_02 m2 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_02 m2 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_02 m2 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_03 m3 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_03 m3 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_03 m3 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_04 m4 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_04 m4 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_04 m4 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_05 m5 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_05 m5 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_05 m5 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_06 m6 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_06 m6 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_06 m6 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_07 m7 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_07 m7 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_07 m7 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_08 m8 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_08 m8 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_08 m8 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_09 m9 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_09 m9 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_09 m9 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_10 m10 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_10 m10 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_10 m10 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_11 m11 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_11 m11 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_11 m11 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_12 m12 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_12 m12 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_12 m12 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_13 m13 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_13 m13 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_13 m13 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_14 m14 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_14 m14 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_14 m14 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_15 m15 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_15 m15 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_15 m15 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_16 m16 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_16 m16 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_16 m16 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_17 m17 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_17 m17 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_17 m17 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_18 m18 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_18 m18 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_18 m18 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_19 m19 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_19 m19 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_19 m19 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_20 m20 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_20 m20 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_20 m20 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_21 m21 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_21 m21 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_21 m21 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_22 m22 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_22 m22 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_22 m22 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_23 m23 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_23 m23 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_23 m23 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_24 m24 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_24 m24 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_24 m24 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_25 m25 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_25 m25 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_25 m25 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_26 m26 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_26 m26 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_26 m26 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_27 m27 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_27 m27 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_27 m27 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_28 m28 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_28 m28 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_28 m28 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_29 m29 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_29 m29 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_29 m29 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_30 m30 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_30 m30 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_30 m30 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_31 m31 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_31 m31 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_31 m31 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_32 m32 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_32 m32 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_32 m32 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_33 m33 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_33 m33 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_33 m33 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_34 m34 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_34 m34 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_34 m34 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_35 m35 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_35 m35 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_35 m35 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_36 m36 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_36 m36 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_36 m36 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_37 m37 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_37 m37 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_37 m37 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_38 m38 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_38 m38 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_38 m38 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_39 m39 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_39 m39 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_39 m39 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SpanCounts_40 m40 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ KFactor_40 m40 : 31|32@0+ (0.0001,0) [0|429496.7295] "" BLENDER1
+ SG_ RawCountsRequest_40 m40 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565936078 ChannelCfg_Labels1: 8 DASTRAC
+ SG_ Index M : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_01 m1 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_01 m1 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_01 m1 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_01 m1 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_01 m1 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_01 m1 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_01 m1 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_02 m2 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_02 m2 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_02 m2 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_02 m2 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_02 m2 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_02 m2 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_02 m2 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_03 m3 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_03 m3 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_03 m3 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_03 m3 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_03 m3 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_03 m3 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_03 m3 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_04 m4 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_04 m4 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_04 m4 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_04 m4 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_04 m4 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_04 m4 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_04 m4 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_05 m5 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_05 m5 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_05 m5 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_05 m5 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_05 m5 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_05 m5 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_05 m5 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_06 m6 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_06 m6 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_06 m6 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_06 m6 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_06 m6 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_06 m6 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_06 m6 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_07 m7 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_07 m7 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_07 m7 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_07 m7 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_07 m7 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_07 m7 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_07 m7 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_08 m8 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_08 m8 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_08 m8 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_08 m8 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_08 m8 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_08 m8 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_08 m8 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_09 m9 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_09 m9 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_09 m9 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_09 m9 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_09 m9 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_09 m9 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_09 m9 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_10 m10 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_10 m10 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_10 m10 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_10 m10 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_10 m10 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_10 m10 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_10 m10 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_11 m11 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_11 m11 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_11 m11 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_11 m11 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_11 m11 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_11 m11 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_11 m11 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_12 m12 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_12 m12 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_12 m12 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_12 m12 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_12 m12 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_12 m12 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_12 m12 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_13 m13 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_13 m13 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_13 m13 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_13 m13 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_13 m13 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_13 m13 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_13 m13 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_14 m14 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_14 m14 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_14 m14 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_14 m14 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_14 m14 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_14 m14 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_14 m14 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_15 m15 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_15 m15 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_15 m15 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_15 m15 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_15 m15 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_15 m15 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_15 m15 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_16 m16 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_16 m16 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_16 m16 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_16 m16 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_16 m16 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_16 m16 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_16 m16 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_17 m17 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_17 m17 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_17 m17 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_17 m17 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_17 m17 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_17 m17 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_17 m17 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_18 m18 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_18 m18 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_18 m18 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_18 m18 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_18 m18 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_18 m18 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_18 m18 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_19 m19 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_19 m19 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_19 m19 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_19 m19 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_19 m19 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_19 m19 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_19 m19 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_20 m20 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_20 m20 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_20 m20 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_20 m20 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_20 m20 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_20 m20 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_20 m20 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_21 m21 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_21 m21 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_21 m21 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_21 m21 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_21 m21 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_21 m21 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_21 m21 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_22 m22 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_22 m22 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_22 m22 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_22 m22 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_22 m22 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_22 m22 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_22 m22 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_23 m23 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_23 m23 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_23 m23 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_23 m23 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_23 m23 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_23 m23 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_23 m23 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_24 m24 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_24 m24 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_24 m24 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_24 m24 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_24 m24 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_24 m24 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_24 m24 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_25 m25 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_25 m25 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_25 m25 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_25 m25 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_25 m25 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_25 m25 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_25 m25 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_26 m26 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_26 m26 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_26 m26 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_26 m26 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_26 m26 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_26 m26 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_26 m26 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_27 m27 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_27 m27 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_27 m27 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_27 m27 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_27 m27 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_27 m27 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_27 m27 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_28 m28 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_28 m28 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_28 m28 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_28 m28 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_28 m28 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_28 m28 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_28 m28 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_29 m29 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_29 m29 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_29 m29 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_29 m29 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_29 m29 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_29 m29 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_29 m29 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_30 m30 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_30 m30 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_30 m30 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_30 m30 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_30 m30 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_30 m30 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_30 m30 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_31 m31 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_31 m31 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_31 m31 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_31 m31 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_31 m31 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_31 m31 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_31 m31 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_32 m32 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_32 m32 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_32 m32 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_32 m32 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_32 m32 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_32 m32 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_32 m32 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_33 m33 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_33 m33 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_33 m33 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_33 m33 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_33 m33 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_33 m33 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_33 m33 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_34 m34 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_34 m34 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_34 m34 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_34 m34 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_34 m34 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_34 m34 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_34 m34 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_35 m35 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_35 m35 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_35 m35 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_35 m35 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_35 m35 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_35 m35 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_35 m35 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_36 m36 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_36 m36 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_36 m36 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_36 m36 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_36 m36 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_36 m36 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_36 m36 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_37 m37 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_37 m37 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_37 m37 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_37 m37 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_37 m37 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_37 m37 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_37 m37 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_38 m38 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_38 m38 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_38 m38 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_38 m38 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_38 m38 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_38 m38 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_38 m38 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_39 m39 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_39 m39 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_39 m39 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_39 m39 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_39 m39 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_39 m39 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_39 m39 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar1_40 m40 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar2_40 m40 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar3_40 m40 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar4_40 m40 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar5_40 m40 : 47|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar6_40 m40 : 55|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar7_40 m40 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565936334 ChannelCfg_Damping: 8 DASTRAC
+ SG_ Index M : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_01 m1 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_01 m1 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_01 m1 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_01 m1 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_02 m2 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_02 m2 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_02 m2 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_02 m2 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_03 m3 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_03 m3 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_03 m3 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_03 m3 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_04 m4 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_04 m4 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_04 m4 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_04 m4 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_05 m5 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_05 m5 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_05 m5 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_05 m5 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_06 m6 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_06 m6 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_06 m6 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_06 m6 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_07 m7 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_07 m7 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_07 m7 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_07 m7 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_08 m8 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_08 m8 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_08 m8 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_08 m8 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_09 m9 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_09 m9 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_09 m9 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_09 m9 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_10 m10 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_10 m10 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_10 m10 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_10 m10 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_11 m11 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_11 m11 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_11 m11 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_11 m11 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_12 m12 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_12 m12 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_12 m12 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_12 m12 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_13 m13 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_13 m13 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_13 m13 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_13 m13 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_14 m14 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_14 m14 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_14 m14 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_14 m14 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_15 m15 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_15 m15 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_15 m15 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_15 m15 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_16 m16 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_16 m16 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_16 m16 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_16 m16 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_17 m17 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_17 m17 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_17 m17 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_17 m17 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_18 m18 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_18 m18 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_18 m18 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_18 m18 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_19 m19 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_19 m19 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_19 m19 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_19 m19 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_20 m20 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_20 m20 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_20 m20 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_20 m20 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_21 m21 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_21 m21 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_21 m21 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_21 m21 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_22 m22 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_22 m22 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_22 m22 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_22 m22 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_23 m23 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_23 m23 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_23 m23 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_23 m23 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_24 m24 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_24 m24 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_24 m24 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_24 m24 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_25 m25 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_25 m25 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_25 m25 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_25 m25 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_26 m26 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_26 m26 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_26 m26 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_26 m26 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_27 m27 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_27 m27 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_27 m27 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_27 m27 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_28 m28 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_28 m28 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_28 m28 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_28 m28 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_29 m29 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_29 m29 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_29 m29 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_29 m29 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_30 m30 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_30 m30 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_30 m30 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_30 m30 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_31 m31 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_31 m31 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_31 m31 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_31 m31 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_32 m32 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_32 m32 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_32 m32 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_32 m32 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_33 m33 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_33 m33 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_33 m33 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_33 m33 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_34 m34 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_34 m34 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_34 m34 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_34 m34 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_35 m35 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_35 m35 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_35 m35 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_35 m35 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_36 m36 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_36 m36 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_36 m36 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_36 m36 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_37 m37 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_37 m37 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_37 m37 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_37 m37 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_38 m38 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_38 m38 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_38 m38 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_38 m38 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_39 m39 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_39 m39 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_39 m39 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_39 m39 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ LabelChar8_40 m40 : 15|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDamping_40 m40 : 23|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ FineDampingRange_40 m40 : 31|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ CoarseDamping_40 m40 : 39|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565947598 PIDCfg_Gains: 8 DASTRAC
+ SG_ Index M : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_01 m1 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_01 m1 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_01 m1 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_01 m1 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_02 m2 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_02 m2 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_02 m2 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_02 m2 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_03 m3 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_03 m3 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_03 m3 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_03 m3 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_04 m4 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_04 m4 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_04 m4 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_04 m4 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_05 m5 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_05 m5 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_05 m5 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_05 m5 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_06 m6 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_06 m6 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_06 m6 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_06 m6 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_07 m7 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_07 m7 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_07 m7 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_07 m7 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_08 m8 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_08 m8 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_08 m8 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_08 m8 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_09 m9 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_09 m9 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_09 m9 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_09 m9 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_10 m10 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_10 m10 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_10 m10 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_10 m10 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_11 m11 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_11 m11 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_11 m11 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_11 m11 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_12 m12 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_12 m12 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_12 m12 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_12 m12 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_13 m13 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_13 m13 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_13 m13 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_13 m13 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_14 m14 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_14 m14 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_14 m14 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_14 m14 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_15 m15 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_15 m15 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_15 m15 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_15 m15 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_16 m16 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_16 m16 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_16 m16 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_16 m16 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_17 m17 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_17 m17 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_17 m17 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_17 m17 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ Kp_18 m18 : 15|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Ki_18 m18 : 31|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ Kd_18 m18 : 47|16@0+ (1,0) [0|65535] "" BLENDER1
+ SG_ PIDParamsOK_18 m18 : 63|8@0+ (1,0) [0|255] "" BLENDER1
+
+BO_ 2565947854 PIDCfg_Sample: 8 DASTRAC
+ SG_ Index M : 7|8@0+ (1,0) [0|255] "" BLENDER1
+ SG_ SampleTime_01 m1 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_01 m1 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+ SG_ SampleTime_02 m2 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_02 m2 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+ SG_ SampleTime_03 m3 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_03 m3 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+ SG_ SampleTime_04 m4 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_04 m4 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+ SG_ SampleTime_05 m5 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_05 m5 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+ SG_ SampleTime_06 m6 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_06 m6 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+ SG_ SampleTime_07 m7 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_07 m7 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+ SG_ SampleTime_08 m8 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_08 m8 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+ SG_ SampleTime_09 m9 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_09 m9 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+ SG_ SampleTime_10 m10 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_10 m10 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+ SG_ SampleTime_11 m11 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_11 m11 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+ SG_ SampleTime_12 m12 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_12 m12 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+ SG_ SampleTime_13 m13 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_13 m13 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+ SG_ SampleTime_14 m14 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_14 m14 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+ SG_ SampleTime_15 m15 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_15 m15 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+ SG_ SampleTime_16 m16 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_16 m16 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+ SG_ SampleTime_17 m17 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_17 m17 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+ SG_ SampleTime_18 m18 : 15|16@0+ (1,0) [0|65535] "ms" BLENDER1
+ SG_ MinOutput_18 m18 : 31|16@0+ (0.01,0) [0|655.35] "%" BLENDER1
+
+
+CM_ BU_ DASTRAC "DASTRAC PC, J1939 source address 0xCE (206)";
+CM_ BU_ BLENDER1 "Blender 1 controller (CAN source 0xCA = 202).";
+VAL_ 2565951694 Opcode 1 "RequestJobProfiles" 2 "RequestChannelConfig" 3 "RequestSystemSerialConfig" 4 "RequestPIDConfig" 5 "SetDensoBase" 6 "SetInlineDensoBase" 10 "AlternateBlenderNumber" 11 "SuctionEmpty" 12 "SuctionWater" 13 "DischargeEmpty" 14 "DischargeWater" 15 "InlineEmpty" 16 "InlineWater" 28 "ResetAuger1Total" 29 "ResetAuger2Total" 30 "ResetAuger3Total" 31 "ResetAuger4Total" 34 "ResetSand1Total" 35 "ResetSand2Total" ;
