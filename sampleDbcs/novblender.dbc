@@ -1,0 +1,461 @@
+VERSION ""
+
+
+NS_ :
+    NS_DESC_
+    CM_
+    BA_DEF_
+    BA_
+    VAL_
+    CAT_DEF_
+    CAT_
+    FILTER
+    BA_DEF_DEF_
+    EV_DATA_
+    ENVVAR_DATA_
+    SGTYPE_
+    SGTYPE_VAL_
+    BA_DEF_SGTYPE_
+    BA_SGTYPE_
+    SIG_TYPE_REF_
+    VAL_TABLE_
+    SIG_GROUP_
+    SIG_VALTYPE_
+    SIGTYPE_VALTYPE_
+    BO_TX_BU_
+    BA_DEF_REL_
+    BA_REL_
+    BA_DEF_DEF_REL_
+    BU_SG_REL_
+    BU_EV_REL_
+    BU_BO_REL_
+    SG_MUL_VAL_
+
+BS_: 
+BU_: 
+BO_ 418382026 MSG_F000_BLENDER_CA: 8 Vector__XXX
+   SG_ SelectedDischargeRate : 0|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ DischargeGrandTotal : 16|24@1+ (0.01,0.0) [0|0] "BBL" Vector__XXX
+   SG_ DischargeStageTotal : 40|24@1+ (0.01,0.0) [0|0] "BBL" Vector__XXX
+
+BO_ 418382027 MSG_F000_BLENDER_CB: 8 Vector__XXX
+   SG_ SelectedDischargeRate : 0|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ DischargeGrandTotal : 16|24@1+ (0.01,0.0) [0|0] "BBL" Vector__XXX
+   SG_ DischargeStageTotal : 40|24@1+ (0.01,0.0) [0|0] "BBL" Vector__XXX
+
+BO_ 418382282 MSG_F001_BLENDER_CA: 8 Vector__XXX
+   SG_ PrimaryDischargeRate : 0|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ BackupDischargeRate1 : 16|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ BackupDischargeRate2 : 32|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+
+BO_ 418382283 MSG_F001_BLENDER_CB: 8 Vector__XXX
+   SG_ PrimaryDischargeRate : 0|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ BackupDischargeRate1 : 16|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ BackupDischargeRate2 : 32|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+
+BO_ 418382538 MSG_F002_BLENDER_CA: 8 Vector__XXX
+   SG_ SelectedSuctionRate : 0|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ SuctionGrandTotal : 16|24@1+ (0.01,0.0) [0|0] "BBL" Vector__XXX
+   SG_ SuctionStageTotal : 40|24@1+ (0.01,0.0) [0|0] "BBL" Vector__XXX
+
+BO_ 418382539 MSG_F002_BLENDER_CB: 8 Vector__XXX
+   SG_ SelectedSuctionRate : 0|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ SuctionGrandTotal : 16|24@1+ (0.01,0.0) [0|0] "BBL" Vector__XXX
+   SG_ SuctionStageTotal : 40|24@1+ (0.01,0.0) [0|0] "BBL" Vector__XXX
+
+BO_ 418382794 MSG_F003_BLENDER_CA: 8 Vector__XXX
+   SG_ PrimarySuctionRate : 0|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ BackupSuctionRate1 : 16|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ BackupSuctionRate2 : 32|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ SpareBytes78 : 48|16@1+ (1,0.0) [0|0] "" Vector__XXX
+
+BO_ 418382795 MSG_F003_BLENDER_CB: 8 Vector__XXX
+   SG_ PrimarySuctionRate : 0|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ BackupSuctionRate1 : 16|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ BackupSuctionRate2 : 32|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ SpareBytes78 : 48|16@1+ (1,0.0) [0|0] "" Vector__XXX
+
+BO_ 418383050 MSG_F004_BLENDER_CA: 8 Vector__XXX
+   SG_ CalculatedSuctionRatePSA : 0|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ CalculatedSuctionRateDensitometer : 16|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ CurrentSGU : 32|16@1+ (0.01,-7.5) [0|0] "SGU" Vector__XXX
+   SG_ InlineCurrentSGU : 48|16@1+ (0.01,-7.5) [0|0] "SGU" Vector__XXX
+
+BO_ 418383051 MSG_F004_BLENDER_CB: 8 Vector__XXX
+   SG_ CalculatedSuctionRatePSA : 0|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ CalculatedSuctionRateDensitometer : 16|16@1+ (0.01,-50.0) [0|0] "BPM" Vector__XXX
+   SG_ CurrentSGU : 32|16@1+ (0.01,-7.5) [0|0] "SGU" Vector__XXX
+   SG_ InlineCurrentSGU : 48|16@1+ (0.01,-7.5) [0|0] "SGU" Vector__XXX
+
+BO_ 418383306 MSG_F005_BLENDER_CA: 8 Vector__XXX
+   SG_ MeasuredDensity : 0|16@1+ (0.01,-15.0) [0|0] "PSA" Vector__XXX
+   SG_ TargetDensity : 16|16@1+ (0.01,-7.5) [0|0] "PSA" Vector__XXX
+   SG_ TargetVolume : 32|24@1+ (0.1,0.0) [0|0] "BBL" Vector__XXX
+   SG_ SpareBytes78 : 48|16@1+ (1,0.0) [0|0] "" Vector__XXX
+
+BO_ 418383307 MSG_F005_BLENDER_CB: 8 Vector__XXX
+   SG_ MeasuredDensity : 0|16@1+ (0.01,-15.0) [0|0] "PSA" Vector__XXX
+   SG_ TargetDensity : 16|16@1+ (0.01,-7.5) [0|0] "PSA" Vector__XXX
+   SG_ TargetVolume : 32|24@1+ (0.1,0.0) [0|0] "BBL" Vector__XXX
+   SG_ SpareBytes78 : 48|16@1+ (1,0.0) [0|0] "" Vector__XXX
+
+BO_ 418383562 MSG_F006_BLENDER_CA: 8 Vector__XXX
+   SG_ CalculatedDensity : 0|16@1+ (0.01,-7.5) [0|0] "PSA" Vector__XXX
+   SG_ InlineDensitometerPSA : 16|16@1+ (0.01,-15.0) [0|0] "PSA" Vector__XXX
+   SG_ CurrentSGU : 32|16@1+ (0.001,-7.5) [0|0] "SGU" Vector__XXX
+   SG_ InlineCurrentSGU : 48|16@1+ (0.001,-7.5) [0|0] "SGU" Vector__XXX
+
+BO_ 418383563 MSG_F006_BLENDER_CB: 8 Vector__XXX
+   SG_ CalculatedDensity : 0|16@1+ (0.01,-7.5) [0|0] "PSA" Vector__XXX
+   SG_ InlineDensitometerPSA : 16|16@1+ (0.01,-15.0) [0|0] "PSA" Vector__XXX
+   SG_ CurrentSGU : 32|16@1+ (0.001,-7.5) [0|0] "SGU" Vector__XXX
+   SG_ InlineCurrentSGU : 48|16@1+ (0.001,-7.5) [0|0] "SGU" Vector__XXX
+
+BO_ 418383818 MSG_F007_BLENDER_CA: 8 Vector__XXX
+   SG_ Auger1RPM : 0|16@1+ (1,0.0) [0|0] "RPM" Vector__XXX
+   SG_ Auger2RPM : 16|16@1+ (1,0.0) [0|0] "RPM" Vector__XXX
+   SG_ Auger3RPM : 32|16@1+ (1,0.0) [0|0] "RPM" Vector__XXX
+   SG_ SandRate : 48|16@1+ (1,0.0) [0|0] "LBS/MIN" Vector__XXX
+
+BO_ 418383819 MSG_F007_BLENDER_CB: 8 Vector__XXX
+   SG_ Auger1RPM : 0|16@1+ (1,0.0) [0|0] "RPM" Vector__XXX
+   SG_ Auger2RPM : 16|16@1+ (1,0.0) [0|0] "RPM" Vector__XXX
+   SG_ Auger3RPM : 32|16@1+ (1,0.0) [0|0] "RPM" Vector__XXX
+   SG_ SandRate : 48|16@1+ (1,0.0) [0|0] "LBS/MIN" Vector__XXX
+
+BO_ 418384074 MSG_F008_BLENDER_CA: 8 Vector__XXX
+   SG_ SandStageTotal : 0|24@1+ (1,0.0) [0|0] "LBS" Vector__XXX
+   SG_ SandGrandTotal : 24|24@1+ (1,0.0) [0|0] "LBS" Vector__XXX
+   SG_ VoltageSystem : 48|16@1+ (0.01,0.0) [0|0] "Volts" Vector__XXX
+
+BO_ 418384075 MSG_F008_BLENDER_CB: 8 Vector__XXX
+   SG_ SandStageTotal : 0|24@1+ (1,0.0) [0|0] "LBS" Vector__XXX
+   SG_ SandGrandTotal : 24|24@1+ (1,0.0) [0|0] "LBS" Vector__XXX
+   SG_ VoltageSystem : 48|16@1+ (0.01,0.0) [0|0] "Volts" Vector__XXX
+
+BO_ 418384330 MSG_F009_BLENDER_CA: 8 Vector__XXX
+   SG_ Auger1Holdpoint : 0|16@1+ (1,0.0) [0|0] "RPM" Vector__XXX
+   SG_ Auger2Holdpoint : 16|16@1+ (1,0.0) [0|0] "RPM" Vector__XXX
+   SG_ Auger3Holdpoint : 32|16@1+ (1,0.0) [0|0] "RPM" Vector__XXX
+   SG_ SpareBytes78 : 48|16@1+ (1,0.0) [0|0] "" Vector__XXX
+
+BO_ 418384331 MSG_F009_BLENDER_CB: 8 Vector__XXX
+   SG_ Auger1Holdpoint : 0|16@1+ (1,0.0) [0|0] "RPM" Vector__XXX
+   SG_ Auger2Holdpoint : 16|16@1+ (1,0.0) [0|0] "RPM" Vector__XXX
+   SG_ Auger3Holdpoint : 32|16@1+ (1,0.0) [0|0] "RPM" Vector__XXX
+   SG_ SpareBytes78 : 48|16@1+ (1,0.0) [0|0] "" Vector__XXX
+
+BO_ 418384586 MSG_F00A_BLENDER_CA: 8 Vector__XXX
+   SG_ Chem01Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem01GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem01StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem01CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418384587 MSG_F00A_BLENDER_CB: 8 Vector__XXX
+   SG_ Chem01Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem01GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem01StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem01CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418384842 MSG_F00B_BLENDER_CA: 8 Vector__XXX
+   SG_ Chem02Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem02GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem02StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem02CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+ 
+BO_ 418384843 MSG_F00B_BLENDER_CB: 8 Vector__XXX
+   SG_ Chem02Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem02GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem02StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem02CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418385098 MSG_F00C_BLENDER_CA: 8 Vector__XXX
+   SG_ Chem03Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem03GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem03StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem03CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418385099 MSG_F00C_BLENDER_CB: 8 Vector__XXX
+   SG_ Chem03Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem03GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem03StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem03CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+ 
+
+BO_ 418385354 MSG_F00D_BLENDER_CA: 8 Vector__XXX
+   SG_ Chem04Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem04GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem04StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem04CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418385355 MSG_F00D_BLENDER_CB: 8 Vector__XXX
+   SG_ Chem04Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem04GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem04StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem04CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418385610 MSG_F00E_BLENDER_CA: 8 Vector__XXX
+   SG_ Chem05Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem05GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem05StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem05CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+ 
+BO_ 418385611 MSG_F00E_BLENDER_CB: 8 Vector__XXX
+   SG_ Chem05Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem05GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem05StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem05CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418385866 MSG_F00F_BLENDER_CA: 8 Vector__XXX
+   SG_ Chem06Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem06GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem06StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem06CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418385867 MSG_F00F_BLENDER_CB: 8 Vector__XXX
+   SG_ Chem06Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem06GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem06StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem06CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418386122 MSG_F010_BLENDER_CA: 8 Vector__XXX
+   SG_ Chem07Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem07GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem07StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem07CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418386123 MSG_F010_BLENDER_CB: 8 Vector__XXX
+   SG_ Chem07Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem07GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem07StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem07CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418386378 MSG_F011_BLENDER_CA: 8 Vector__XXX
+   SG_ Chem08Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem08GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem08StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem08CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418386379 MSG_F011_BLENDER_CB: 8 Vector__XXX
+   SG_ Chem08Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem08GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem08StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem08CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+ 
+BO_ 418386634 MSG_F012_BLENDER_CA: 8 Vector__XXX
+   SG_ Chem09Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem09GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem09StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem09CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418386635 MSG_F012_BLENDER_CB: 8 Vector__XXX
+   SG_ Chem09Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem09GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem09StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem09CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+ 
+BO_ 418386890 MSG_F013_BLENDER_CA: 8 Vector__XXX
+   SG_ Chem10Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem10GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem10StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem10CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418386891 MSG_F013_BLENDER_CB: 8 Vector__XXX
+   SG_ Chem10Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ Chem10GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem10StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ Chem10CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418387146 MSG_F014_BLENDER_CA: 8 Vector__XXX
+   SG_ BackupChem01Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem01GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem01StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem01CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418387147 MSG_F014_BLENDER_CB: 8 Vector__XXX
+   SG_ BackupChem01Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem01GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem01StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem01CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418387402 MSG_F015_BLENDER_CA: 8 Vector__XXX
+   SG_ BackupChem02Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem02GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem02StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem02CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418387403 MSG_F015_BLENDER_CB: 8 Vector__XXX
+   SG_ BackupChem02Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem02GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem02StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem02CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418387658 MSG_F016_BLENDER_CA: 8 Vector__XXX
+   SG_ BackupChem03Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem03GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem03StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem03CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418387659 MSG_F016_BLENDER_CB: 8 Vector__XXX
+   SG_ BackupChem03Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem03GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem03StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem03CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418387914 MSG_F017_BLENDER_CA: 8 Vector__XXX
+   SG_ BackupChem04Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem04GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem04StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem04CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418387915 MSG_F017_BLENDER_CB: 8 Vector__XXX
+   SG_ BackupChem04Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem04GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem04StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem04CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418388170 MSG_F018_BLENDER_CA: 8 Vector__XXX
+   SG_ BackupChem05Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem05GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem05StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem05CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418388171 MSG_F018_BLENDER_CB: 8 Vector__XXX
+   SG_ BackupChem05Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem05GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem05StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem05CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418388426 MSG_F019_BLENDER_CA: 8 Vector__XXX
+   SG_ BackupChem06Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem06GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem06StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem06CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418388427 MSG_F019_BLENDER_CB: 8 Vector__XXX
+   SG_ BackupChem06Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem06GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem06StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem06CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418388682 MSG_F01A_BLENDER_CA: 8 Vector__XXX
+   SG_ BackupChem07Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem07GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem07StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem07CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418388683 MSG_F01A_BLENDER_CB: 8 Vector__XXX
+   SG_ BackupChem07Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem07GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem07StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem07CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418388938 MSG_F01B_BLENDER_CA: 8 Vector__XXX
+   SG_ BackupChem08Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem08GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem08StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem08CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418388939 MSG_F01B_BLENDER_CB: 8 Vector__XXX
+   SG_ BackupChem08Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem08GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem08StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem08CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418389194 MSG_F01C_BLENDER_CA: 8 Vector__XXX
+   SG_ BackupChem09Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem09GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem09StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem09CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418389195 MSG_F01C_BLENDER_CB: 8 Vector__XXX
+   SG_ BackupChem09Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem09GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem09StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem09CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418389450 MSG_F01D_BLENDER_CA: 8 Vector__XXX
+   SG_ BackupChem10Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem10GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem10StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem10CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418389451 MSG_F01D_BLENDER_CB: 8 Vector__XXX
+   SG_ BackupChem10Rate : 0|16@1+ (0.01,-37.5) [0|0] "GPM" Vector__XXX
+   SG_ BackupChem10GrandTotal : 16|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem10StageTotal : 32|16@1+ (0.1,0.0) [0|0] "GAL" Vector__XXX
+   SG_ BackupChem10CalculatedRatio : 48|16@1+ (0.01,0.0) [0|0] "Gal/1000 Gal" Vector__XXX
+
+BO_ 418389706 MSG_F01E_BLENDER_CA: 8 Vector__XXX
+   SG_ TubLevel : 0|16@1+ (0.01,-25.0) [0|0] "Percent" Vector__XXX
+   SG_ MiscellaneousInput1 : 16|24@1+ (0.01,-3750.0) [0|0] "NONE" Vector__XXX
+   SG_ MiscellaneousInput2 : 40|24@1+ (0.01,-3750.0) [0|0] "NONE" Vector__XXX
+
+BO_ 418389707 MSG_F01E_BLENDER_CB: 8 Vector__XXX
+   SG_ TubLevel : 0|16@1+ (0.01,-25.0) [0|0] "Percent" Vector__XXX
+   SG_ MiscellaneousInput1 : 16|24@1+ (0.01,-3750.0) [0|0] "NONE" Vector__XXX
+   SG_ MiscellaneousInput2 : 40|24@1+ (0.01,-3750.0) [0|0] "NONE" Vector__XXX
+
+BO_ 418389962 MSG_F01F_BLENDER_CA: 8 Vector__XXX
+   SG_ MiscellaneousInput3 : 0|24@1+ (0.01,-3750.0) [0|0] "NONE" Vector__XXX
+   SG_ MiscellaneousInput4 : 24|24@1+ (0.01,-3750.0) [0|0] "NONE" Vector__XXX
+   SG_ SpareBytes78 : 48|16@1+ (1,0.0) [0|0] "" Vector__XXX
+
+BO_ 418389963 MSG_F01F_BLENDER_CB: 8 Vector__XXX
+   SG_ MiscellaneousInput3 : 0|24@1+ (0.01,-3750.0) [0|0] "NONE" Vector__XXX
+   SG_ MiscellaneousInput4 : 24|24@1+ (0.01,-3750.0) [0|0] "NONE" Vector__XXX
+   SG_ SpareBytes78 : 48|16@1+ (1,0.0) [0|0] "" Vector__XXX
+
+BO_ 418390218 MSG_F020_BLENDER_CA: 8 Vector__XXX
+   SG_ MiscellaneousInput5 : 0|24@1+ (0.01,-3750.0) [0|0] "NONE" Vector__XXX
+   SG_ MiscellaneousInput6 : 24|24@1+ (0.01,-3750.0) [0|0] "NONE" Vector__XXX
+   SG_ SpareBytes78 : 48|16@1+ (1,0.0) [0|0] "" Vector__XXX
+
+BO_ 418390219 MSG_F020_BLENDER_CB: 8 Vector__XXX
+   SG_ MiscellaneousInput5 : 0|24@1+ (0.01,-3750.0) [0|0] "NONE" Vector__XXX
+   SG_ MiscellaneousInput6 : 24|24@1+ (0.01,-3750.0) [0|0] "NONE" Vector__XXX
+   SG_ SpareBytes78 : 48|16@1+ (1,0.0) [0|0] "" Vector__XXX
+
+BO_ 418390474 MSG_F021_BLENDER_CA: 8 Vector__XXX
+   SG_ CasingPressure : 0|24@1+ (0.01,-3750.0) [0|0] "NONE" Vector__XXX
+   SG_ WellheadPressure : 24|24@1+ (0.01,-3750.0) [0|0] "NONE" Vector__XXX
+   SG_ SpareBytes78 : 48|16@1+ (1,0.0) [0|0] "" Vector__XXX
+
+BO_ 418390475 MSG_F021_BLENDER_CB: 8 Vector__XXX
+   SG_ CasingPressure : 0|24@1+ (0.01,-3750.0) [0|0] "NONE" Vector__XXX
+   SG_ WellheadPressure : 24|24@1+ (0.01,-3750.0) [0|0] "NONE" Vector__XXX
+   SG_ SpareBytes78 : 48|16@1+ (1,0.0) [0|0] "" Vector__XXX
+
+BO_ 418390730 MSG_F022_BLENDER_CA: 8 Vector__XXX
+   SG_ DischargePressure : 0|24@1+ (0.01,-3750.0) [0|0] "" Vector__XXX
+   SG_ CurrentStage : 24|8@1+ (1,0.0) [0|0] "" Vector__XXX
+   SG_ RunMode : 32|1@1+ (1,0.0) [0|0] "" Vector__XXX
+   SG_ Auger1AutoMode : 40|1@1+ (1,0.0) [0|0] "" Vector__XXX
+   SG_ Auger2AutoMode : 48|1@1+ (1,0.0) [0|0] "" Vector__XXX
+   SG_ Auger3AutoMode : 56|1@1+ (1,0.0) [0|0] "" Vector__XXX
+ 
+BO_ 418390731 MSG_F022_BLENDER_CB: 8 Vector__XXX
+   SG_ DischargePressure : 0|24@1+ (0.01,-3750.0) [0|0] "" Vector__XXX
+   SG_ CurrentStage : 24|8@1+ (1,0.0) [0|0] "" Vector__XXX
+   SG_ RunMode : 32|1@1+ (1,0.0) [0|0] "" Vector__XXX
+   SG_ Auger1AutoMode : 40|1@1+ (1,0.0) [0|0] "" Vector__XXX
+   SG_ Auger2AutoMode : 48|1@1+ (1,0.0) [0|0] "" Vector__XXX
+   SG_ Auger3AutoMode : 56|1@1+ (1,0.0) [0|0] "" Vector__XXX
+
+BO_ 418398410 MSG_F040_BLENDER_CA: 8 Vector__XXX
+   SG_ DischargeManifoldPressure : 0|16@1+ (0.01,0.0) [0|0] "PSI" Vector__XXX
+   SG_ SuctionManifoldPressure : 16|16@1+ (0.01,0.0) [0|0] "PSI" Vector__XXX
+
+BO_ 418398411 MSG_F040_BLENDER_CB: 8 Vector__XXX
+   SG_ DischargeManifoldPressure : 0|16@1+ (0.01,0.0) [0|0] "PSI" Vector__XXX
+   SG_ SuctionManifoldPressure : 16|16@1+ (0.01,0.0) [0|0] "PSI" Vector__XXX
+
+BO_ 419430346 MSG_FFFF_BLENDER_CA: 8 Vector__XXX
+   SG_ SpareBytes12 : 0|16@1+ (1,0.0) [0|0] "" Vector__XXX
+   SG_ CustomerSerialNumber : 16|40@1+ (1,0.0) [0|0] "ASCII" Vector__XXX
+   SG_ SpareBytes7 : 56|8@1+ (1,0.0) [0|0] "" Vector__XXX
+
+BO_ 419430347 MSG_FFFF_BLENDER_CB: 8 Vector__XXX
+   SG_ SpareBytes12 : 0|16@1+ (1,0.0) [0|0] "" Vector__XXX
+   SG_ CustomerSerialNumber : 16|40@1+ (1,0.0) [0|0] "ASCII" Vector__XXX
+   SG_ SpareBytes7 : 56|8@1+ (1,0.0) [0|0] "" Vector__XXX

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace PcapReplayer
 {
-    public class MainForm : Form
+    public partial class MainForm : Form
     {
         // ── Replay tab ────────────────────────────────────────────────────────
         private TextBox    txtPcapPath   = null!;
@@ -93,6 +93,7 @@ namespace PcapReplayer
             tabs.TabPages.Add(BuildReplayTab());
             tabs.TabPages.Add(BuildMetadataTab());
             tabs.TabPages.Add(BuildTrcLogTab());
+            tabs.TabPages.Add(BuildCanGenTab());
             this.Controls.Add(tabs);
             _tabs = tabs;
 
@@ -106,12 +107,27 @@ namespace PcapReplayer
             _engine.OnComplete += () => { Log("Replay finished!"); EnableReplayControls(true); };
             _engine.OnError    += ex => { Log($"Error: {ex.Message}"); EnableReplayControls(true); };
 
+            _canTx = new CanTransmitter();
+            _canTx.OnLog     += Log;
+            _canTx.OnLog     += CanGenLog;
+            _canTx.OnTxCount += SetCanTxCount;
+            _canTx.OnError   += ex =>
+            {
+                Log($"Error: {ex.Message}");
+                CanGenLog($"❌ Error: {ex.Message}");
+            };
+
             // Mock server
             _mockServer = new MetadataMockServer();
             _mockServer.OnStatusChanged  += msg  => SetMockStatus(msg);
             _mockServer.OnRequestLogged  += line => AppendRequestLog(line);
 
-            this.FormClosing += (s, e) => _mockServer.Stop();
+            this.FormClosing += (s, e) =>
+            {
+                _canTxCts?.Cancel();
+                _canTx.Stop();
+                _mockServer.Stop();
+            };
         }
 
         // ══════════════════════════════════════════════════════════════════════

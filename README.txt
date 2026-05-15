@@ -7,7 +7,8 @@
 --------------------------------------------------------------------------------
   WHAT THIS TOOL DOES
 --------------------------------------------------------------------------------
-  GUI application (.NET 9 WinForms) that replays PCAP captures over UDP.
+  GUI application (.NET 9 WinForms) with four tabs: Replay, Metadata Mock,
+  TRC / LOG → USR PCAP, and CAN Generator.
 
   Key features:
     - On load: auto-detects whether UDP payloads are PEAK or USR-CANET200 format
@@ -17,6 +18,11 @@
     - PEAK CAN Gateway HTTP mock server (responds to gateway metadata queries)
     - Source IP / Target IP / Port / Speed / Loop overrides
     - Scans up to 300 UDP packets on load for classification
+    - CAN Generator tab loads a DBC, groups messages by PGN (or Standard CAN),
+      edits per-message rates and per-signal physical values, and transmits
+      live USR-CANET200 UDP packets
+    - Value tables (VAL_) render as signal drop-downs; multiplexed signals are
+      logged and skipped for now
 
   Character limits (hardware-spec):
     - USR metadata string: 40 chars (USR-CANET200 hardware limit)
@@ -30,8 +36,9 @@
   C:\Projects\PcapReplayer\
   ├── PcapReplayer.csproj            Main app (WinForms, net9.0-windows)
   ├── Program.cs                     Entry point — launches MainForm
-  ├── MainForm.cs                    UI: two tabs (Replay + Metadata Mock)
-  │                                  Depends on IReplayEngine (not concrete class)
+  ├── MainForm.cs                    UI shell + Replay / Metadata / TRC tabs
+  ├── MainForm.CanGen.cs             CAN Generator tab UI + handlers
+  │                                  Depends on IReplayEngine / ICanTransmitter
   ├── ReplayEngine.cs                Implements IReplayEngine
   │                                  Hot path fully optimised (see EFFICIENCY below)
   ├── IReplayEngine.cs               Interface — enables mock injection / future CLI
@@ -45,15 +52,46 @@
   ├── UsrPacketHelper.cs             ALL stateless detection + injection logic
   │                                  Mirrors PeakCanParser.CanParse and
   │                                  UsrCanetParser.FindFrameStartIndex exactly
+  ├── Dbc\                          Minimal DBC parser + models + J1939 helper
+  ├── CanGen\                       CAN generator transmitter / encoder helpers
   └── MetadataMockServer.cs          PEAK HTTP mock server
 
   C:\Projects\PcapReplayer\PcapReplayer.Tests\
   ├── PcapReplayer.Tests.csproj
   ├── UsrPacketHelperTests.cs        38 tests: detection, injection, boundary, info byte
   ├── PcapAnalyzerTests.cs           11 tests: full classification using synthetic PCAPs
-  └── PayloadTransformerTests.cs     15 tests: NullTransformer, UsrMetadataTransformer,
-                                               multi-asset independence invariants
-  TOTAL: 64 tests, 0 failures, ~130ms
+  ├── PayloadTransformerTests.cs     15 tests: NullTransformer, UsrMetadataTransformer,
+  │                                            multi-asset independence invariants
+  ├── CanLogConverterTests.cs         3 tests: TRC / LOG conversion + USR framing
+  ├── DbcParserTests.cs               6 tests: BO_/SG_/VAL_/multiplex skip coverage
+  ├── SignalEncoderTests.cs          10 tests: physical→raw + Intel/Motorola packing
+  ├── UsrFrameBuilderTests.cs         4 tests: 13-byte frame output + USR round-trip
+  └── CanTransmitterTests.cs          4 tests: rate, mute, cancellation, batching
+  TOTAL: 91 tests, 0 failures
+
+
+--------------------------------------------------------------------------------
+  CAN GENERATOR TAB
+--------------------------------------------------------------------------------
+  The CAN Generator tab is a live USR-CANET200 transmitter driven by a user-
+  selected DBC file. It adds a sibling transmitter component beside ReplayEngine
+  (ReplayEngine itself is unchanged).
+
+  Behaviour:
+    - Parses BO_, SG_, CM_, and VAL_ records into a DBC model
+    - Groups extended J1939 messages by PGN; non-J1939 traffic is grouped under
+      "Standard CAN"
+    - Lets the user configure one transmission rate per message
+    - Lets the user edit per-signal PHYSICAL values; the raw encoded value is
+      shown live using factor/offset conversion
+    - Supports Intel and Motorola bit packing
+    - Lets the user mute individual signals (muted signals contribute 0 bits)
+    - Sends ASCII metadata header + N × 13-byte CAN frames as live UDP traffic
+      in the USR-CANET200 wire format
+
+  Current limitation:
+    - Multiplexed DBC signals (M / m0 / m1 / ...) are intentionally deferred.
+      They are skipped with a warning so the rest of the message still loads.
 
 
 --------------------------------------------------------------------------------
