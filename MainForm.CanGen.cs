@@ -166,8 +166,9 @@ namespace PcapReplayer
             nudCanMsgRate.ValueChanged += (s, e) =>
             {
                 if (_selectedCanMessage == null) return;
-                if (_selectedCanMessage.IsMultiplexed)
-                    _selectedCanMessage.MuxRoundRobinIntervalMs = (int)nudCanMsgRate.Value;
+                // If a mux group is selected (via Tag), set its individual period
+                if (nudCanMsgRate.Tag is MultiplexGroup muxGroup)
+                    muxGroup.PeriodMs = (int)nudCanMsgRate.Value;
                 else
                     _selectedCanMessage.PeriodMs = (int)nudCanMsgRate.Value;
             };
@@ -579,20 +580,32 @@ namespace PcapReplayer
             chkCanMsgEnabled.Enabled = true;
             chkCanMsgEnabled.Checked = message.Enabled;
             chkCanMsgEnabled.Tag     = null; // not bound to a mux group
-            nudCanMsgRate.Enabled    = true;
-            nudCanMsgRate.Value      = message.IsMultiplexed ? message.MuxRoundRobinIntervalMs : message.PeriodMs;
+            nudCanMsgRate.Tag        = null; // not bound to a mux group
+            if (message.IsMultiplexed)
+            {
+                // Rate is per-group for muxed messages; disable at message level
+                nudCanMsgRate.Enabled = false;
+            }
+            else
+            {
+                nudCanMsgRate.Enabled = true;
+                nudCanMsgRate.Value   = message.PeriodMs;
+            }
             string infoText = $"{message.Name}  ID=0x{message.CanId:X8}  DLC={message.Dlc}";
             if (message.IsMultiplexed && message.MultiplexGroups != null)
             {
                 int enabledCount = message.MultiplexGroups.Values.Count(g => g.Enabled);
-                int totalMs = enabledCount * message.MuxRoundRobinIntervalMs;
-                infoText += $"  [{enabledCount} mux groups × {message.MuxRoundRobinIntervalMs}ms = {totalMs}ms cycle]";
+                infoText += $"  [{enabledCount} mux groups enabled]";
             }
             lblCanMsgInfo.Text       = infoText;
             lblCanMsgInfo.ForeColor  = Color.Black;
 
             foreach (var signal in message.Signals)
+            {
+                // Hide the multiplexor signal — its value is set automatically per mux group
+                if (signal.Signal.MultiplexIndicator == "M") continue;
                 flpCanSignals.Controls.Add(BuildSignalRow(message, signal));
+            }
 
             flpCanSignals.ResumeLayout();
             UpdateCanStartState();
@@ -610,14 +623,14 @@ namespace PcapReplayer
             chkCanMsgEnabled.Checked = group.Enabled;
             chkCanMsgEnabled.Tag     = group; // track which group is bound
 
-            // Rate controls the mux round-robin interval (time between successive mux options)
+            // Rate controls this individual mux group's period
             nudCanMsgRate.Enabled = true;
-            nudCanMsgRate.Value   = message.MuxRoundRobinIntervalMs;
+            nudCanMsgRate.Tag     = group; // track which group is bound for ValueChanged
+            nudCanMsgRate.Value   = group.PeriodMs;
 
             int enabledCount = message.MultiplexGroups?.Values.Count(g => g.Enabled) ?? 0;
-            int totalMs = enabledCount * message.MuxRoundRobinIntervalMs;
             lblCanMsgInfo.Text = $"{message.Name}  Mux m{muxValue}  ({group.Signals.Count} signals)  " +
-                                 $"[{enabledCount} groups × {message.MuxRoundRobinIntervalMs}ms = {totalMs}ms cycle]";
+                                 $"Rate={group.PeriodMs}ms  [{enabledCount} groups enabled]";
             lblCanMsgInfo.ForeColor = Color.MediumSlateBlue;
 
             foreach (var signal in group.Signals)

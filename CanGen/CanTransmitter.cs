@@ -64,7 +64,14 @@ namespace PcapReplayer
             byte[] headerBytes = Encoding.ASCII.GetBytes(cfg.UsrMetadataHeader);
             long now = Stopwatch.GetTimestamp();
             foreach (var message in allMessages)
+            {
                 message.NextSendTs = now;
+                if (message.MultiplexGroups != null)
+                {
+                    foreach (var group in message.MultiplexGroups.Values)
+                        group.NextSendTs = now;
+                }
+            }
 
             var target = new IPEndPoint(IPAddress.Parse(cfg.TargetIp), cfg.TargetPort);
             IUdpSink sink = _testSink ?? new UdpClientSink(cfg.SourceIp);
@@ -81,39 +88,72 @@ namespace PcapReplayer
                     ct.ThrowIfCancellationRequested();
                     ThrowIfStopRequested();
 
-                    // Dynamically filter to enabled messages so real-time toggling is reflected
-                    List<MessageTxState> enabledMessages = allMessages.Where(m => m.Enabled).ToList();
-                    if (enabledMessages.Count == 0)
+                    // Collect all schedulable items: non-mux messages use message.NextSendTs,
+                    // mux messages use per-group NextSendTs for each enabled group.
+                    long nextDue = long.MaxValue;
+                    bool anyEnabled = false;
+
+                    foreach (var message in allMessages)
                     {
-                        // No messages enabled; sleep briefly and re-check
+                        if (!message.Enabled) continue;
+
+                        if (message.IsMultiplexed && message.MultiplexGroups != null)
+                        {
+                            foreach (var group in message.MultiplexGroups.Values)
+                            {
+                                if (!group.Enabled) continue;
+                                anyEnabled = true;
+                                if (group.NextSendTs < nextDue) nextDue = group.NextSendTs;
+                            }
+                        }
+                        else
+                        {
+                            anyEnabled = true;
+                            if (message.NextSendTs < nextDue) nextDue = message.NextSendTs;
+                        }
+                    }
+
+                    if (!anyEnabled)
+                    {
                         Thread.Sleep(10);
                         continue;
                     }
 
-                    long nextDue = enabledMessages.Min(m => m.NextSendTs);
                     WaitUntil(nextDue, ct);
 
                     long dueCutoff = Stopwatch.GetTimestamp() + batchWindowTicks;
-                    var dueMessages = new List<MessageTxState>();
-                    foreach (var message in enabledMessages)
+
+                    // Build frames for all due items
+                    var frames = new List<byte[]>();
+                    foreach (var message in allMessages)
                     {
-                        if (message.NextSendTs <= dueCutoff)
-                            dueMessages.Add(message);
+                        if (!message.Enabled) continue;
+
+                        if (message.IsMultiplexed && message.MultiplexGroups != null)
+                        {
+                            foreach (var group in message.MultiplexGroups.Values)
+                            {
+                                if (!group.Enabled) continue;
+                                if (group.NextSendTs > dueCutoff) continue;
+                                frames.Add(UsrFrameBuilder.Build13BytesForMuxGroup(message, group.MuxValue));
+                                group.NextSendTs += (long)(group.PeriodMs * TicksPerMs);
+                            }
+                        }
+                        else
+                        {
+                            if (message.NextSendTs > dueCutoff) continue;
+                            frames.Add(UsrFrameBuilder.Build13Bytes(message));
+                            message.NextSendTs += (long)(message.PeriodMs * TicksPerMs);
+                        }
                     }
 
-                    if (dueMessages.Count == 0)
+                    if (frames.Count == 0)
                         continue;
 
-                    byte[] packet = BuildPacket(headerBytes, dueMessages);
+                    byte[] packet = BuildPacketFromFrames(headerBytes, frames);
                     sink.Send(packet, packet.Length, target);
 
-                    foreach (var message in dueMessages)
-                    {
-                        int intervalMs = message.IsMultiplexed ? message.MuxRoundRobinIntervalMs : message.PeriodMs;
-                        message.NextSendTs += (long)(intervalMs * TicksPerMs);
-                    }
-
-                    totalFrames += dueMessages.Count;
+                    totalFrames += frames.Count;
                     OnTxCount?.Invoke(totalFrames);
                 }
             }
@@ -124,35 +164,8 @@ namespace PcapReplayer
             }
         }
 
-        private static byte[] BuildPacket(byte[] headerBytes, IReadOnlyList<MessageTxState> dueMessages)
+        private static byte[] BuildPacketFromFrames(byte[] headerBytes, IReadOnlyList<byte[]> frames)
         {
-            // Count how many frames this batch will produce (mux messages may produce multiple)
-            var frames = new List<byte[]>();
-            foreach (var message in dueMessages)
-            {
-                if (message.IsMultiplexed)
-                {
-                    // Round-robin: send the next enabled mux group
-                    int[]? keys = message.MultiplexGroups?.Keys.Where(k =>
-                        message.MultiplexGroups[k].Enabled).ToArray();
-                    if (keys == null || keys.Length == 0)
-                    {
-                        // Fallback: send with no mux signals
-                        frames.Add(UsrFrameBuilder.Build13Bytes(message));
-                        continue;
-                    }
-
-                    int idx = message.ActiveMuxRoundRobinIndex % keys.Length;
-                    int muxValue = keys[idx];
-                    message.ActiveMuxRoundRobinIndex = (idx + 1) % keys.Length;
-                    frames.Add(UsrFrameBuilder.Build13BytesForMuxGroup(message, muxValue));
-                }
-                else
-                {
-                    frames.Add(UsrFrameBuilder.Build13Bytes(message));
-                }
-            }
-
             var packet = new byte[headerBytes.Length + frames.Count * UsrPacketHelper.USR_FRAME_SIZE];
             Buffer.BlockCopy(headerBytes, 0, packet, 0, headerBytes.Length);
 
