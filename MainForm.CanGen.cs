@@ -142,7 +142,11 @@ namespace PcapReplayer
             chkCanMsgEnabled.CheckedChanged += (s, e) =>
             {
                 if (_selectedCanMessage == null) return;
-                _selectedCanMessage.Enabled = chkCanMsgEnabled.Checked;
+                // If a mux group is selected, toggle that group; otherwise toggle the whole message
+                if (chkCanMsgEnabled.Tag is MultiplexGroup group)
+                    group.Enabled = chkCanMsgEnabled.Checked;
+                else
+                    _selectedCanMessage.Enabled = chkCanMsgEnabled.Checked;
                 UpdateCanStartState();
                 RefreshTreeLabels();
             };
@@ -162,7 +166,10 @@ namespace PcapReplayer
             nudCanMsgRate.ValueChanged += (s, e) =>
             {
                 if (_selectedCanMessage == null) return;
-                _selectedCanMessage.PeriodMs = (int)nudCanMsgRate.Value;
+                if (_selectedCanMessage.IsMultiplexed)
+                    _selectedCanMessage.MuxRoundRobinIntervalMs = (int)nudCanMsgRate.Value;
+                else
+                    _selectedCanMessage.PeriodMs = (int)nudCanMsgRate.Value;
             };
             pnlCanDetailHeader.Controls.Add(nudCanMsgRate);
 
@@ -527,6 +534,12 @@ namespace PcapReplayer
 
             if (e.Node?.Tag is SignalNodeTag signalTag)
             {
+                // If this signal lives inside a mux group node, show that group's details
+                if (e.Node.Parent?.Tag is MuxGroupNodeTag parentMuxTag)
+                {
+                    ShowMuxGroupDetails(parentMuxTag.Message, parentMuxTag.MuxValue, parentMuxTag.Group);
+                    return;
+                }
                 ShowMessageDetails(signalTag.Message);
                 return;
             }
@@ -562,11 +575,20 @@ namespace PcapReplayer
                 return;
             }
 
+            chkCanMsgEnabled.Text    = "Enable message";
             chkCanMsgEnabled.Enabled = true;
             chkCanMsgEnabled.Checked = message.Enabled;
+            chkCanMsgEnabled.Tag     = null; // not bound to a mux group
             nudCanMsgRate.Enabled    = true;
-            nudCanMsgRate.Value      = message.PeriodMs;
-            lblCanMsgInfo.Text       = $"{message.Name}  ID=0x{message.CanId:X8}  DLC={message.Dlc}";
+            nudCanMsgRate.Value      = message.IsMultiplexed ? message.MuxRoundRobinIntervalMs : message.PeriodMs;
+            string infoText = $"{message.Name}  ID=0x{message.CanId:X8}  DLC={message.Dlc}";
+            if (message.IsMultiplexed && message.MultiplexGroups != null)
+            {
+                int enabledCount = message.MultiplexGroups.Values.Count(g => g.Enabled);
+                int totalMs = enabledCount * message.MuxRoundRobinIntervalMs;
+                infoText += $"  [{enabledCount} mux groups × {message.MuxRoundRobinIntervalMs}ms = {totalMs}ms cycle]";
+            }
+            lblCanMsgInfo.Text       = infoText;
             lblCanMsgInfo.ForeColor  = Color.Black;
 
             foreach (var signal in message.Signals)
@@ -582,12 +604,21 @@ namespace PcapReplayer
             flpCanSignals.SuspendLayout();
             flpCanSignals.Controls.Clear();
 
+            // Enable checkbox toggles the individual mux group
+            chkCanMsgEnabled.Text    = $"Enable m{muxValue}";
             chkCanMsgEnabled.Enabled = true;
-            chkCanMsgEnabled.Checked = message.Enabled;
-            nudCanMsgRate.Enabled    = true;
-            nudCanMsgRate.Value      = message.PeriodMs;
-            lblCanMsgInfo.Text       = $"{message.Name}  Mux m{muxValue}  ({group.Signals.Count} signals)";
-            lblCanMsgInfo.ForeColor  = Color.MediumSlateBlue;
+            chkCanMsgEnabled.Checked = group.Enabled;
+            chkCanMsgEnabled.Tag     = group; // track which group is bound
+
+            // Rate controls the mux round-robin interval (time between successive mux options)
+            nudCanMsgRate.Enabled = true;
+            nudCanMsgRate.Value   = message.MuxRoundRobinIntervalMs;
+
+            int enabledCount = message.MultiplexGroups?.Values.Count(g => g.Enabled) ?? 0;
+            int totalMs = enabledCount * message.MuxRoundRobinIntervalMs;
+            lblCanMsgInfo.Text = $"{message.Name}  Mux m{muxValue}  ({group.Signals.Count} signals)  " +
+                                 $"[{enabledCount} groups × {message.MuxRoundRobinIntervalMs}ms = {totalMs}ms cycle]";
+            lblCanMsgInfo.ForeColor = Color.MediumSlateBlue;
 
             foreach (var signal in group.Signals)
                 flpCanSignals.Controls.Add(BuildSignalRow(message, signal));
