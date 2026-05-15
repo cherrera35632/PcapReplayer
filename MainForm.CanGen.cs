@@ -553,7 +553,7 @@ namespace PcapReplayer
 
             if (e.Node?.Tag is MuxParentNodeTag muxParentTag)
             {
-                ShowMessageDetails(muxParentTag.Message);
+                ShowMuxParentDetails(muxParentTag.Message);
                 return;
             }
 
@@ -570,6 +570,7 @@ namespace PcapReplayer
             {
                 chkCanMsgEnabled.Enabled = false;
                 nudCanMsgRate.Enabled    = false;
+                nudCanMsgRate.Tag        = null;
                 lblCanMsgInfo.Text       = "Select a CAN message from the tree.";
                 lblCanMsgInfo.ForeColor  = Color.DimGray;
                 flpCanSignals.ResumeLayout();
@@ -583,8 +584,9 @@ namespace PcapReplayer
             nudCanMsgRate.Tag        = null; // not bound to a mux group
             if (message.IsMultiplexed)
             {
-                // Rate is per-group for muxed messages; disable at message level
+                // Rate is per-group for muxed messages; show nothing at message level
                 nudCanMsgRate.Enabled = false;
+                nudCanMsgRate.Value   = nudCanMsgRate.Minimum; // clear stale value
             }
             else
             {
@@ -595,7 +597,7 @@ namespace PcapReplayer
             if (message.IsMultiplexed && message.MultiplexGroups != null)
             {
                 int enabledCount = message.MultiplexGroups.Values.Count(g => g.Enabled);
-                infoText += $"  [{enabledCount} mux groups enabled]";
+                infoText += $"  [{enabledCount} mux groups enabled — select a group to set its rate]";
             }
             lblCanMsgInfo.Text       = infoText;
             lblCanMsgInfo.ForeColor  = Color.Black;
@@ -605,6 +607,56 @@ namespace PcapReplayer
                 // Hide the multiplexor signal — its value is set automatically per mux group
                 if (signal.Signal.MultiplexIndicator == "M") continue;
                 flpCanSignals.Controls.Add(BuildSignalRow(message, signal));
+            }
+
+            flpCanSignals.ResumeLayout();
+            UpdateCanStartState();
+        }
+
+        /// <summary>
+        /// Shown when the user clicks the "🔀 SignalName (multiplexed)" parent node.
+        /// Displays a read-only summary of all groups; directs the user to click a group
+        /// node (m0, m1, …) to configure its individual rate and signals.
+        /// </summary>
+        private void ShowMuxParentDetails(MessageTxState message)
+        {
+            _selectedCanMessage = message;
+            flpCanSignals.SuspendLayout();
+            flpCanSignals.Controls.Clear();
+
+            // Rate and enable are not meaningful at the mux-parent level
+            chkCanMsgEnabled.Text    = "Enable message";
+            chkCanMsgEnabled.Enabled = true;
+            chkCanMsgEnabled.Checked = message.Enabled;
+            chkCanMsgEnabled.Tag     = null;
+            nudCanMsgRate.Enabled    = false;
+            nudCanMsgRate.Tag        = null;
+            nudCanMsgRate.Value      = nudCanMsgRate.Minimum; // clear any stale value
+
+            int groupCount   = message.MultiplexGroups?.Count ?? 0;
+            int enabledCount = message.MultiplexGroups?.Values.Count(g => g.Enabled) ?? 0;
+            string muxorName = message.MultiplexorSignal?.Signal.Name ?? "Mux";
+            lblCanMsgInfo.Text      = $"{message.Name}  Multiplexor: {muxorName}  "
+                                    + $"{groupCount} groups ({enabledCount} enabled) — select m# to set rate";
+            lblCanMsgInfo.ForeColor = Color.MediumSlateBlue;
+
+            // Show a compact summary row for each group
+            if (message.MultiplexGroups != null)
+            {
+                foreach (var (muxValue, group) in message.MultiplexGroups)
+                {
+                    var summary = new Label
+                    {
+                        Text      = $"m{muxValue}  — {group.Signals.Count} signals  "
+                                  + $"Rate={group.PeriodMs} ms  "
+                                  + (group.Enabled ? "[enabled]" : "[disabled]"),
+                        AutoSize  = true,
+                        Font      = new Font("Consolas", 8.5f),
+                        ForeColor = group.Enabled ? Color.DarkSlateBlue : Color.Gray,
+                        Margin    = new Padding(4, 4, 0, 0)
+                    };
+                    flpCanSignals.Controls.Add(summary);
+                }
             }
 
             flpCanSignals.ResumeLayout();
