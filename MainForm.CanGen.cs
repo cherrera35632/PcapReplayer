@@ -254,7 +254,7 @@ namespace PcapReplayer
 
                 RebuildCanTree();
 
-                CanGenLog($"DBC loaded: {Path.GetFileName(ofd.FileName)} ({_canDatabase.MessageCount} msgs, {_canDatabase.SignalCount} sigs, {_canDatabase.MultiplexedSignalsSkipped} multiplexed signals skipped)");
+                CanGenLog($"DBC loaded: {Path.GetFileName(ofd.FileName)} ({_canDatabase.MessageCount} msgs, {_canDatabase.SignalCount} sigs)");
                 foreach (string warning in _canDatabase.Warnings.Take(5))
                     CanGenLog($"⚠️ {warning}");
             }
@@ -295,8 +295,63 @@ namespace PcapReplayer
                     Enabled    = false
                 };
 
+                // Separate normal, multiplexor, and multiplexed signals
+                DbcSignal? muxorSignal = null;
+                var muxedSignals = new Dictionary<int, List<DbcSignal>>();
+                var normalSignals = new List<DbcSignal>();
+
                 foreach (var signal in message.Signals)
+                {
+                    if (signal.MultiplexIndicator == "M")
+                    {
+                        muxorSignal = signal;
+                    }
+                    else if (signal.MultiplexIndicator != null &&
+                             signal.MultiplexIndicator.StartsWith("m", StringComparison.Ordinal) &&
+                             int.TryParse(signal.MultiplexIndicator[1..], out int muxIdx))
+                    {
+                        if (!muxedSignals.TryGetValue(muxIdx, out var list))
+                        {
+                            list = new List<DbcSignal>();
+                            muxedSignals[muxIdx] = list;
+                        }
+                        list.Add(signal);
+                    }
+                    else
+                    {
+                        normalSignals.Add(signal);
+                    }
+                }
+
+                // Add normal signals to state.Signals
+                foreach (var signal in normalSignals)
                     state.Signals.Add(BuildSignalState(signal));
+
+                // If message has multiplex structure, build the groups
+                if (muxorSignal != null && muxedSignals.Count > 0)
+                {
+                    var muxorState = BuildSignalState(muxorSignal);
+                    muxorState.IsMuted = false; // multiplexor is always active
+                    state.MultiplexorSignal = muxorState;
+                    state.Signals.Add(muxorState); // also in Signals list for display
+
+                    var groups = new SortedDictionary<int, MultiplexGroup>();
+                    foreach (var (muxValue, signals) in muxedSignals.OrderBy(kv => kv.Key))
+                    {
+                        var group = new MultiplexGroup { MuxValue = muxValue };
+                        foreach (var signal in signals)
+                            group.Signals.Add(BuildSignalState(signal));
+                        groups[muxValue] = group;
+                    }
+                    state.MultiplexGroups = groups;
+                }
+                else
+                {
+                    // Non-multiplexed: add any remaining signals normally
+                    // (muxorSignal without muxed signals is treated as normal)
+                    if (muxorSignal != null)
+                        state.Signals.Add(BuildSignalState(muxorSignal));
+                }
 
                 UsrFrameBuilder.BuildDataBytes(state);
                 result.Add(state);
@@ -368,8 +423,42 @@ namespace PcapReplayer
                     }
 
                     var messageNode = new TreeNode(FormatMessageNodeText(message)) { Tag = message };
+
+                    // Add normal (non-mux) signals
                     foreach (var signal in message.Signals)
+                    {
+                        if (signal.Signal.MultiplexIndicator == "M") continue; // skip multiplexor in normal list
                         messageNode.Nodes.Add(new TreeNode(FormatSignalText(signal)) { Tag = new SignalNodeTag(message, signal) });
+                    }
+
+                    // Add multiplex groups as sub-tree
+                    if (message.IsMultiplexed && message.MultiplexGroups != null)
+                    {
+                        string muxorName = message.MultiplexorSignal?.Signal.Name ?? "Mux";
+                        var muxParentNode = new TreeNode($"🔀 {muxorName} (multiplexed)")
+                        {
+                            ForeColor = Color.MediumSlateBlue,
+                            Tag = new MuxParentNodeTag(message)
+                        };
+
+                        foreach (var (muxValue, group) in message.MultiplexGroups)
+                        {
+                            var groupNode = new TreeNode($"m{muxValue}")
+                            {
+                                Tag = new MuxGroupNodeTag(message, muxValue, group)
+                            };
+                            foreach (var signal in group.Signals)
+                            {
+                                groupNode.Nodes.Add(new TreeNode(FormatSignalText(signal))
+                                {
+                                    Tag = new SignalNodeTag(message, signal)
+                                });
+                            }
+                            muxParentNode.Nodes.Add(groupNode);
+                        }
+
+                        messageNode.Nodes.Add(muxParentNode);
+                    }
 
                     parentNode.Nodes.Add(messageNode);
                     parentNode.Expand();
@@ -442,6 +531,18 @@ namespace PcapReplayer
                 return;
             }
 
+            if (e.Node?.Tag is MuxGroupNodeTag muxGroupTag)
+            {
+                ShowMuxGroupDetails(muxGroupTag.Message, muxGroupTag.MuxValue, muxGroupTag.Group);
+                return;
+            }
+
+            if (e.Node?.Tag is MuxParentNodeTag muxParentTag)
+            {
+                ShowMessageDetails(muxParentTag.Message);
+                return;
+            }
+
             ShowMessageDetails(null);
         }
 
@@ -469,6 +570,26 @@ namespace PcapReplayer
             lblCanMsgInfo.ForeColor  = Color.Black;
 
             foreach (var signal in message.Signals)
+                flpCanSignals.Controls.Add(BuildSignalRow(message, signal));
+
+            flpCanSignals.ResumeLayout();
+            UpdateCanStartState();
+        }
+
+        private void ShowMuxGroupDetails(MessageTxState message, int muxValue, MultiplexGroup group)
+        {
+            _selectedCanMessage = message;
+            flpCanSignals.SuspendLayout();
+            flpCanSignals.Controls.Clear();
+
+            chkCanMsgEnabled.Enabled = true;
+            chkCanMsgEnabled.Checked = message.Enabled;
+            nudCanMsgRate.Enabled    = true;
+            nudCanMsgRate.Value      = message.PeriodMs;
+            lblCanMsgInfo.Text       = $"{message.Name}  Mux m{muxValue}  ({group.Signals.Count} signals)";
+            lblCanMsgInfo.ForeColor  = Color.MediumSlateBlue;
+
+            foreach (var signal in group.Signals)
                 flpCanSignals.Controls.Add(BuildSignalRow(message, signal));
 
             flpCanSignals.ResumeLayout();
@@ -816,6 +937,8 @@ namespace PcapReplayer
         }
 
         private sealed record SignalNodeTag(MessageTxState Message, SignalTxState Signal);
+        private sealed record MuxGroupNodeTag(MessageTxState Message, int MuxValue, MultiplexGroup Group);
+        private sealed record MuxParentNodeTag(MessageTxState Message);
 
         private sealed class CanValueOption
         {

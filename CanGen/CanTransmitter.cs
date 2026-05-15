@@ -123,13 +123,39 @@ namespace PcapReplayer
 
         private static byte[] BuildPacket(byte[] headerBytes, IReadOnlyList<MessageTxState> dueMessages)
         {
-            var packet = new byte[headerBytes.Length + dueMessages.Count * UsrPacketHelper.USR_FRAME_SIZE];
+            // Count how many frames this batch will produce (mux messages may produce multiple)
+            var frames = new List<byte[]>();
+            foreach (var message in dueMessages)
+            {
+                if (message.IsMultiplexed)
+                {
+                    // Round-robin: send the next enabled mux group
+                    int[]? keys = message.MultiplexGroups?.Keys.Where(k =>
+                        message.MultiplexGroups[k].Enabled).ToArray();
+                    if (keys == null || keys.Length == 0)
+                    {
+                        // Fallback: send with no mux signals
+                        frames.Add(UsrFrameBuilder.Build13Bytes(message));
+                        continue;
+                    }
+
+                    int idx = message.ActiveMuxRoundRobinIndex % keys.Length;
+                    int muxValue = keys[idx];
+                    message.ActiveMuxRoundRobinIndex = (idx + 1) % keys.Length;
+                    frames.Add(UsrFrameBuilder.Build13BytesForMuxGroup(message, muxValue));
+                }
+                else
+                {
+                    frames.Add(UsrFrameBuilder.Build13Bytes(message));
+                }
+            }
+
+            var packet = new byte[headerBytes.Length + frames.Count * UsrPacketHelper.USR_FRAME_SIZE];
             Buffer.BlockCopy(headerBytes, 0, packet, 0, headerBytes.Length);
 
             int offset = headerBytes.Length;
-            foreach (var message in dueMessages)
+            foreach (var frame in frames)
             {
-                byte[] frame = UsrFrameBuilder.Build13Bytes(message);
                 Buffer.BlockCopy(frame, 0, packet, offset, frame.Length);
                 offset += frame.Length;
             }

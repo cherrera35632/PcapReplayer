@@ -40,5 +40,13 @@ namespace PcapReplayer
         public string? Comment { get; set; }
         public int? Spn { get; set; }
         public Dictionary<long, string>? ValueTable { get; set; }
+
+        /// <summary>
+        /// Multiplex indicator from the DBC file.
+        /// null  = normal (non-multiplexed) signal.
+        /// "M"   = this signal is the multiplexor switch.
+        /// "m0", "m1", … = this signal belongs to the given mux group.
+        /// </summary>
+        public string? MultiplexIndicator { get; init; }
     }
 }

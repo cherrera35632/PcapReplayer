@@ -128,11 +128,21 @@ namespace PcapReplayer
                 return false;
             }
 
-            if (leftParts.Skip(1).Any(IsMultiplexToken))
+            // Detect multiplex indicator from tokens after the signal name
+            string? muxIndicator = null;
+            foreach (var token in leftParts.Skip(1))
             {
-                db.MultiplexedSignalsSkipped++;
-                db.Warnings.Add($"Line {lineNumber}: multiplexed signal '{leftParts[0]}' skipped — not supported.");
-                return false;
+                if (token.Equals("M", StringComparison.Ordinal))
+                {
+                    muxIndicator = "M";
+                    break;
+                }
+                if (token.Length > 1 && (token[0] == 'm' || token[0] == 'M') && int.TryParse(token[1..], out _))
+                {
+                    // Normalize to lowercase "mN"
+                    muxIndicator = "m" + token[1..];
+                    break;
+                }
             }
 
             var match = SignalPattern.Match(right);
@@ -144,17 +154,18 @@ namespace PcapReplayer
 
             signal = new DbcSignal
             {
-                Name           = leftParts[0],
-                StartBit       = int.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture),
-                Length         = int.Parse(match.Groups[2].Value, CultureInfo.InvariantCulture),
-                IsLittleEndian = match.Groups[3].Value == "1",
-                IsSigned       = match.Groups[4].Value == "-",
-                Factor         = double.Parse(match.Groups[5].Value, CultureInfo.InvariantCulture),
-                Offset         = double.Parse(match.Groups[6].Value, CultureInfo.InvariantCulture),
-                Min            = double.Parse(match.Groups[7].Value, CultureInfo.InvariantCulture),
-                Max            = double.Parse(match.Groups[8].Value, CultureInfo.InvariantCulture),
-                Unit           = Unescape(match.Groups[9].Value),
-                Receiver       = match.Groups[10].Success ? match.Groups[10].Value.Trim() : null
+                Name               = leftParts[0],
+                StartBit           = int.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture),
+                Length             = int.Parse(match.Groups[2].Value, CultureInfo.InvariantCulture),
+                IsLittleEndian     = match.Groups[3].Value == "1",
+                IsSigned           = match.Groups[4].Value == "-",
+                Factor             = double.Parse(match.Groups[5].Value, CultureInfo.InvariantCulture),
+                Offset             = double.Parse(match.Groups[6].Value, CultureInfo.InvariantCulture),
+                Min                = double.Parse(match.Groups[7].Value, CultureInfo.InvariantCulture),
+                Max                = double.Parse(match.Groups[8].Value, CultureInfo.InvariantCulture),
+                Unit               = Unescape(match.Groups[9].Value),
+                Receiver           = match.Groups[10].Success ? match.Groups[10].Value.Trim() : null,
+                MultiplexIndicator = muxIndicator
             };
 
             return true;

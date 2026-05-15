@@ -13,6 +13,7 @@ namespace PcapReplayer.Tests
 BO_ {Eec1RawId} EEC1: 8 Vector__XXX
  SG_ EngineSpeed : 24|16@1+ (0.125,0) [0|8031.875] ""rpm"" Vector__XXX
  SG_ DriverMode : 8|4@1+ (1,0) [0|15] """" Vector__XXX
+ SG_ MuxSwitch M : 0|4@1+ (1,0) [0|15] """" Vector__XXX
  SG_ SkipMux m0 : 12|4@1+ (1,0) [0|15] """" Vector__XXX
 BO_ {Et1RawId} ET1: 8 Vector__XXX
  SG_ OilTemp : 0|8@1- (1,-40) [-40|210] ""degC"" Vector__XXX
@@ -23,12 +24,12 @@ CM_ SG_ {Eec1RawId} EngineSpeed ""SPN 190"";
 ";
 
         [TestMethod]
-        public void Parse_SyntheticDbc_LoadsThreeMessagesAndFourSignals()
+        public void Parse_SyntheticDbc_LoadsThreeMessagesAndSixSignals()
         {
             var db = DbcParser.Parse(SyntheticDbc);
 
             Assert.AreEqual(3, db.MessageCount);
-            Assert.AreEqual(4, db.SignalCount);
+            Assert.AreEqual(6, db.SignalCount);
             CollectionAssert.AreEquivalent(new[] { "EEC1", "ET1", "StdMsg" }, db.Messages.Select(m => m.Name).ToArray());
         }
 
@@ -72,14 +73,22 @@ CM_ SG_ {Eec1RawId} EngineSpeed ""SPN 190"";
         }
 
         [TestMethod]
-        public void Parse_MultiplexedSignal_IsSkippedButMessageRemains()
+        public void Parse_MultiplexedSignal_IsParsedWithIndicator()
         {
             var db = DbcParser.Parse(SyntheticDbc);
             var eec1 = db.Messages.Single(m => m.Name == "EEC1");
 
-            Assert.AreEqual(1, db.MultiplexedSignalsSkipped);
-            Assert.IsFalse(eec1.Signals.Any(s => s.Name == "SkipMux"));
-            Assert.IsTrue(db.Warnings.Any(w => w.Contains("multiplexed signal 'SkipMux'", System.StringComparison.OrdinalIgnoreCase)));
+            var muxSig = eec1.Signals.SingleOrDefault(s => s.Name == "SkipMux");
+            Assert.IsNotNull(muxSig);
+            Assert.AreEqual("m0", muxSig!.MultiplexIndicator);
+
+            var muxor = eec1.Signals.SingleOrDefault(s => s.Name == "MuxSwitch");
+            Assert.IsNotNull(muxor);
+            Assert.AreEqual("M", muxor!.MultiplexIndicator);
+
+            // Normal signals have null indicator
+            var normal = eec1.Signals.Single(s => s.Name == "EngineSpeed");
+            Assert.IsNull(normal.MultiplexIndicator);
         }
 
         [TestMethod]
