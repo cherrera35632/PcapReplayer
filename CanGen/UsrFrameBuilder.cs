@@ -6,6 +6,18 @@ namespace PcapReplayer
 {
     public static class UsrFrameBuilder
     {
+        /// <summary>
+        /// Returns the effective 29-bit CAN ID to transmit, substituting the low 8 bits
+        /// (Source Address) when <see cref="MessageTxState.OverrideSa"/> is set.
+        /// For standard (11-bit) messages the ID is returned unchanged.
+        /// </summary>
+        private static uint EffectiveCanId(MessageTxState message)
+        {
+            if (message.IsExtended && message.OverrideSa.HasValue)
+                return (message.CanId & 0xFFFFFF00u) | message.OverrideSa.Value;
+            return message.CanId;
+        }
+
         public static byte[] Build13Bytes(MessageTxState message)
         {
             if (message == null) throw new ArgumentNullException(nameof(message));
@@ -16,10 +28,11 @@ namespace PcapReplayer
             frame[0] = (byte)(message.Dlc & 0x0F);
             if (message.IsExtended) frame[0] |= 0x80;
 
-            frame[1] = (byte)((message.CanId >> 24) & 0xFF);
-            frame[2] = (byte)((message.CanId >> 16) & 0xFF);
-            frame[3] = (byte)((message.CanId >> 8) & 0xFF);
-            frame[4] = (byte)(message.CanId & 0xFF);
+            uint txId = EffectiveCanId(message);
+            frame[1] = (byte)((txId >> 24) & 0xFF);
+            frame[2] = (byte)((txId >> 16) & 0xFF);
+            frame[3] = (byte)((txId >> 8) & 0xFF);
+            frame[4] = (byte)(txId & 0xFF);
             Array.Copy(message.Data, 0, frame, 5, Math.Min(8, message.Data.Length));
             return frame;
         }
@@ -39,10 +52,11 @@ namespace PcapReplayer
             frame[0] = (byte)(message.Dlc & 0x0F);
             if (message.IsExtended) frame[0] |= 0x80;
 
-            frame[1] = (byte)((message.CanId >> 24) & 0xFF);
-            frame[2] = (byte)((message.CanId >> 16) & 0xFF);
-            frame[3] = (byte)((message.CanId >> 8) & 0xFF);
-            frame[4] = (byte)(message.CanId & 0xFF);
+            uint txId = EffectiveCanId(message);
+            frame[1] = (byte)((txId >> 24) & 0xFF);
+            frame[2] = (byte)((txId >> 16) & 0xFF);
+            frame[3] = (byte)((txId >> 8) & 0xFF);
+            frame[4] = (byte)(txId & 0xFF);
             Array.Copy(message.Data, 0, frame, 5, Math.Min(8, message.Data.Length));
             return frame;
         }

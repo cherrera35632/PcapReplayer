@@ -1,6 +1,6 @@
 ================================================================================
   PcapReplayer — Project Status & Roadmap
-  Last updated: April 2026
+  Last updated: May 2026
   Current grade: A (GUI tool) / B+ (multi-VM deployed via script)
 ================================================================================
 
@@ -65,9 +65,9 @@
   ├── CanLogConverterTests.cs         3 tests: TRC / LOG conversion + USR framing
   ├── DbcParserTests.cs               6 tests: BO_/SG_/VAL_/multiplex skip coverage
   ├── SignalEncoderTests.cs          10 tests: physical→raw + Intel/Motorola packing
-  ├── UsrFrameBuilderTests.cs         4 tests: 13-byte frame output + USR round-trip
+  ├── UsrFrameBuilderTests.cs         8 tests: 13-byte frame output, SA override, USR round-trip
   └── CanTransmitterTests.cs          4 tests: rate, mute, cancellation, batching
-  TOTAL: 91 tests, 0 failures
+  TOTAL: 95 tests, 0 failures
 
 
 --------------------------------------------------------------------------------
@@ -88,6 +88,11 @@
     - Lets the user mute individual signals (muted signals contribute 0 bits)
     - Sends ASCII metadata header + N × 13-byte CAN frames as live UDP traffic
       in the USR-CANET200 wire format
+    - J1939 SA Override: for any extended (29-bit) message the detail panel
+      shows an "Override SA:" checkbox + spinner (0–255). When enabled, the
+      low 8 bits of the CAN ID (the J1939 Source Address field) are replaced
+      with the chosen value in every transmitted frame — including all mux
+      group sub-frames — without altering signals or other ID bits.
 
   Current limitation:
     - Multiplexed DBC signals (M / m0 / m1 / ...) are intentionally deferred.

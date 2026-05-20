@@ -32,6 +32,11 @@ namespace PcapReplayer
         private Panel pnlCanDetailHeader   = null!;
         private ToolTip _canToolTip        = new();
 
+        // SA override controls (only visible for J1939 extended messages)
+        private CheckBox chkOverrideSa     = null!;
+        private NumericUpDown nudOverrideSa = null!;
+        private Label lblOverrideSaHex     = null!;
+
         private ICanTransmitter _canTx = null!;
         private DbcDatabase? _canDatabase;
         private List<MessageTxState> _canMessages = new();
@@ -173,6 +178,57 @@ namespace PcapReplayer
                     _selectedCanMessage.PeriodMs = (int)nudCanMsgRate.Value;
             };
             pnlCanDetailHeader.Controls.Add(nudCanMsgRate);
+
+            // SA override — shown only when an extended (J1939 29-bit) message is selected
+            chkOverrideSa = new CheckBox
+            {
+                Text      = "Override SA:",
+                Location  = new Point(300, 33),
+                AutoSize  = true,
+                Enabled   = false,
+                Visible   = false,
+                Font      = new Font("Segoe UI", 8.5f)
+            };
+            nudOverrideSa = new NumericUpDown
+            {
+                Location  = new Point(393, 30),
+                Width     = 60,
+                Minimum   = 0,
+                Maximum   = 255,
+                Enabled   = false,
+                Visible   = false,
+                Font      = new Font("Segoe UI", 8.5f)
+            };
+            lblOverrideSaHex = new Label
+            {
+                Location  = new Point(458, 35),
+                Width     = 46,
+                AutoSize  = false,
+                Font      = new Font("Consolas", 8f),
+                ForeColor = Color.DimGray,
+                Visible   = false
+            };
+
+            chkOverrideSa.CheckedChanged += (s, e) =>
+            {
+                nudOverrideSa.Enabled = chkOverrideSa.Checked;
+                if (_selectedCanMessage == null) return;
+                _selectedCanMessage.OverrideSa = chkOverrideSa.Checked
+                    ? (byte)nudOverrideSa.Value
+                    : (byte?)null;
+                UpdateSaHexLabel();
+            };
+            nudOverrideSa.ValueChanged += (s, e) =>
+            {
+                if (_selectedCanMessage == null) return;
+                if (chkOverrideSa.Checked)
+                    _selectedCanMessage.OverrideSa = (byte)nudOverrideSa.Value;
+                UpdateSaHexLabel();
+            };
+
+            pnlCanDetailHeader.Controls.Add(chkOverrideSa);
+            pnlCanDetailHeader.Controls.Add(nudOverrideSa);
+            pnlCanDetailHeader.Controls.Add(lblOverrideSaHex);
 
             flpCanSignals = new FlowLayoutPanel
             {
@@ -573,6 +629,7 @@ namespace PcapReplayer
                 nudCanMsgRate.Tag        = null;
                 lblCanMsgInfo.Text       = "Select a CAN message from the tree.";
                 lblCanMsgInfo.ForeColor  = Color.DimGray;
+                ApplySaOverrideControls(null);
                 flpCanSignals.ResumeLayout();
                 return;
             }
@@ -601,6 +658,7 @@ namespace PcapReplayer
             }
             lblCanMsgInfo.Text       = infoText;
             lblCanMsgInfo.ForeColor  = Color.Black;
+            ApplySaOverrideControls(message);
 
             foreach (var signal in message.Signals)
             {
@@ -639,6 +697,7 @@ namespace PcapReplayer
             lblCanMsgInfo.Text      = $"{message.Name}  Multiplexor: {muxorName}  "
                                     + $"{groupCount} groups ({enabledCount} enabled) — select m# to set rate";
             lblCanMsgInfo.ForeColor = Color.MediumSlateBlue;
+            ApplySaOverrideControls(message);
 
             // Show a compact summary row for each group
             if (message.MultiplexGroups != null)
@@ -684,6 +743,7 @@ namespace PcapReplayer
             lblCanMsgInfo.Text = $"{message.Name}  Mux m{muxValue}  ({group.Signals.Count} signals)  " +
                                  $"Rate={group.PeriodMs}ms  [{enabledCount} groups enabled]";
             lblCanMsgInfo.ForeColor = Color.MediumSlateBlue;
+            ApplySaOverrideControls(message);
 
             foreach (var signal in group.Signals)
                 flpCanSignals.Controls.Add(BuildSignalRow(message, signal));
@@ -692,15 +752,53 @@ namespace PcapReplayer
             UpdateCanStartState();
         }
 
+        /// <summary>
+        /// Shows or hides the SA override checkbox + NUD and syncs them to <paramref name="message"/>.
+        /// Pass <c>null</c> to hide the controls when no message is selected or it is standard CAN.
+        /// </summary>
+        private void ApplySaOverrideControls(MessageTxState? message)
+        {
+            bool visible = message != null && message.IsExtended;
+            chkOverrideSa.Visible    = visible;
+            nudOverrideSa.Visible    = visible;
+            lblOverrideSaHex.Visible = visible;
+
+            if (!visible) return;
+
+            // Decode the DBC-baked SA for display
+            byte dbcSa = (byte)(message!.CanId & 0xFF);
+
+            // Suppress events while we set values
+            chkOverrideSa.CheckedChanged -= null;
+
+            bool overrideActive = message.OverrideSa.HasValue;
+            chkOverrideSa.Enabled = true;
+            chkOverrideSa.Checked = overrideActive;
+
+            nudOverrideSa.Enabled = overrideActive;
+            nudOverrideSa.Value   = overrideActive ? message.OverrideSa!.Value : dbcSa;
+
+            UpdateSaHexLabel();
+        }
+
+        private void UpdateSaHexLabel()
+        {
+            if (lblOverrideSaHex == null || !lblOverrideSaHex.Visible) return;
+            byte displaySa = chkOverrideSa.Checked ? (byte)nudOverrideSa.Value
+                           : (_selectedCanMessage != null ? (byte)(_selectedCanMessage.CanId & 0xFF) : (byte)0);
+            lblOverrideSaHex.Text = $"0x{displaySa:X2}";
+        }
+
         private Control BuildSignalRow(MessageTxState message, SignalTxState signal)
         {
             var row = new Panel
             {
-                Width  = 348,
-                Height = 34,
-                Margin = new Padding(0, 0, 0, 4)
+                Width  = 500,   // wider to accommodate mode controls
+                Height = 58,
+                Margin = new Padding(0, 0, 0, 2)
             };
 
+            // ── Line 1: enable checkbox │ signal label │ value editor │ raw display ────────
             var chkEnabled = new CheckBox
             {
                 Checked  = !signal.IsMuted,
@@ -723,23 +821,25 @@ namespace PcapReplayer
 
             row.Controls.Add(new Label
             {
-                Text     = signalLabel,
-                Location = new Point(22, 9),
-                Width    = 145,
+                Text         = signalLabel,
+                Location     = new Point(22, 9),
+                Width        = 145,
                 AutoEllipsis = true,
-                Font     = new Font("Segoe UI", 8.5f)
+                Font         = new Font("Segoe UI", 8.5f)
             });
 
             var rawLabel = new Label
             {
-                Location  = new Point(268, 9),
-                Width     = 76,
+                Location     = new Point(268, 9),
+                Width        = 76,
                 AutoEllipsis = true,
-                Font      = new Font("Consolas", 8f),
-                ForeColor = Color.DimGray
+                Font         = new Font("Consolas", 8f),
+                ForeColor    = Color.DimGray
             };
             row.Controls.Add(rawLabel);
 
+            // Value editor (NUD or ComboBox depending on value table)
+            Control valueEditor;
             if (signal.Signal.ValueTable is { Count: > 0 })
             {
                 var cbo = new ComboBox
@@ -751,7 +851,6 @@ namespace PcapReplayer
                 };
                 foreach (var entry in signal.Signal.ValueTable.OrderBy(v => v.Key))
                     cbo.Items.Add(new CanValueOption(entry.Key, entry.Value));
-
                 var selected = cbo.Items.Cast<CanValueOption>().FirstOrDefault(o => o.Raw == signal.RawValue);
                 if (selected != null) cbo.SelectedItem = selected;
                 cbo.SelectedIndexChanged += (s, e) =>
@@ -759,33 +858,29 @@ namespace PcapReplayer
                     if (cbo.SelectedItem is not CanValueOption option) return;
                     signal.RawValue      = option.Raw;
                     signal.PhysicalValue = option.Raw * signal.Signal.Factor + signal.Signal.Offset;
-                    if (SignalEncoder.TryEncodePhysical(signal.Signal, signal.PhysicalValue, out long raw, out string? error))
-                    {
-                        signal.RawValue = raw;
-                        signal.Error    = null;
-                    }
+                    if (SignalEncoder.TryEncodePhysical(signal.Signal, signal.PhysicalValue, out long raw, out string? err))
+                    { signal.RawValue = raw; signal.Error = null; }
                     else
-                    {
-                        signal.Error = error;
-                    }
+                    { signal.Error = err; }
                     UpdateSignalVisual(message, signal, cbo, rawLabel);
                 };
                 row.Controls.Add(cbo);
                 UpdateSignalVisual(message, signal, cbo, rawLabel);
+                valueEditor = cbo;
             }
             else
             {
                 var nud = new NumericUpDown
                 {
-                    Location          = new Point(170, 5),
-                    Width             = 92,
-                    DecimalPlaces     = GetDecimalPlaces(signal.Signal.Factor),
-                    Minimum           = SafeDecimal(Math.Min(signal.Signal.Min, signal.Signal.Max)),
-                    Maximum           = SafeDecimal(Math.Max(signal.Signal.Min, signal.Signal.Max)),
-                    Increment         = SafeIncrement(signal.Signal.Factor),
+                    Location           = new Point(170, 5),
+                    Width              = 92,
+                    DecimalPlaces      = GetDecimalPlaces(signal.Signal.Factor),
+                    Minimum            = SafeDecimal(Math.Min(signal.Signal.Min, signal.Signal.Max)),
+                    Maximum            = SafeDecimal(Math.Max(signal.Signal.Min, signal.Signal.Max)),
+                    Increment          = SafeIncrement(signal.Signal.Factor),
                     ThousandsSeparator = true,
-                    Value             = SafeDecimal(signal.PhysicalValue),
-                    Font              = new Font("Segoe UI", 8.5f)
+                    Value              = SafeDecimal(signal.PhysicalValue),
+                    Font               = new Font("Segoe UI", 8.5f)
                 };
                 nud.ValueChanged += (s, e) =>
                 {
@@ -794,11 +889,76 @@ namespace PcapReplayer
                 };
                 row.Controls.Add(nud);
                 UpdateSignalVisual(message, signal, nud, rawLabel);
+                valueEditor = nud;
             }
 
-            _canToolTip.SetToolTip(row, BuildSignalTooltip(signal.Signal));
+            // ── Line 2: gen-mode selector ───────────────────────────────────────────────────
+            bool hasRange = signal.Signal.Min < signal.Signal.Max;
+
+            row.Controls.Add(new Label
+            {
+                Text      = "Mode:",
+                Location  = new Point(22, 36),
+                AutoSize  = true,
+                Font      = new Font("Segoe UI", 7.5f),
+                ForeColor = Color.DimGray
+            });
+
+            var cboMode = new ComboBox
+            {
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Location      = new Point(58, 33),
+                Width         = 78,
+                Font          = new Font("Segoe UI", 8f)
+            };
+            cboMode.Items.AddRange(new object[] { "Fixed", "🎲 Random", "〜 Sine" });
+            cboMode.SelectedIndex = (int)signal.GenMode;
+            cboMode.Enabled = hasRange;
+            row.Controls.Add(cboMode);
+
+            var lblPeriod = new Label
+            {
+                Text      = "Period ms:",
+                Location  = new Point(144, 36),
+                AutoSize  = true,
+                Font      = new Font("Segoe UI", 7.5f),
+                ForeColor = Color.DimGray,
+                Visible   = signal.GenMode == SignalGenMode.Sine
+            };
+            row.Controls.Add(lblPeriod);
+
+            var nudPeriod = new NumericUpDown
+            {
+                Location  = new Point(210, 33),
+                Width     = 72,
+                Minimum   = 100,
+                Maximum   = 300_000,
+                Increment = 500,
+                Value     = signal.SinePeriodMs,
+                Font      = new Font("Segoe UI", 8f),
+                Visible   = signal.GenMode == SignalGenMode.Sine
+            };
+            nudPeriod.ValueChanged += (s, e) => signal.SinePeriodMs = (int)nudPeriod.Value;
+            row.Controls.Add(nudPeriod);
+
+            cboMode.SelectedIndexChanged += (s, e) =>
+            {
+                signal.GenMode  = (SignalGenMode)cboMode.SelectedIndex;
+                bool isSine     = signal.GenMode == SignalGenMode.Sine;
+                bool isFixed    = signal.GenMode == SignalGenMode.Fixed;
+                lblPeriod.Visible  = isSine;
+                nudPeriod.Visible  = isSine;
+                // Disable the value editor when the signal is being auto-driven
+                valueEditor.Enabled = isFixed;
+            };
+            // Reflect initial state
+            valueEditor.Enabled = signal.GenMode == SignalGenMode.Fixed;
+
+            _canToolTip.SetToolTip(row, BuildSignalTooltip(signal.Signal) +
+                (hasRange ? string.Empty : "\n⚠ Min = Max — Random/Sine unavailable"));
             return row;
         }
+
 
         private void UpdateSignalVisual(MessageTxState message, SignalTxState signal, Control editor, Label rawLabel)
         {

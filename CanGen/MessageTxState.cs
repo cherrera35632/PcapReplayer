@@ -2,6 +2,20 @@ using System.Collections.Generic;
 
 namespace PcapReplayer
 {
+    /// <summary>Controls how a signal's value is generated on each TX tick.</summary>
+    public enum SignalGenMode
+    {
+        /// <summary>Value stays at the user-set physical value (default).</summary>
+        Fixed,
+        /// <summary>A new random value is drawn from [Signal.Min, Signal.Max] on every TX tick.</summary>
+        Random,
+        /// <summary>Value oscillates as a sine wave between Signal.Min and Signal.Max.</summary>
+        Sine
+    }
+}
+
+namespace PcapReplayer
+{
     public sealed class MessageTxState
     {
         public required string Name { get; init; }
@@ -13,6 +27,13 @@ namespace PcapReplayer
         public byte[] Data { get; } = new byte[8];
         public List<SignalTxState> Signals { get; } = new();
         public long NextSendTs { get; set; }
+
+        /// <summary>
+        /// When non-null and <see cref="IsExtended"/> is true, overrides the Source Address
+        /// (low 8 bits of the 29-bit CAN ID) for every transmitted frame of this message.
+        /// Set to <c>null</c> to use the SA embedded in the DBC CAN ID.
+        /// </summary>
+        public byte? OverrideSa { get; set; }
         public string? Comment { get; init; }
 
         /// <summary>Non-null when this message contains multiplexed signals.
@@ -44,5 +65,11 @@ namespace PcapReplayer
         public double PhysicalValue { get; set; }
         public long RawValue { get; set; }
         public string? Error { get; set; }
+
+        /// <summary>How the value is generated each TX tick. Default is <see cref="SignalGenMode.Fixed"/>.</summary>
+        public SignalGenMode GenMode { get; set; } = SignalGenMode.Fixed;
+
+        /// <summary>Sine wave period in milliseconds. Only used when <see cref="GenMode"/> is <see cref="SignalGenMode.Sine"/>.</summary>
+        public int SinePeriodMs { get; set; } = 5000;
     }
 }

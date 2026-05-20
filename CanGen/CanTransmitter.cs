@@ -62,7 +62,8 @@ namespace PcapReplayer
             IReadOnlyList<MessageTxState> allMessages = cfg.Messages;
 
             byte[] headerBytes = Encoding.ASCII.GetBytes(cfg.UsrMetadataHeader);
-            long now = Stopwatch.GetTimestamp();
+            long now    = Stopwatch.GetTimestamp();
+            long startTs = now; // anchor for sine elapsed-time computation
             foreach (var message in allMessages)
             {
                 message.NextSendTs = now;
@@ -122,6 +123,7 @@ namespace PcapReplayer
                     WaitUntil(nextDue, ct);
 
                     long dueCutoff = Stopwatch.GetTimestamp() + batchWindowTicks;
+                    double elapsedSec = (Stopwatch.GetTimestamp() - startTs) / (double)Stopwatch.Frequency;
 
                     // Build frames for all due items
                     var frames = new List<byte[]>();
@@ -135,6 +137,13 @@ namespace PcapReplayer
                             {
                                 if (!group.Enabled) continue;
                                 if (group.NextSendTs > dueCutoff) continue;
+                                // Update non-muxed normal signals
+                                foreach (var sig in message.Signals)
+                                    if (sig.Signal.MultiplexIndicator == null)
+                                        SignalValueGenerator.Update(sig, elapsedSec);
+                                // Update the group's own signals
+                                foreach (var sig in group.Signals)
+                                    SignalValueGenerator.Update(sig, elapsedSec);
                                 frames.Add(UsrFrameBuilder.Build13BytesForMuxGroup(message, group.MuxValue));
                                 group.NextSendTs += (long)(group.PeriodMs * TicksPerMs);
                             }
@@ -142,6 +151,8 @@ namespace PcapReplayer
                         else
                         {
                             if (message.NextSendTs > dueCutoff) continue;
+                            foreach (var sig in message.Signals)
+                                SignalValueGenerator.Update(sig, elapsedSec);
                             frames.Add(UsrFrameBuilder.Build13Bytes(message));
                             message.NextSendTs += (long)(message.PeriodMs * TicksPerMs);
                         }
