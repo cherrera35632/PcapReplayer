@@ -37,6 +37,11 @@ namespace PcapReplayer
         private NumericUpDown nudOverrideSa = null!;
         private Label lblOverrideSaHex     = null!;
 
+        // Favorites quick-access bar
+        private ComboBox cboFavorites      = null!;
+        private CheckBox chkMarkFavorite   = null!;
+        private Label    lblFavoritesHint  = null!;
+
         private ICanTransmitter _canTx = null!;
         private DbcDatabase? _canDatabase;
         private List<MessageTxState> _canMessages = new();
@@ -100,11 +105,51 @@ namespace PcapReplayer
             txtCanTargetPort.TextChanged += (s, e) => UpdateCanStartState();
             txtCanSourceIp.TextChanged   += (s, e) => UpdateCanStartState();
 
+            // ── Favorites bar ────────────────────────────────────────────────────────────
+            var pnlFavorites = new Panel
+            {
+                Location  = new Point(10, 122),
+                Size      = new Size(634, 28),
+                BackColor = Color.FromArgb(255, 253, 235)   // warm cream tint
+            };
+
+            pnlFavorites.Controls.Add(new Label
+            {
+                Text      = "⭐ Favorites:",
+                Location  = new Point(2, 6),
+                AutoSize  = true,
+                Font      = new Font("Segoe UI", 8.5f, FontStyle.Bold),
+                ForeColor = Color.DarkGoldenrod
+            });
+
+            cboFavorites = new ComboBox
+            {
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Location      = new Point(84, 3),
+                Width         = 430,
+                Font          = new Font("Segoe UI", 8.5f),
+                Enabled       = false
+            };
+            cboFavorites.SelectedIndexChanged += CboFavorites_SelectedIndexChanged;
+            pnlFavorites.Controls.Add(cboFavorites);
+
+            lblFavoritesHint = new Label
+            {
+                Text      = "(no favorites yet — check ⭐ on a message)",
+                Location  = new Point(84, 7),
+                Width     = 430,
+                AutoSize  = false,
+                Font      = new Font("Segoe UI", 8f, FontStyle.Italic),
+                ForeColor = Color.DarkGoldenrod
+            };
+            pnlFavorites.Controls.Add(lblFavoritesHint);
+
+            // ── Messages group box ───────────────────────────────────────────────────────
             grpCanMessages = new GroupBox
             {
                 Text      = "Messages (PGN → Message → Signal)",
-                Location  = new Point(10, 124),
-                Size      = new Size(634, 350),
+                Location  = new Point(10, 156),
+                Size      = new Size(634, 318),
                 Font      = new Font("Segoe UI", 9f, FontStyle.Bold),
                 ForeColor = Color.SteelBlue
             };
@@ -127,7 +172,7 @@ namespace PcapReplayer
             split.Panel1.Controls.Add(tvCanMessages);
 
             var detailPanel = new Panel { Dock = DockStyle.Fill };
-            pnlCanDetailHeader = new Panel { Dock = DockStyle.Top, Height = 58 };
+            pnlCanDetailHeader = new Panel { Dock = DockStyle.Top, Height = 84 };
             lblCanMsgInfo = new Label
             {
                 Text      = "Select a CAN message from the tree.",
@@ -179,11 +224,24 @@ namespace PcapReplayer
             };
             pnlCanDetailHeader.Controls.Add(nudCanMsgRate);
 
-            // SA override — shown only when an extended (J1939 29-bit) message is selected
+            // ⭐ Mark favorite — row 3
+            chkMarkFavorite = new CheckBox
+            {
+                Text      = "⭐ Favorite",
+                Location  = new Point(8, 61),
+                AutoSize  = true,
+                Enabled   = false,
+                Font      = new Font("Segoe UI", 8.5f),
+                ForeColor = Color.DarkGoldenrod
+            };
+            chkMarkFavorite.CheckedChanged += ChkMarkFavorite_Changed;
+            pnlCanDetailHeader.Controls.Add(chkMarkFavorite);
+
+            // SA override — row 3, shown only for J1939 extended messages
             chkOverrideSa = new CheckBox
             {
                 Text      = "Override SA:",
-                Location  = new Point(300, 33),
+                Location  = new Point(110, 61),
                 AutoSize  = true,
                 Enabled   = false,
                 Visible   = false,
@@ -191,7 +249,7 @@ namespace PcapReplayer
             };
             nudOverrideSa = new NumericUpDown
             {
-                Location  = new Point(393, 30),
+                Location  = new Point(210, 58),
                 Width     = 60,
                 Minimum   = 0,
                 Maximum   = 255,
@@ -201,7 +259,7 @@ namespace PcapReplayer
             };
             lblOverrideSaHex = new Label
             {
-                Location  = new Point(458, 35),
+                Location  = new Point(275, 62),
                 Width     = 46,
                 AutoSize  = false,
                 Font      = new Font("Consolas", 8f),
@@ -287,9 +345,16 @@ namespace PcapReplayer
                 ScrollBars = RichTextBoxScrollBars.Vertical
             };
 
+            // Shift Start/Stop/Log controls down to account for the favorites bar
+            btnCanStart.Location    = new Point(10, 484);
+            btnCanStop.Location     = new Point(140, 484);
+            lblCanSentCount.Location= new Point(250, 490);
+            txtCanGenLog.Location   = new Point(10, 520);
+
             tab.Controls.AddRange(new Control[]
             {
                 pnlCanConfig,
+                pnlFavorites,
                 grpCanMessages,
                 btnCanStart,
                 btnCanStop,
@@ -459,6 +524,76 @@ namespace PcapReplayer
             };
         }
 
+        /// <summary>
+        /// Refreshes the Favorites combo box to reflect the current <see cref="MessageTxState.IsFavorite"/> flags.
+        /// Call this whenever a message's favorite state changes or the tree is rebuilt.
+        /// </summary>
+        private void RefreshFavoritesBar()
+        {
+            cboFavorites.SelectedIndexChanged -= CboFavorites_SelectedIndexChanged;
+            cboFavorites.Items.Clear();
+
+            foreach (var msg in _canMessages.Where(m => m.IsFavorite))
+                cboFavorites.Items.Add(new FavoriteEntry(msg));
+
+            bool hasFavs = cboFavorites.Items.Count > 0;
+            cboFavorites.Enabled       = hasFavs;
+            cboFavorites.Visible       = hasFavs;
+            lblFavoritesHint.Visible   = !hasFavs;
+
+            // Re-select current message in the combo if it is a favorite
+            if (_selectedCanMessage != null && _selectedCanMessage.IsFavorite)
+            {
+                var target = cboFavorites.Items.Cast<FavoriteEntry>()
+                    .FirstOrDefault(fe => ReferenceEquals(fe.Message, _selectedCanMessage));
+                if (target != null) cboFavorites.SelectedItem = target;
+            }
+
+            cboFavorites.SelectedIndexChanged += CboFavorites_SelectedIndexChanged;
+            // Also reflect the star checkbox for the currently shown message
+            SyncStarCheckbox();
+        }
+
+        private void CboFavorites_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            if (cboFavorites.SelectedItem is FavoriteEntry entry)
+                NavigateToMessage(entry.Message);
+        }
+
+        /// <summary>Selects the tree node that corresponds to <paramref name="message"/>.</summary>
+        private void NavigateToMessage(MessageTxState message)
+        {
+            foreach (TreeNode pgn in tvCanMessages.Nodes)
+            {
+                foreach (TreeNode msgNode in pgn.Nodes)
+                {
+                    if (ReferenceEquals(msgNode.Tag, message))
+                    {
+                        tvCanMessages.SelectedNode = msgNode;
+                        msgNode.EnsureVisible();
+                        return;
+                    }
+                }
+            }
+        }
+
+        /// <summary>Syncs the ⭐ checkbox to the currently selected message without re-raising events.</summary>
+        private void SyncStarCheckbox()
+        {
+            chkMarkFavorite.CheckedChanged -= ChkMarkFavorite_Changed;
+            bool msgSelected = _selectedCanMessage != null;
+            chkMarkFavorite.Enabled = msgSelected;
+            chkMarkFavorite.Checked = msgSelected && _selectedCanMessage!.IsFavorite;
+            chkMarkFavorite.CheckedChanged += ChkMarkFavorite_Changed;
+        }
+
+        private void ChkMarkFavorite_Changed(object? sender, EventArgs e)
+        {
+            if (_selectedCanMessage == null) return;
+            _selectedCanMessage.IsFavorite = chkMarkFavorite.Checked;
+            RefreshFavoritesBar();
+        }
+
         private void RebuildCanTree()
         {
             tvCanMessages.BeginUpdate();
@@ -467,8 +602,10 @@ namespace PcapReplayer
                 tvCanMessages.Nodes.Clear();
                 _selectedCanMessage = null;
                 flpCanSignals.Controls.Clear();
-                chkCanMsgEnabled.Enabled = false;
-                nudCanMsgRate.Enabled    = false;
+                chkCanMsgEnabled.Enabled  = false;
+                nudCanMsgRate.Enabled     = false;
+                chkMarkFavorite.Enabled   = false;
+                chkMarkFavorite.Checked   = false;
                 lblCanMsgInfo.Text       = "Select a CAN message from the tree.";
                 lblCanMsgInfo.ForeColor  = Color.DimGray;
 
@@ -538,6 +675,9 @@ namespace PcapReplayer
             {
                 tvCanMessages.EndUpdate();
             }
+
+            // Rebuild favorites combo after the tree is ready
+            RefreshFavoritesBar();
         }
 
         private void RefreshTreeLabels()
@@ -639,6 +779,7 @@ namespace PcapReplayer
             chkCanMsgEnabled.Checked = message.Enabled;
             chkCanMsgEnabled.Tag     = null; // not bound to a mux group
             nudCanMsgRate.Tag        = null; // not bound to a mux group
+            SyncStarCheckbox();
             if (message.IsMultiplexed)
             {
                 // Rate is per-group for muxed messages; show nothing at message level
@@ -690,6 +831,7 @@ namespace PcapReplayer
             nudCanMsgRate.Enabled    = false;
             nudCanMsgRate.Tag        = null;
             nudCanMsgRate.Value      = nudCanMsgRate.Minimum; // clear any stale value
+            SyncStarCheckbox();
 
             int groupCount   = message.MultiplexGroups?.Count ?? 0;
             int enabledCount = message.MultiplexGroups?.Values.Count(g => g.Enabled) ?? 0;
@@ -738,6 +880,9 @@ namespace PcapReplayer
             nudCanMsgRate.Enabled = true;
             nudCanMsgRate.Tag     = group; // track which group is bound for ValueChanged
             nudCanMsgRate.Value   = group.PeriodMs;
+
+            // Star reflects the parent message (groups don't have their own favorite state)
+            SyncStarCheckbox();
 
             int enabledCount = message.MultiplexGroups?.Values.Count(g => g.Enabled) ?? 0;
             lblCanMsgInfo.Text = $"{message.Name}  Mux m{muxValue}  ({group.Signals.Count} signals)  " +
@@ -1195,6 +1340,19 @@ namespace PcapReplayer
         private sealed record SignalNodeTag(MessageTxState Message, SignalTxState Signal);
         private sealed record MuxGroupNodeTag(MessageTxState Message, int MuxValue, MultiplexGroup Group);
         private sealed record MuxParentNodeTag(MessageTxState Message);
+
+        /// <summary>Wraps a <see cref="MessageTxState"/> for display in the Favorites combo box.</summary>
+        private sealed class FavoriteEntry
+        {
+            public FavoriteEntry(MessageTxState message) => Message = message;
+            public MessageTxState Message { get; }
+            public override string ToString()
+            {
+                string idText = Message.IsExtended ? $"0x{Message.CanId:X8}" : $"0x{Message.CanId:X3}";
+                string enabled = Message.Enabled ? string.Empty : " [off]";
+                return $"⭐ {Message.Name}  {idText}{enabled}";
+            }
+        }
 
         private sealed class CanValueOption
         {

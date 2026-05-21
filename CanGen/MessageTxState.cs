@@ -36,6 +36,12 @@ namespace PcapReplayer
         public byte? OverrideSa { get; set; }
         public string? Comment { get; init; }
 
+        /// <summary>
+        /// When <see langword="true"/> the message appears in the Favorites quick-access bar
+        /// so the user can navigate to its settings without scrolling the full tree.
+        /// </summary>
+        public bool IsFavorite { get; set; }
+
         /// <summary>Non-null when this message contains multiplexed signals.
         /// The multiplexor signal itself lives in <see cref="Signals"/>.
         /// Each group is keyed by the mux index (1, 2, …) and holds its own signal states.</summary>
