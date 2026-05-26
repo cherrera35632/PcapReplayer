@@ -1,6 +1,6 @@
 ================================================================================
   PcapReplayer — Project Status & Roadmap
-  Last updated: May 2026
+  Last updated: 2026-05-26
   Current grade: A (GUI tool) / B+ (multi-VM deployed via script)
 ================================================================================
 
@@ -66,8 +66,10 @@
   ├── DbcParserTests.cs               6 tests: BO_/SG_/VAL_/multiplex skip coverage
   ├── SignalEncoderTests.cs          10 tests: physical→raw + Intel/Motorola packing
   ├── UsrFrameBuilderTests.cs         8 tests: 13-byte frame output, SA override, USR round-trip
-  └── CanTransmitterTests.cs          4 tests: rate, mute, cancellation, batching
-  TOTAL: 95 tests, 0 failures
+  ├── CanTransmitterTests.cs          4 tests: rate, mute, cancellation, batching
+  └── CanSearchTests.cs             24 tests: NormalizeSearchQuery, MessageMatchesSearchQuery,
+  │                                            extended/standard ID prefix matching, round-trips
+  TOTAL: 119 tests, 0 failures
 
 
 --------------------------------------------------------------------------------
@@ -93,6 +95,12 @@
       low 8 bits of the CAN ID (the J1939 Source Address field) are replaced
       with the chosen value in every transmitted frame — including all mux
       group sub-frames — without altering signals or other ID bits.
+
+  Live Search:
+    - A search bar (🔍) sits above the message tree.
+    - Matches by message name (substring, case-insensitive) OR by hex CAN-ID prefix.
+    - Supports "0x" / "0X" prefix stripping so users can paste IDs either way.
+    - First match is auto-selected and scrolled into view; match count shown inline.
 
   Current limitation:
     - Multiplexed DBC signals (M / m0 / m1 / ...) are intentionally deferred.

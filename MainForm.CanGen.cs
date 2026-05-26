@@ -42,6 +42,10 @@ namespace PcapReplayer
         private CheckBox chkMarkFavorite   = null!;
         private Label    lblFavoritesHint  = null!;
 
+        // Live search bar
+        private TextBox txtCanSearch       = null!;
+        private Label   lblCanSearchStatus = null!;
+
         private ICanTransmitter _canTx = null!;
         private DbcDatabase? _canDatabase;
         private List<MessageTxState> _canMessages = new();
@@ -144,12 +148,48 @@ namespace PcapReplayer
             };
             pnlFavorites.Controls.Add(lblFavoritesHint);
 
+            // ── Search bar ─────────────────────────────────────────────────────────
+            var pnlSearch = new Panel
+            {
+                Location  = new Point(10, 150),
+                Size      = new Size(634, 28),
+                BackColor = Color.FromArgb(235, 244, 255)   // light blue tint
+            };
+
+            pnlSearch.Controls.Add(new Label
+            {
+                Text      = "🔍 Search:",
+                Location  = new Point(2, 6),
+                AutoSize  = true,
+                Font      = new Font("Segoe UI", 8.5f, FontStyle.Bold),
+                ForeColor = Color.SteelBlue
+            });
+
+            txtCanSearch = new TextBox
+            {
+                Location     = new Point(70, 4),
+                Width        = 320,
+                Font         = new Font("Segoe UI", 8.5f),
+                PlaceholderText = "Message name or CAN ID (e.g. ENG_SPEED or 18FD9BFE)"
+            };
+            txtCanSearch.TextChanged += CanSearch_TextChanged;
+            pnlSearch.Controls.Add(txtCanSearch);
+
+            lblCanSearchStatus = new Label
+            {
+                Location  = new Point(396, 7),
+                AutoSize  = true,
+                Font      = new Font("Segoe UI", 8f, FontStyle.Italic),
+                ForeColor = Color.SteelBlue
+            };
+            pnlSearch.Controls.Add(lblCanSearchStatus);
+
             // ── Messages group box ───────────────────────────────────────────────────────
             grpCanMessages = new GroupBox
             {
                 Text      = "Messages (PGN → Message → Signal)",
-                Location  = new Point(10, 156),
-                Size      = new Size(634, 318),
+                Location  = new Point(10, 184),
+                Size      = new Size(634, 290),
                 Font      = new Font("Segoe UI", 9f, FontStyle.Bold),
                 ForeColor = Color.SteelBlue
             };
@@ -355,6 +395,7 @@ namespace PcapReplayer
             {
                 pnlCanConfig,
                 pnlFavorites,
+                pnlSearch,
                 grpCanMessages,
                 btnCanStart,
                 btnCanStop,
@@ -592,6 +633,82 @@ namespace PcapReplayer
             if (_selectedCanMessage == null) return;
             _selectedCanMessage.IsFavorite = chkMarkFavorite.Checked;
             RefreshFavoritesBar();
+        }
+
+        // ── Live search ──────────────────────────────────────────────────────────────────
+
+        private void CanSearch_TextChanged(object? sender, EventArgs e)
+        {
+            string raw = txtCanSearch.Text.Trim();
+
+            if (string.IsNullOrEmpty(raw))
+            {
+                lblCanSearchStatus.Text      = string.Empty;
+                lblCanSearchStatus.ForeColor = Color.SteelBlue;
+                return;
+            }
+
+            string query   = NormalizeSearchQuery(raw);
+            var    matches = SearchCanTree(query);
+
+            if (matches.Count == 0)
+            {
+                lblCanSearchStatus.Text      = "no match";
+                lblCanSearchStatus.ForeColor = Color.Crimson;
+                return;
+            }
+
+            tvCanMessages.SelectedNode = matches[0];
+            matches[0].EnsureVisible();
+
+            lblCanSearchStatus.Text      = matches.Count == 1 ? "1 match" : $"{matches.Count} matches";
+            lblCanSearchStatus.ForeColor = Color.SeaGreen;
+        }
+
+        /// <summary>
+        /// Strips a leading "0x" / "0X" prefix so users can enter hex IDs either way.
+        /// The result is the normalised query string passed to <see cref="MessageMatchesSearchQuery"/>.
+        /// </summary>
+        internal static string NormalizeSearchQuery(string raw)
+            => raw.StartsWith("0x", StringComparison.OrdinalIgnoreCase) ? raw[2..] : raw;
+
+        /// <summary>
+        /// Returns <see langword="true"/> when <paramref name="msg"/> matches a normalised
+        /// (no "0x" prefix) <paramref name="query"/>:
+        /// <list type="bullet">
+        ///   <item>Message name <em>contains</em> the query (case-insensitive), or</item>
+        ///   <item>Hex CAN-ID <em>starts with</em> the query (case-insensitive).</item>
+        /// </list>
+        /// </summary>
+        internal static bool MessageMatchesSearchQuery(MessageTxState msg, string query)
+        {
+            if (string.IsNullOrEmpty(query)) return false;
+
+            bool nameMatch = msg.Name.Contains(query, StringComparison.OrdinalIgnoreCase);
+
+            string hexId  = msg.IsExtended ? $"{msg.CanId:X8}" : $"{msg.CanId:X3}";
+            bool idMatch  = hexId.StartsWith(query, StringComparison.OrdinalIgnoreCase);
+
+            return nameMatch || idMatch;
+        }
+
+        /// <summary>
+        /// Returns all message-level <see cref="TreeNode"/>s that satisfy
+        /// <see cref="MessageMatchesSearchQuery"/> for the given normalised query.
+        /// </summary>
+        private List<TreeNode> SearchCanTree(string query)
+        {
+            var results = new List<TreeNode>();
+            foreach (TreeNode pgn in tvCanMessages.Nodes)
+            {
+                foreach (TreeNode msgNode in pgn.Nodes)
+                {
+                    if (msgNode.Tag is not MessageTxState msg) continue;
+                    if (MessageMatchesSearchQuery(msg, query))
+                        results.Add(msgNode);
+                }
+            }
+            return results;
         }
 
         private void RebuildCanTree()
