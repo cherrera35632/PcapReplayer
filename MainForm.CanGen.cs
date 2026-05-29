@@ -25,6 +25,7 @@ namespace PcapReplayer
         private FlowLayoutPanel flpCanSignals = null!;
         private Button btnCanStart         = null!;
         private Button btnCanStop          = null!;
+        private Button btnCanSetAllRandom1s = null!;
         private Label lblCanSentCount      = null!;
         private RichTextBox txtCanGenLog   = null!;
         private Panel pnlCanConfig         = null!;
@@ -364,10 +365,21 @@ namespace PcapReplayer
             };
             btnCanStop.Click += BtnCanStop_Click;
 
+            btnCanSetAllRandom1s = new Button
+            {
+                Text      = "🎲 Set All: 1s + Random",
+                Location  = new Point(240, 484),
+                Width     = 180,
+                BackColor = Color.FromArgb(235, 244, 255),
+                FlatStyle = FlatStyle.Flat,
+                Enabled   = false
+            };
+            btnCanSetAllRandom1s.Click += BtnCanSetAllRandom1s_Click;
+
             lblCanSentCount = new Label
             {
                 Text      = "Sent: 0 frames",
-                Location  = new Point(250, 490),
+                Location  = new Point(435, 490),
                 AutoSize  = true,
                 Font      = new Font("Consolas", 9f),
                 ForeColor = Color.DimGray
@@ -388,7 +400,8 @@ namespace PcapReplayer
             // Shift Start/Stop/Log controls down to account for the favorites bar
             btnCanStart.Location    = new Point(10, 484);
             btnCanStop.Location     = new Point(140, 484);
-            lblCanSentCount.Location= new Point(250, 490);
+            btnCanSetAllRandom1s.Location = new Point(240, 484);
+            lblCanSentCount.Location= new Point(435, 490);
             txtCanGenLog.Location   = new Point(10, 520);
 
             tab.Controls.AddRange(new Control[]
@@ -399,6 +412,7 @@ namespace PcapReplayer
                 grpCanMessages,
                 btnCanStart,
                 btnCanStop,
+                btnCanSetAllRandom1s,
                 lblCanSentCount,
                 txtCanGenLog
             });
@@ -709,6 +723,55 @@ namespace PcapReplayer
                 }
             }
             return results;
+        }
+
+        private void BtnCanSetAllRandom1s_Click(object? sender, EventArgs e)
+        {
+            if (_canMessages.Count == 0) return;
+
+            SetAllToRandom1s(_canMessages);
+
+            var previouslySelected = _selectedCanMessage;
+            RebuildCanTree();
+            if (previouslySelected != null)
+            {
+                NavigateToMessage(previouslySelected);
+            }
+
+            CanGenLog("🎲 Set all messages & multiplex groups to 1s rate with Random values.");
+            UpdateCanStartState();
+        }
+
+        internal static void SetAllToRandom1s(IEnumerable<MessageTxState> messages)
+        {
+            foreach (var message in messages)
+            {
+                message.Enabled = true;
+                message.PeriodMs = 1000;
+
+                foreach (var signal in message.Signals)
+                {
+                    signal.IsMuted = false;
+                    signal.GenMode = SignalGenMode.Random;
+                }
+
+                if (message.MultiplexGroups != null)
+                {
+                    foreach (var group in message.MultiplexGroups.Values)
+                    {
+                        group.Enabled = true;
+                        group.PeriodMs = 1000;
+
+                        foreach (var signal in group.Signals)
+                        {
+                            signal.IsMuted = false;
+                            signal.GenMode = SignalGenMode.Random;
+                        }
+                    }
+                }
+
+                UsrFrameBuilder.BuildDataBytes(message);
+            }
         }
 
         private void RebuildCanTree()
@@ -1388,6 +1451,10 @@ namespace PcapReplayer
         {
             if (btnCanStart == null) return;
             btnCanStart.Enabled = _canTxCts == null && GetCanStartValidationError() == null;
+            if (btnCanSetAllRandom1s != null)
+            {
+                btnCanSetAllRandom1s.Enabled = _canTxCts == null && _canDatabase != null && _canMessages.Count > 0;
+            }
         }
 
         private void SetCanTxRunning(bool running)
@@ -1397,6 +1464,10 @@ namespace PcapReplayer
             // Keep grpCanMessages enabled during TX so users can toggle messages/signals in real time
             btnCanStart.Enabled    = !running && GetCanStartValidationError() == null;
             btnCanStop.Enabled     = running;
+            if (btnCanSetAllRandom1s != null)
+            {
+                btnCanSetAllRandom1s.Enabled = !running && _canDatabase != null && _canMessages.Count > 0;
+            }
         }
 
         private void SetCanTxCount(int count)

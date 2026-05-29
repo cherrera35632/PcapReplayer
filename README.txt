@@ -67,9 +67,12 @@
   ├── SignalEncoderTests.cs          10 tests: physical→raw + Intel/Motorola packing
   ├── UsrFrameBuilderTests.cs         8 tests: 13-byte frame output, SA override, USR round-trip
   ├── CanTransmitterTests.cs          4 tests: rate, mute, cancellation, batching
-  └── CanSearchTests.cs             24 tests: NormalizeSearchQuery, MessageMatchesSearchQuery,
+  ├── CanSearchTests.cs             24 tests: NormalizeSearchQuery, MessageMatchesSearchQuery,
   │                                            extended/standard ID prefix matching, round-trips
-  TOTAL: 119 tests, 0 failures
+  ├── FavoritesFeatureTests.cs      20 tests: IsFavorite toggles, orthogonal properties, favorites bar
+  ├── SignalValueGeneratorTests.cs   6 tests: fixed/random/sine wave generator update logic
+  └── CanSetAllRandomTests.cs        3 tests: SetAllToRandom1s batch configuration helper
+  TOTAL: 148 tests, 0 failures
 
 
 --------------------------------------------------------------------------------
@@ -101,6 +104,11 @@
     - Matches by message name (substring, case-insensitive) OR by hex CAN-ID prefix.
     - Supports "0x" / "0X" prefix stripping so users can paste IDs either way.
     - First match is auto-selected and scrolled into view; match count shown inline.
+
+  Set All Random 1s Feature:
+    - A "Set All: 1s + Random" button (🎲) sits below the message tree.
+    - Instantly enables all messages and multiplex groups, set their rate to 1000ms, unmutes all their signals, and sets their generation mode to Random.
+    - Maintains the active user tree selection.
 
   Current limitation:
     - Multiplexed DBC signals (M / m0 / m1 / ...) are intentionally deferred.
