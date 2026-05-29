@@ -35,6 +35,12 @@ namespace PcapReplayer
                 }
                 min = minRaw * signal.Factor + signal.Offset;
                 max = maxRaw * signal.Factor + signal.Offset;
+                if (min > max)
+                {
+                    double t = min;
+                    min = max;
+                    max = t;
+                }
             }
         }
 

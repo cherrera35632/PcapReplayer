@@ -15,8 +15,7 @@ namespace PcapReplayer
                 return false;
             }
 
-            double min = Math.Min(sig.Min, sig.Max);
-            double max = Math.Max(sig.Min, sig.Max);
+            SignalValueGenerator.GetEffectiveRange(sig, out double min, out double max);
             if (double.IsNaN(physical) || physical < min || physical > max)
             {
                 error = $"physical {physical} is outside [{min}, {max}]";

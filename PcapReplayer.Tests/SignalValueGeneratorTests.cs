@@ -9,7 +9,7 @@ namespace PcapReplayer.Tests
         // ── helpers ──────────────────────────────────────────────────────────────────────
 
         private static SignalTxState CreateSignal(double min, double max,
-            SignalGenMode mode = SignalGenMode.Fixed, int sinePeriodMs = 1000)
+            SignalGenMode mode = SignalGenMode.Fixed, int sinePeriodMs = 1000, double factor = 1)
         {
             var signal = new SignalTxState
             {
@@ -20,7 +20,7 @@ namespace PcapReplayer.Tests
                     Length         = 16,
                     IsLittleEndian = true,
                     IsSigned       = false,
-                    Factor         = 1,
+                    Factor         = factor,
                     Offset         = 0,
                     Min            = min,
                     Max            = max,
@@ -132,7 +132,7 @@ namespace PcapReplayer.Tests
         [TestMethod]
         public void Update_DegenerateRange_DoesNotChangeValue()
         {
-            var signal = CreateSignal(42, 42, SignalGenMode.Random); // min == max
+            var signal = CreateSignal(42, 42, SignalGenMode.Random, factor: 0); // min == max and factor == 0 makes it degenerate
             double original = signal.PhysicalValue;
 
             SignalValueGenerator.Update(signal, 1.0);
