@@ -13,6 +13,32 @@ namespace PcapReplayer
         private static readonly Random _rng = new();
 
         /// <summary>
+        /// Gets the effective physical range of a signal.
+        /// If the signal does not have a valid range in DBC (Min >= Max), it falls back to the theoretical range based on its bit length.
+        /// </summary>
+        public static void GetEffectiveRange(DbcSignal signal, out double min, out double max)
+        {
+            if (signal.Min < signal.Max)
+            {
+                min = signal.Min;
+                max = signal.Max;
+            }
+            else
+            {
+                int len = Math.Min(63, signal.Length);
+                long minRaw = 0;
+                long maxRaw = len >= 63 ? long.MaxValue : (1L << len) - 1;
+                if (signal.IsSigned)
+                {
+                    minRaw = len >= 63 ? long.MinValue : -(1L << (len - 1));
+                    maxRaw = len >= 63 ? long.MaxValue : (1L << (len - 1)) - 1;
+                }
+                min = minRaw * signal.Factor + signal.Offset;
+                max = maxRaw * signal.Factor + signal.Offset;
+            }
+        }
+
+        /// <summary>
         /// Updates <paramref name="signal"/> for the current tick.
         /// No-ops when the signal is muted or its mode is <see cref="SignalGenMode.Fixed"/>.
         /// </summary>
@@ -22,8 +48,7 @@ namespace PcapReplayer
         {
             if (signal.IsMuted || signal.GenMode == SignalGenMode.Fixed) return;
 
-            double min = signal.Signal.Min;
-            double max = signal.Signal.Max;
+            GetEffectiveRange(signal.Signal, out double min, out double max);
             if (min >= max) return; // degenerate range
 
             double physical = ComputePhysical(signal, min, max, elapsedSeconds);

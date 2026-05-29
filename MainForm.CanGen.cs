@@ -546,12 +546,13 @@ namespace PcapReplayer
 
         private static SignalTxState BuildSignalState(DbcSignal signal)
         {
-            double physical = signal.Min + ((signal.Max - signal.Min) / 2.0);
+            SignalValueGenerator.GetEffectiveRange(signal, out double min, out double max);
+            double physical = min + ((max - min) / 2.0);
             bool ok = SignalEncoder.TryEncodePhysical(signal, physical, out long raw, out string? error);
 
             if (!ok)
             {
-                physical = Math.Min(signal.Min, signal.Max);
+                physical = Math.Min(min, max);
                 ok = SignalEncoder.TryEncodePhysical(signal, physical, out raw, out error);
             }
 
@@ -750,10 +751,7 @@ namespace PcapReplayer
                 message.PeriodMs = 1000;
 
                 foreach (var signal in message.Signals)
-                {
-                    signal.IsMuted = false;
-                    signal.GenMode = SignalGenMode.Random;
-                }
+                    ApplyRandomMode(signal);
 
                 if (message.MultiplexGroups != null)
                 {
@@ -763,15 +761,31 @@ namespace PcapReplayer
                         group.PeriodMs = 1000;
 
                         foreach (var signal in group.Signals)
-                        {
-                            signal.IsMuted = false;
-                            signal.GenMode = SignalGenMode.Random;
-                        }
+                            ApplyRandomMode(signal);
                     }
                 }
 
                 UsrFrameBuilder.BuildDataBytes(message);
             }
+        }
+
+        /// <summary>
+        /// Sets a signal to Random gen-mode and clears any stale encoding error.
+        /// The error is safe to clear because <see cref="SignalValueGenerator.Update"/> always
+        /// produces a valid encoded value within the effective range on every TX tick.
+        /// Signals with a truly degenerate range (effective min >= max even after bit-length
+        /// fallback) are left muted — Random is meaningless for them.
+        /// </summary>
+        private static void ApplyRandomMode(SignalTxState signal)
+        {
+            SignalValueGenerator.GetEffectiveRange(signal.Signal, out double effectiveMin, out double effectiveMax);
+            bool hasValidRange = effectiveMin < effectiveMax;
+
+            signal.GenMode = SignalGenMode.Random;
+            signal.IsMuted = !hasValidRange;  // mute signals with no useful range
+
+            if (hasValidRange)
+                signal.Error = null;  // clear stale load-time encoding error — generator will produce a valid value
         }
 
         private void RebuildCanTree()
@@ -1195,13 +1209,14 @@ namespace PcapReplayer
             }
             else
             {
+                SignalValueGenerator.GetEffectiveRange(signal.Signal, out double effMin, out double effMax);
                 var nud = new NumericUpDown
                 {
                     Location           = new Point(170, 5),
                     Width              = 92,
                     DecimalPlaces      = GetDecimalPlaces(signal.Signal.Factor),
-                    Minimum            = SafeDecimal(Math.Min(signal.Signal.Min, signal.Signal.Max)),
-                    Maximum            = SafeDecimal(Math.Max(signal.Signal.Min, signal.Signal.Max)),
+                    Minimum            = SafeDecimal(effMin),
+                    Maximum            = SafeDecimal(effMax),
                     Increment          = SafeIncrement(signal.Signal.Factor),
                     ThousandsSeparator = true,
                     Value              = SafeDecimal(signal.PhysicalValue),
@@ -1218,7 +1233,8 @@ namespace PcapReplayer
             }
 
             // ── Line 2: gen-mode selector ───────────────────────────────────────────────────
-            bool hasRange = signal.Signal.Min < signal.Signal.Max;
+            SignalValueGenerator.GetEffectiveRange(signal.Signal, out double tempMin, out double tempMax);
+            bool hasRange = tempMin < tempMax;
 
             row.Controls.Add(new Label
             {
@@ -1436,11 +1452,15 @@ namespace PcapReplayer
             if (!int.TryParse(txtCanTargetPort.Text.Trim(), out int port) || port < 1 || port > 65535)
                 return "Target port must be between 1 and 65535.";
 
-            // Only validate signals that are not muted (muted signals don't contribute to the frame)
+            // Only block TX for fixed-mode signals that have an encoding error AND are unmuted.
+            // Random/Sine signals have their error cleared by the generator on every tick,
+            // so a stale load-time error is irrelevant and must NOT block TX.
             var invalidSignal = _canMessages
                 .Where(m => m.Enabled)
                 .SelectMany(m => m.Signals)
-                .FirstOrDefault(s => !s.IsMuted && !string.IsNullOrEmpty(s.Error));
+                .FirstOrDefault(s => !s.IsMuted &&
+                                     !string.IsNullOrEmpty(s.Error) &&
+                                     s.GenMode == SignalGenMode.Fixed);
             if (invalidSignal != null)
                 return $"Signal '{invalidSignal.Signal.Name}' has an invalid value: {invalidSignal.Error}";
 
