@@ -94,6 +94,7 @@ namespace PcapReplayer
             tabs.TabPages.Add(BuildMetadataTab());
             tabs.TabPages.Add(BuildTrcLogTab());
             tabs.TabPages.Add(BuildCanGenTab());
+            tabs.TabPages.Add(BuildIsDirtyMockTab());
             this.Controls.Add(tabs);
             _tabs = tabs;
 
@@ -127,6 +128,7 @@ namespace PcapReplayer
                 _canTxCts?.Cancel();
                 _canTx.Stop();
                 _mockServer.Stop();
+                _promMockServer?.Stop();
             };
         }
 
