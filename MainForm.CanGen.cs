@@ -1488,6 +1488,7 @@ namespace PcapReplayer
             {
                 btnCanSetAllRandom1s.Enabled = !running && _canDatabase != null && _canMessages.Count > 0;
             }
+            UpdatePromMockGating();
         }
 
         private void SetCanTxCount(int count)

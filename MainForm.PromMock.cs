@@ -228,7 +228,7 @@ namespace PcapReplayer
             });
 
             // Keep the identity label / preview live as the CAN Generator tab changes.
-            txtCanUsrHeader.TextChanged  += (s, e) => RefreshPromPreview();
+            txtCanUsrHeader.TextChanged  += (s, e) => { RefreshPromPreview(); UpdatePromMockGating(); };
             txtCanSourceIp.TextChanged   += (s, e) => RefreshPromPreview();
 
             RefreshPromPreview();
@@ -302,6 +302,42 @@ namespace PcapReplayer
             txtPromMetricPreview.Text = PrometheusMockServer.BuildMetricsBody(GetCurrentPromMockConfig());
         }
 
+        /// is_dirty never arrives over CAN in the field (it's ProxyBox HTTP polling or NOV
+        /// Container MODBUS), so this mock must only be live while the CAN Generator is
+        /// actually transmitting as a Pump. Replay has no equipment-type concept at all
+        /// (it just re-sends opaque captured bytes), so it can never satisfy this and is
+        /// excluded by construction rather than by an explicit check.
+        private bool IsCanGeneratorPumpActive() =>
+            _canTxCts != null && ParseCanGenIdentity().equipType == "Pump";
+
+        /// Re-evaluates whether the mock should be running right now. Called whenever the
+        /// checkbox is checked, the CAN Generator starts/stops, or its USR header (equip
+        /// type) changes. The checkbox represents "armed", not "running" — actual start/stop
+        /// tracks <see cref="IsCanGeneratorPumpActive"/> automatically while armed.
+        private void UpdatePromMockGating()
+        {
+            if (chkEnablePromMock == null || !chkEnablePromMock.Checked) return;
+
+            if (IsCanGeneratorPumpActive())
+            {
+                if (!_promMockServer.IsRunning &&
+                    int.TryParse(txtPromMockPort.Text, out int port) && port >= 1 && port <= 65535)
+                {
+                    _promMockServer.Start(port, "127.0.0.1", GetCurrentPromMockConfig);
+                    chkPromRespondToReq.Enabled = true;
+                }
+            }
+            else if (_promMockServer.IsRunning)
+            {
+                _promMockServer.Stop();
+                chkPromRespondToReq.Enabled = false;
+                chkPromRespondToReq.Checked = true;
+            }
+
+            if (!_promMockServer.IsRunning)
+                SetPromMockStatus("Armed — waiting for CAN Generator to send as Pump");
+        }
+
         private void ChkEnablePromMock_CheckedChanged(object? sender, EventArgs e)
         {
             if (chkEnablePromMock.Checked)
@@ -313,8 +349,7 @@ namespace PcapReplayer
                     chkEnablePromMock.Checked = false;
                     return;
                 }
-                _promMockServer.Start(port, "127.0.0.1", GetCurrentPromMockConfig);
-                chkPromRespondToReq.Enabled = true;
+                UpdatePromMockGating();
             }
             else
             {
