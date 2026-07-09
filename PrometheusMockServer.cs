@@ -13,6 +13,15 @@ namespace PcapReplayer
     /// field format exactly, so a dashboard built against this mock needs no changes once
     /// pointed at the real exporter/datasource.
     /// </summary>
+    /// <summary>
+    /// slot_id arrives via one of four telemetry backends in the field: ProxyBox HTTP
+    /// (same box that reports is_dirty), or one of three MODBUS-side variants
+    /// (CSP's two firmware generations, or a Rolligon NOV Container). Unlike is_dirty
+    /// (which only ever has two flavors), CSP pumps are a hardware vendor that isn't
+    /// represented anywhere else in this mock.
+    /// </summary>
+    public enum SlotIdFlavor { ProxyBox, CspPumpV1, CspPumpV2, PumpRolligon }
+
     public record PromMockConfig(
         int Port,
         string AssetId,
@@ -25,7 +34,11 @@ namespace PcapReplayer
         string Version,
         bool IsProxyBox,
         int DirtyValue,          // 0 = clean, 1 = dirty, -999 = unknown/offline
-        bool RespondToRequests);
+        bool RespondToRequests,
+        bool EnableSlotId = false,
+        SlotIdFlavor SlotFlavor = SlotIdFlavor.ProxyBox,
+        int SlotIdValue = 0,
+        string EngType = "3520"); // only emitted for CspPumpV2
 
     /// <summary>
     /// Embeds a System.Net.HttpListener that serves Prometheus text-exposition format
@@ -185,7 +198,70 @@ namespace PcapReplayer
                   .Append($"}} {c.DirtyValue}\n");
             }
 
+            if (c.EnableSlotId)
+                AppendSlotIdMetric(sb, c, equipUpper, mfgUpper);
+
             return sb.ToString();
+        }
+
+        /// <summary>Appends the slot_id metric for whichever of the four backends is selected.
+        /// asset_id/crew/district/ip/tmv_asset_id/equipment_type are shared with the is_dirty
+        /// identity above (same physical box in the field); mfg and version are flavor-specific
+        /// since CSP is a distinct vendor with its own fixed version-generation labels ("V1"/"V2")
+        /// rather than a real firmware version string.</summary>
+        private static void AppendSlotIdMetric(StringBuilder sb, PromMockConfig c, string equipUpper, string mfgUpper)
+        {
+            string routingKeyHttp = $"EQ.{equipUpper}.{c.AssetId}.HTTP";
+            string routingKeyModbus = $"EQ.{equipUpper}.{c.AssetId}.MODBUS";
+
+            switch (c.SlotFlavor)
+            {
+                case SlotIdFlavor.ProxyBox:
+                    string url = $"http://{c.Ip}:8000/commands";
+                    sb.Append("# HELP rolligon_proxybox_config_reported_controller_pump_name Telegraf collected metric\n");
+                    sb.Append("# TYPE rolligon_proxybox_config_reported_controller_pump_name untyped\n");
+                    sb.Append("rolligon_proxybox_config_reported_controller_pump_name{")
+                      .Append($"asset_id=\"{c.AssetId}\",crew=\"{c.Crew}\",district=\"{c.District}\",")
+                      .Append($"equipment_type=\"{equipUpper}\",ip=\"{c.Ip}\",mfg=\"{mfgUpper}\",")
+                      .Append("port=\"8000\",protocol=\"HTTP\",")
+                      .Append($"routing_key=\"{routingKeyHttp}\",tmv_asset_id=\"{c.TmvAssetId}\",")
+                      .Append($"url=\"{url}\",version=\"{c.Version}\"")
+                      .Append($"}} {c.SlotIdValue}\n");
+                    break;
+
+                case SlotIdFlavor.CspPumpV1:
+                    sb.Append("# HELP csp_pump_v1_cudd_slot_id Telegraf collected metric\n");
+                    sb.Append("# TYPE csp_pump_v1_cudd_slot_id untyped\n");
+                    sb.Append("csp_pump_v1_cudd_slot_id{")
+                      .Append($"asset_id=\"{c.AssetId}\",crew=\"{c.Crew}\",district=\"{c.District}\",")
+                      .Append($"equipment_type=\"{equipUpper}\",ip=\"{c.Ip}\",mfg=\"CSP\",")
+                      .Append("port=\"502\",protocol=\"MODBUS\",")
+                      .Append($"routing_key=\"{routingKeyModbus}\",tmv_asset_id=\"{c.TmvAssetId}\",version=\"V1\"")
+                      .Append($"}} {c.SlotIdValue}\n");
+                    break;
+
+                case SlotIdFlavor.CspPumpV2:
+                    sb.Append("# HELP csp_pump_v2_cudd_slot_id Telegraf collected metric\n");
+                    sb.Append("# TYPE csp_pump_v2_cudd_slot_id untyped\n");
+                    sb.Append("csp_pump_v2_cudd_slot_id{")
+                      .Append($"asset_id=\"{c.AssetId}\",crew=\"{c.Crew}\",district=\"{c.District}\",")
+                      .Append($"eng_type=\"{c.EngType}\",equipment_type=\"{equipUpper}\",ip=\"{c.Ip}\",mfg=\"CSP\",")
+                      .Append("port=\"502\",protocol=\"MODBUS\",")
+                      .Append($"routing_key=\"{routingKeyModbus}\",tmv_asset_id=\"{c.TmvAssetId}\",version=\"V2\"")
+                      .Append($"}} {c.SlotIdValue}\n");
+                    break;
+
+                case SlotIdFlavor.PumpRolligon:
+                    sb.Append("# HELP pump_rolligon_slot_id Telegraf collected metric\n");
+                    sb.Append("# TYPE pump_rolligon_slot_id untyped\n");
+                    sb.Append("pump_rolligon_slot_id{")
+                      .Append($"asset_id=\"{c.AssetId}\",crew=\"{c.Crew}\",district=\"{c.District}\",")
+                      .Append($"equipment_type=\"{equipUpper}\",ip=\"{c.Ip}\",mfg=\"{mfgUpper}\",")
+                      .Append("port=\"502\",protocol=\"MODBUS\",")
+                      .Append($"routing_key=\"{routingKeyModbus}\",tmv_asset_id=\"{c.TmvAssetId}\",version=\"{c.Version}\"")
+                      .Append($"}} {c.SlotIdValue}\n");
+                    break;
+            }
         }
     }
 }

@@ -24,6 +24,14 @@ namespace PcapReplayer
         private TextBox    txtPromMetricPreview = null!;
         private ListBox    lstPromRequestLog    = null!;
 
+        // ── slot_id Prometheus Mock (same server/port as is_dirty above) ──────
+        private GroupBox   grpSlotIdMock        = null!;
+        private CheckBox   chkEnableSlotId      = null!;
+        private ComboBox   cboSlotFlavor        = null!;
+        private NumericUpDown numSlotId         = null!;
+        private Label      lblSlotEngType       = null!;
+        private TextBox    txtSlotEngType       = null!;
+
         private PrometheusMockServer _promMockServer = null!;
 
         // Mirrors UDPCANGateway.App/default_config.json's EquipmentType/Manufacturer
@@ -59,13 +67,15 @@ namespace PcapReplayer
 
         private TabPage BuildIsDirtyMockTab()
         {
-            var tab = new TabPage("🧪  is_dirty Mock") { Padding = new Padding(6) };
+            var tab = new TabPage("🧪  is_dirty Mock") { Padding = new Padding(6), AutoScroll = true };
 
             _promMockServer = new PrometheusMockServer();
             _promMockServer.OnStatusChanged += msg => SetPromMockStatus(msg);
             _promMockServer.OnRequestLogged += line => AppendPromRequestLog(line);
 
             tab.Controls.Add(BuildPromMockGroup());
+            tab.Controls.Add(BuildSlotIdMockGroup());
+            RefreshPromPreview();
             return tab;
         }
 
@@ -200,11 +210,11 @@ namespace PcapReplayer
 
             txtPromMetricPreview = new TextBox
             {
-                Location = new Point(col1, y), Width = 622, Height = 70,
+                Location = new Point(col1, y), Width = 622, Height = 130,
                 Multiline = true, ReadOnly = true, ScrollBars = ScrollBars.Vertical,
                 Font = new Font("Consolas", 8f), BackColor = Color.FromArgb(245, 245, 245)
             };
-            y += 76;
+            y += 136;
 
             // ── Incoming requests ─────────────────────────────────────────────
             AddSectionHeader(grpPromMock, col1, y, "Incoming Requests"); y += 26;
@@ -231,9 +241,86 @@ namespace PcapReplayer
             txtCanUsrHeader.TextChanged  += (s, e) => { RefreshPromPreview(); UpdatePromMockGating(); };
             txtCanSourceIp.TextChanged   += (s, e) => RefreshPromPreview();
 
-            RefreshPromPreview();
+            // Not called here: GetCurrentPromMockConfig() also reads the slot_id controls,
+            // which don't exist until BuildSlotIdMockGroup() runs. BuildIsDirtyMockTab()
+            // calls RefreshPromPreview() once after both groups are built instead.
 
             return grpPromMock;
+        }
+
+        private GroupBox BuildSlotIdMockGroup()
+        {
+            grpSlotIdMock = new GroupBox
+            {
+                Text      = "🔢  slot_id Prometheus Mock  —  same server/port as is_dirty above",
+                Location  = new Point(8, 850),
+                Size      = new Size(648, 210),
+                Font      = new Font("Segoe UI", 9f, FontStyle.Bold),
+                ForeColor = Color.SteelBlue
+            };
+
+            int col1 = 12, col2 = 320;
+            int y = 22;
+
+            var lblInfo = new Label
+            {
+                Text = "slot_id is used to place a pump in the topology map instead of the\n" +
+                       "manual reassignment popup. Reuses the AssetId/Ip/Crew/District/TmvAssetId\n" +
+                       "identity above; Version is shared for ProxyBox/pump_rolligon (real firmware\n" +
+                       "string) but fixed per flavor for CSP (\"V1\"/\"V2\" are the product generation,\n" +
+                       "not a firmware version).",
+                Location  = new Point(col1, y),
+                Size      = new Size(624, 62),
+                Font      = new Font("Segoe UI", 8.5f, FontStyle.Italic),
+                ForeColor = Color.Gray
+            };
+            grpSlotIdMock.Controls.Add(lblInfo);
+            y += 68;
+
+            AddComboInner(grpSlotIdMock, "Backend:", col1, y, out cboSlotFlavor,
+                new[] { "ProxyBox (HTTP)", "csp_pump_v1 (MODBUS)", "csp_pump_v2 (MODBUS)", "pump_rolligon (MODBUS)" },
+                selectedIndex: 0, w: 200);
+            cboSlotFlavor.SelectedIndexChanged += (s, e) => { UpdateSlotEngTypeVisibility(); RefreshPromPreview(); };
+
+            grpSlotIdMock.Controls.Add(new Label
+            {
+                Text = "Slot Value:", Location = new Point(col2, y + 3), AutoSize = true
+            });
+            numSlotId = new NumericUpDown
+            {
+                Location = new Point(col2, y + 20), Width = 80,
+                Minimum = 0, Maximum = 999, Value = 0
+            };
+            numSlotId.ValueChanged += (s, e) => RefreshPromPreview();
+            grpSlotIdMock.Controls.Add(numSlotId);
+            y += 44;
+
+            lblSlotEngType = new Label
+            {
+                Text = "Eng Type:  (csp_pump_v2 only)", Location = new Point(col1, y + 3), AutoSize = true
+            };
+            grpSlotIdMock.Controls.Add(lblSlotEngType);
+            txtSlotEngType = new TextBox { Text = "3520", Location = new Point(col1, y + 20), Width = 140 };
+            txtSlotEngType.TextChanged += (s, e) => RefreshPromPreview();
+            grpSlotIdMock.Controls.Add(txtSlotEngType);
+            y += 44;
+
+            chkEnableSlotId = new CheckBox
+            {
+                Text = "Include slot_id in the mock's response", Location = new Point(col1, y), AutoSize = true
+            };
+            chkEnableSlotId.CheckedChanged += (s, e) => RefreshPromPreview();
+            grpSlotIdMock.Controls.Add(chkEnableSlotId);
+
+            UpdateSlotEngTypeVisibility();
+            return grpSlotIdMock;
+        }
+
+        private void UpdateSlotEngTypeVisibility()
+        {
+            bool isCspV2 = cboSlotFlavor.SelectedIndex == 2; // csp_pump_v2
+            lblSlotEngType.Visible = isCspV2;
+            txtSlotEngType.Visible = isCspV2;
         }
 
         private void OnFlavorChanged()
@@ -272,6 +359,14 @@ namespace PcapReplayer
                 _ => -999
             };
 
+            SlotIdFlavor slotFlavor = cboSlotFlavor.SelectedIndex switch
+            {
+                0 => SlotIdFlavor.ProxyBox,
+                1 => SlotIdFlavor.CspPumpV1,
+                2 => SlotIdFlavor.CspPumpV2,
+                _ => SlotIdFlavor.PumpRolligon
+            };
+
             return new PromMockConfig(
                 Port: int.TryParse(txtPromMockPort.Text, out int p) ? p : 9091,
                 AssetId: assetId,
@@ -284,7 +379,11 @@ namespace PcapReplayer
                 Version: txtPromVersion.Text.Trim(),
                 IsProxyBox: radProxyBox.Checked,
                 DirtyValue: dirtyValue,
-                RespondToRequests: chkPromRespondToReq.Checked);
+                RespondToRequests: chkPromRespondToReq.Checked,
+                EnableSlotId: chkEnableSlotId.Checked,
+                SlotFlavor: slotFlavor,
+                SlotIdValue: (int)numSlotId.Value,
+                EngType: txtSlotEngType.Text.Trim());
         }
 
         private void RefreshPromPreview()

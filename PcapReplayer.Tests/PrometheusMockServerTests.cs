@@ -209,7 +209,122 @@ namespace PcapReplayer.Tests
             StringAssert.Contains(body, $"}} {dirtyValue}\n");
         }
 
-        // ── Helper ──────────────────────────────────────────────────────────────
+        // ── slot_id golden-format tests: reproduce the real field samples byte-for-byte ──
+
+        [TestMethod]
+        public void BuildMetricsBody_SlotId_ProxyBox_MatchesRealFieldSample_PBS006()
+        {
+            var cfg = MakeSlotConfig(
+                assetId: "PBS006", ip: "192.168.130.233", version: "PB 2.21.0",
+                slotFlavor: SlotIdFlavor.ProxyBox, slotValue: 11);
+
+            string body = PrometheusMockServer.BuildMetricsBody(cfg);
+
+            const string expectedLine =
+                "rolligon_proxybox_config_reported_controller_pump_name{asset_id=\"PBS006\"," +
+                "crew=\"woodlands\",district=\"woodlands\",equipment_type=\"PUMP\"," +
+                "ip=\"192.168.130.233\",mfg=\"ROLLIGON\",port=\"8000\",protocol=\"HTTP\"," +
+                "routing_key=\"EQ.PUMP.PBS006.HTTP\",tmv_asset_id=\"tmv_asset_id\"," +
+                "url=\"http://192.168.130.233:8000/commands\",version=\"PB 2.21.0\"} 11";
+
+            StringAssert.Contains(body, expectedLine);
+        }
+
+        [TestMethod]
+        public void BuildMetricsBody_SlotId_CspPumpV1_MatchesRealFieldSample_99066043()
+        {
+            var cfg = MakeSlotConfig(
+                assetId: "99066043", ip: "192.168.130.211",
+                slotFlavor: SlotIdFlavor.CspPumpV1, slotValue: 0);
+
+            string body = PrometheusMockServer.BuildMetricsBody(cfg);
+
+            const string expectedLine =
+                "csp_pump_v1_cudd_slot_id{asset_id=\"99066043\",crew=\"woodlands\"," +
+                "district=\"woodlands\",equipment_type=\"PUMP\",ip=\"192.168.130.211\"," +
+                "mfg=\"CSP\",port=\"502\",protocol=\"MODBUS\"," +
+                "routing_key=\"EQ.PUMP.99066043.MODBUS\",tmv_asset_id=\"tmv_asset_id\"," +
+                "version=\"V1\"} 0";
+
+            StringAssert.Contains(body, expectedLine);
+        }
+
+        [TestMethod]
+        public void BuildMetricsBody_SlotId_CspPumpV2_MatchesRealFieldSample_65699()
+        {
+            var cfg = MakeSlotConfig(
+                assetId: "65699", ip: "192.168.130.225",
+                slotFlavor: SlotIdFlavor.CspPumpV2, slotValue: 0, engType: "3520");
+
+            string body = PrometheusMockServer.BuildMetricsBody(cfg);
+
+            const string expectedLine =
+                "csp_pump_v2_cudd_slot_id{asset_id=\"65699\",crew=\"woodlands\"," +
+                "district=\"woodlands\",eng_type=\"3520\",equipment_type=\"PUMP\"," +
+                "ip=\"192.168.130.225\",mfg=\"CSP\",port=\"502\",protocol=\"MODBUS\"," +
+                "routing_key=\"EQ.PUMP.65699.MODBUS\",tmv_asset_id=\"tmv_asset_id\"," +
+                "version=\"V2\"} 0";
+
+            StringAssert.Contains(body, expectedLine);
+        }
+
+        [TestMethod]
+        public void BuildMetricsBody_SlotId_PumpRolligon_MatchesRealFieldSample_RMS01()
+        {
+            var cfg = MakeSlotConfig(
+                assetId: "RMS01", ip: "192.168.130.240", version: "70.35.1",
+                slotFlavor: SlotIdFlavor.PumpRolligon, slotValue: 0);
+
+            string body = PrometheusMockServer.BuildMetricsBody(cfg);
+
+            const string expectedLine =
+                "pump_rolligon_slot_id{asset_id=\"RMS01\",crew=\"woodlands\"," +
+                "district=\"woodlands\",equipment_type=\"PUMP\",ip=\"192.168.130.240\"," +
+                "mfg=\"ROLLIGON\",port=\"502\",protocol=\"MODBUS\"," +
+                "routing_key=\"EQ.PUMP.RMS01.MODBUS\",tmv_asset_id=\"tmv_asset_id\"," +
+                "version=\"70.35.1\"} 0";
+
+            StringAssert.Contains(body, expectedLine);
+        }
+
+        [TestMethod]
+        public void BuildMetricsBody_SlotId_Disabled_EmitsOnlyIsDirty()
+        {
+            var cfg = MakeConfig() with { EnableSlotId = false };
+            string body = PrometheusMockServer.BuildMetricsBody(cfg);
+
+            Assert.IsFalse(body.Contains("slot_id"), "slot_id must not appear when EnableSlotId is false.");
+            Assert.IsFalse(body.Contains("pump_name"), "slot_id must not appear when EnableSlotId is false.");
+        }
+
+        [TestMethod]
+        public void BuildMetricsBody_SlotId_CoexistsWithIsDirty_BothLinesPresent()
+        {
+            var cfg = MakeSlotConfig(slotFlavor: SlotIdFlavor.PumpRolligon, slotValue: 3);
+            string body = PrometheusMockServer.BuildMetricsBody(cfg);
+
+            StringAssert.Contains(body, "pump_rolligon_is_dirty{");
+            StringAssert.Contains(body, "pump_rolligon_slot_id{");
+        }
+
+        [TestMethod]
+        public void BuildMetricsBody_SlotId_CspFlavors_UseFixedVersionNotSharedVersionField()
+        {
+            // CSP's "version" is a fixed product-generation label, not the free-text
+            // firmware version shared with ProxyBox/pump_rolligon (e.g. "70.35.1").
+            var cfg = MakeSlotConfig(slotFlavor: SlotIdFlavor.CspPumpV1, version: "70.35.1");
+            string body = PrometheusMockServer.BuildMetricsBody(cfg);
+
+            int cspLineStart = body.IndexOf("csp_pump_v1_cudd_slot_id{");
+            int cspLineEnd = body.IndexOf('\n', cspLineStart);
+            string cspLine = body.Substring(cspLineStart, cspLineEnd - cspLineStart);
+
+            StringAssert.Contains(cspLine, "version=\"V1\"");
+            Assert.IsFalse(cspLine.Contains("70.35.1"),
+                "The csp_pump_v1 line must use its fixed 'V1' version, not the shared Version field (which is only for ProxyBox/pump_rolligon).");
+        }
+
+        // ── Helpers ──────────────────────────────────────────────────────────────
 
         private static PromMockConfig MakeConfig(
             string assetId = "RMS01",
@@ -230,5 +345,21 @@ namespace PcapReplayer.Tests
                 IsProxyBox: isProxyBox,
                 DirtyValue: dirtyValue,
                 RespondToRequests: true);
+
+        private static PromMockConfig MakeSlotConfig(
+            string assetId = "RMS01",
+            string ip = "192.168.130.240",
+            string version = "70.35.1",
+            SlotIdFlavor slotFlavor = SlotIdFlavor.PumpRolligon,
+            int slotValue = 0,
+            string engType = "3520") =>
+            MakeConfig(assetId: assetId, ip: ip, isProxyBox: slotFlavor == SlotIdFlavor.ProxyBox) with
+            {
+                Version = version,
+                EnableSlotId = true,
+                SlotFlavor = slotFlavor,
+                SlotIdValue = slotValue,
+                EngType = engType
+            };
     }
 }
